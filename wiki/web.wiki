@@ -2,3 +2,4 @@
 
 = [http://code.google.com/p/vkurse/wiki/web_usecase Описание вариантов использования] =
 
+= [http://code.google.com/p/vkurse/wiki/Web_ScreenTemplate Эскиз дизайна] =
