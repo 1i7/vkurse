@@ -43,3 +43,5 @@ http://vkurse.googlecode.com/files/JavaME_scr2.jpg http://vkurse.googlecode.com/
 Пользователь закрывает приложение.
 
 http://vkurse.googlecode.com/files/JavaME_scr4.jpg
+
+[http://code.google.com/p/vkurse/wiki/Java На главную]
