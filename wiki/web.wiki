@@ -1,6 +1,6 @@
 #summary группа веб-интерфейса
 
-= Introduction =
+= [http://code.google.com/ Описание вариантов использования] =
 
 
 = Details =
