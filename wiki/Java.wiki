@@ -2,7 +2,7 @@
 
 = Описание вариантов использования =
 
-[http://code.google.com/p/vkurse/wiki/JavaME_UseCase Описание вариантов использования]
+= [http://code.google.com/p/vkurse/wiki/JavaME_UseCase Описание вариантов использования] =
 
 
 = Эскиз дизайна приложения =
