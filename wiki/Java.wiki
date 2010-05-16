@@ -7,7 +7,7 @@ http://code.google.com/p/vkurse/wiki/JavaME_UseCase
 
 = Эскиз дизайна приложения =
 
-http://code.google.com/p/vkurse/wiki/JavaME_UseCase
+http://code.google.com/p/vkurse/wiki/JavaME_ScreenTemplate
 
 = Технический отчет =
 
