@@ -22,3 +22,7 @@ http://vkurse.googlecode.com/svn/trunk/Android/Android_screen4.jpg
 На экране «Информация о предмете» пользователь видит время, название предмета, ФИО преподавателя, № аудитории и форму отчетности. Пользователь просматривает информацию о предмете, после чего нажимает на кнопку «Назад» и переходит на экран расписание.
 
 http://vkurse.googlecode.com/svn/trunk/Android/Android_screen5.jpg
+
+Пользователь нажимает на кнопку «Выход» и закрывает приложение.
+
+http://vkurse.googlecode.com/svn/trunk/Android/Android_screen4.jpg
