@@ -1,7 +1,3 @@
 #summary мобильная группа андроид
 
-= Introduction =
-
-
-
-= Details =
+== [http://code.google.com/p/vkurse/wiki/Android_UseCase Описание вариантов использования.]==
