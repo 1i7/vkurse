@@ -1,6 +1,6 @@
 #summary мобильная группа андроид
 
-== [http://code.google.com/p/vkurse/wiki/Android_UseCase Описание вариантов использования]==
+== [http://code.google.com/p/vkurse/wiki/Andriod_UseCase Описание вариантов использования]==
 
 == [http://code.google.com/p/vkurse/wiki/Android_ScreenTemplate Эскиз дизайна приложения] ==
 
