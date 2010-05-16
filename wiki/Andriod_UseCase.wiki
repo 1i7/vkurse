@@ -1,13 +1,7 @@
 #summary Descriptions of the Use-Cases
 
-= Introduction =
+= Описание вариантов использования =
 
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Пользователь заходит в приложение и видит главный экран.
+Пользователь нажимает на «Выберите курс» и попадает на экран «Выбор курса».
+http://code.google.com/p/vkurse/source/browse/trunk/Android/Android_screen1.jpg
