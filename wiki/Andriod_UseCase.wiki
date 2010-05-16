@@ -26,3 +26,5 @@ http://vkurse.googlecode.com/svn/trunk/Android/Android_screen5.jpg http://vkurse
 Пользователь нажимает на кнопку «Выход» и закрывает приложение.
 
 http://vkurse.googlecode.com/svn/trunk/Android/Android_screen4.jpg
+
+[http://code.google.com/p/vkurse/wiki/Android На главную]
