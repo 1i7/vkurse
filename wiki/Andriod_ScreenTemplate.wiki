@@ -5,3 +5,15 @@
 Экран настроек (написано на андроиде)
 
 http://vkurse.googlecode.com/svn/trunk/Android/Template1.jpg
+
+Главный экран расписания (написано на андроиде)
+
+http://vkurse.googlecode.com/svn/trunk/Android/Template2.jpg
+
+Экран с подробной информацией о занятии (написано на андроиде)
+
+http://vkurse.googlecode.com/svn/trunk/Android/Template3.jpg
+
+Экран с обычным календарём (эскиз)
+
+http://vkurse.googlecode.com/svn/trunk/Android/Template4.jpg
