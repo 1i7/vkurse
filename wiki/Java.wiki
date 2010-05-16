@@ -3,6 +3,7 @@
 = Описание вариантов использования. =
 
 Пользователь заходит в приложение, видит главный экран.
+</b>
 http://vkurse.googlecode.com/files/JavaME_scr1.jpg
 
 = Details =
