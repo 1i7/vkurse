@@ -6,3 +6,7 @@
 Пользователь нажимает на «Выберите курс» и попадает на экран «Выбор курса».
 
 http://vkurse.googlecode.com/svn/trunk/Android/Android_screen1.jpg
+
+Пользователь выбирает курс из списка и попадает на главный экран.
+
+http://vkurse.googlecode.com/svn/trunk/Android/Android_screen2.jpg http://vkurse.googlecode.com/svn/trunk/Android/Android_screen1.jpg
