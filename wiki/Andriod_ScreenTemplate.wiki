@@ -17,3 +17,5 @@ http://vkurse.googlecode.com/svn/trunk/Android/Template3.jpg
 Экран с обычным календарём (эскиз)
 
 http://vkurse.googlecode.com/svn/trunk/Android/Template4.jpg
+
+[http://code.google.com/p/vkurse/wiki/Android На главную]
