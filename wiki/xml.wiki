@@ -1,6 +1,8 @@
 #summary группа XML-сервиса
 
-= Introduction =
+== [http://code.google.com/p/vkurse/wiki/xml/otchet Отчет по первому заданию группе XML Web-Services] ==
+
+== [http://code.google.com/p/vkurse/wiki/xml/opisanie Описание вариантов использования] ==
 
 
 
