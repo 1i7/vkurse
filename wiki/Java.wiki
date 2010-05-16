@@ -6,8 +6,8 @@
 
 == [http://code.google.com/p/vkurse/wiki/JavaME_TechReport Технический отчет] ==
 
-= Wiki-странички программиста =
+== Wiki-странички программиста ==
 
-http://debate-world.ru/wiki/J2ME
+*[http://debate-world.ru/wiki/J2ME 1]
 
-http://debate-world.ru/wiki/SOAP
+*[http://debate-world.ru/wiki/SOAP 2]
