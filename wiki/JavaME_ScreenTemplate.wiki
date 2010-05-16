@@ -2,6 +2,6 @@
 
 = Эскиз дизайна приложения =
 
-http://vkurse.googlecode.com/files/JavaME_ScreenSmall.jpg
+http://vkurse.googlecode.com/svn/trunk/JavaME/JavaME_ScreenSmall.jpg
 
 [http://code.google.com/p/vkurse/wiki/Java На главную]
