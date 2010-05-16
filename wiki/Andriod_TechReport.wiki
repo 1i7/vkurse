@@ -36,3 +36,5 @@
 
 !OnDestroy — запускается перед  уничтожением окна.
 Интент (* Intent *) - это механизм описание специальных действий, таких как «снять фото», «отправить e-mail».  Ресурсы (* Resources *) - это строки, картинки или любой другой файл ( только не java код ).
+
+http://vkurse.googlecode.com/svn/trunk/Android/ScreenLifeCycle.jpg
