@@ -4,4 +4,4 @@
 
 http://vkurse.googlecode.com/files/JavaME_ScreenSmall.jpg
 
-[http://code.google.com/p/vkurse/w/edit/Java На главную]
+[http://code.google.com/p/vkurse/Java На главную]
