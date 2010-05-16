@@ -2,12 +2,16 @@
 
 = Описание вариантов использования =
 
-http://code.google.com/p/vkurse/wiki/Use_cases
+http://code.google.com/p/vkurse/wiki/JavaME_UseCase
 
 
 = Эскиз дизайна приложения =
 
 http://code.google.com/p/vkurse/wiki/JavaME_UseCase
+
+= Технический отчет =
+
+http://code.google.com/p/vkurse/wiki/JavaME_TechReport
 
 = Wiki-странички программиста =
 
