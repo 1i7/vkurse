@@ -10,3 +10,7 @@ http://vkurse.googlecode.com/svn/trunk/Android/Android_screen1.jpg
 Пользователь выбирает курс из списка и попадает на главный экран.
 
 http://vkurse.googlecode.com/svn/trunk/Android/Android_screen2.jpg http://vkurse.googlecode.com/svn/trunk/Android/Android_screen1.jpg
+
+Пользователь выбирает группу из списка и попадает на главный экран. Пользователь нажимает «Ok» и попадает на экран «Расписание».
+
+http://vkurse.googlecode.com/svn/trunk/Android/Android_screen3.jpg http://vkurse.googlecode.com/svn/trunk/Android/Android_screen1.jpg
