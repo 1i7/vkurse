@@ -8,6 +8,6 @@
 
 == Wiki-странички программиста ==
 
-=== [http://debate-world.ru/wiki/J2ME JavaME] ===
+[http://debate-world.ru/wiki/J2ME JavaME]
 
-=== [http://debate-world.ru/wiki/SOAP Работа с протоколом SOAP] ===
+[http://debate-world.ru/wiki/SOAP Работа с протоколом SOAP]
