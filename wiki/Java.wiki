@@ -2,10 +2,14 @@
 
 = Описание вариантов использования =
 
-
 http://code.google.com/p/vkurse/wiki/Use_cases
 
 
 = Эскиз дизайна приложения =
 
-http://vkurse.googlecode.com/files/JavaME_ScreenSmall.jpg
+http://code.google.com/p/vkurse/wiki/JavaME_UseCase
+
+= Wiki-странички программиста =
+
+http://debate-world.ru/wiki/J2ME
+http://debate-world.ru/wiki/SOAP
