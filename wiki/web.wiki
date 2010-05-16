@@ -1,6 +1,6 @@
 #summary группа веб-интерфейса
 
-= [http://code.google.com/ Описание вариантов использования] =
+= [http://code.google.com/p/vkurse/wiki/web_usecase Описание вариантов использования] =
 
 
 = Details =
