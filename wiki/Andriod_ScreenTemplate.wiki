@@ -1,5 +1,7 @@
-#summary One-sentence summary of this page.
+#summary Эскиз дизайна приложения.
 
-= Introduction =
+= Эскиз дизайна приложения =
+
+Экран настроек (написано на андроиде)
 
 http://vkurse.googlecode.com/svn/trunk/Android/Template1.jpg
