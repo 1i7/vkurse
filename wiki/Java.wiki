@@ -1,17 +1,10 @@
 #summary мобильная группа Java
 
-= Описание вариантов использования =
+== [http://code.google.com/p/vkurse/wiki/JavaME_UseCase Описание вариантов использования] ==
 
-= [http://code.google.com/p/vkurse/wiki/JavaME_UseCase Описание вариантов использования] =
+== [http://code.google.com/p/vkurse/wiki/JavaME_ScreenTemplate Эскиз дизайна приложения] ==
 
-
-= Эскиз дизайна приложения =
-
-http://code.google.com/p/vkurse/wiki/JavaME_ScreenTemplate
-
-= Технический отчет =
-
-http://code.google.com/p/vkurse/wiki/JavaME_TechReport
+== [http://code.google.com/p/vkurse/wiki/JavaME_TechReport Технический отчет] ==
 
 = Wiki-странички программиста =
 
