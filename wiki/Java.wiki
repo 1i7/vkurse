@@ -44,4 +44,6 @@ http://vkurse.googlecode.com/files/JavaME_scr2.jpg http://vkurse.googlecode.com/
 
 http://vkurse.googlecode.com/files/JavaME_scr4.jpg
 
-= Details =
+= Эскиз дизайна приложения =
+
+http://vkurse.googlecode.com/files/JavaME_Screen.jpg
