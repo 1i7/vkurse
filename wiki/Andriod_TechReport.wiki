@@ -1,13 +1,5 @@
 #summary Технический отчёт.
 
-= Introduction =
+= Отчет на общее техническое задание =
 
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== Android  SDK == - это набор инструментов для написания мобильных приложений под платформу Android  с открытым исходным кодом, созданный Google' ом и Open Handset Alliance.
