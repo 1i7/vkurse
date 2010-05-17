@@ -1,6 +1,71 @@
 #summary группа баз данных
 
-= Introduction =
+= Схема базы данных =
+http://vkurse.googlecode.com/svn/trunk/DataBase/DbScheme.png
 
 
-= Details =
+
+= Текстовое описание =
+
+{{{
+= Schedule =		//  Каждая запись - элемент расписания. Представляет собой список занятий на неделе с указанием
+					//  предмета группы, преподавателя, аудитории, днем недели, началом, длительностью и т.д.
+int		ID
+int		groupID		-> Groups.ID
+byte	day
+time	startTime
+time	length
+int		lectureID	-> Lectures.ID
+int		roomID		-> Rooms.ID
+int		teacherID	-> Teachers.ID
+string	comment
+
+
+
+= ScheduleChanges =	//  Изменения в расписании. Если какое-то из полей ...ID = null, значит оно не изменено.
+int		ID
+int		scheduleID	-> Schedule.ID		//  Какой элемент расписания изменяем. Если null, значит просто дополниельная пара
+int		week							//  Изменения касаются только элемента расписания на конкретной неделе, указанной в week
+int		groupID		-> Groups.ID		//  Занятия будут проходить у другой группы
+byte	day								//  Эти три поля связаны с изменением дня/времени занятия
+time	startTime
+time	length
+int		lectureID	-> Lectures.ID		//  Изменен предмет. На практике бывает редко, но бывает
+int		roomID		-> Rooms.ID			//  Изменена аудитория
+int		teacherID	-> Teachers.ID		//  Замена преподавателя
+string	comment							//  У изменений в расписании комментарии будут наверняка
+
+
+
+= Lectures = 		//  Список возможных предметов (название предмета, тип отчетности)
+int		ID
+string 	name
+int		examTypeID	-> ExamTypes.ID
+string	comment
+
+
+
+= Groups =			//  Список групп
+int		ID
+string	name
+string	course
+
+
+
+= Teachers =		//  Список преподавателей
+int		ID
+string	name
+string	degree
+
+
+
+= ExamTypes =		//  Список типов отчетности (т.к. будут не только экзамен/зачет, но и диф.зачет, письменный+устный, и т.д.)
+int		ID
+string 	name
+
+
+
+= Rooms =			//  Список аудиторий
+int		ID
+string	name
+}}}
