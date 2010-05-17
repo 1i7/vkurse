@@ -1,7 +1,8 @@
 #summary main page
 
 = Архитектура проекта =
-http://vkurse.googlecode.com/svn/trunk/architec.png
+http://vkurse.googlecode.com/svn/trunk/architecture/architec.png
+
 
 
 = технические группы =
