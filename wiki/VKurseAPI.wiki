@@ -6,12 +6,12 @@ http://vkurse.googlecode.com/svn/trunk/ModelAPI/ClassDiagramAPI.png
 
 = Тестовые данные =
 
-== ExamTypesTable ==
+=== ExamTypesTable ===
 || *ID* || *name* ||
 || 0 || Exam ||
 || 1 || Test ||
 
-== GroupsTable ==
+=== GroupsTable ===
 || *ID* || *name* || *course* ||
 || 0 || 791 || 3 ||
 || 1 || 792 || 3 ||
@@ -19,20 +19,20 @@ http://vkurse.googlecode.com/svn/trunk/ModelAPI/ClassDiagramAPI.png
 || 3 || 794 || 3 ||
 || 4 || 798 || 3 ||
 
-== LecturesTable ==
+=== LecturesTable ===
 || *ID* || *name* || *examTypeID* || *comment* ||
 || 0 || Innovative practics || 0 ||  ||
 || 1 || Physics || 1 ||  ||
 || 2 || Math || 0 ||  ||
 || 3 || Programming || 1 ||  ||
 
-== RoomsTable ===
+=== RoomsTable ===
 || *ID* || *name* ||
 || 0 || 123 ГК ||
 || 1 || Большая физическая ||
 || 2 || 115 КПМ ||
 
-== ScheduleTable ==
+=== ScheduleTable ===
 || *ID* || *day* || *startTime* || *length* || *lectureID* || *roomID* || *teacherID* || *comment* ||
 || 0 || 1 || 480 || 85 || 0 || 0 || 0 || it is comment of lecture 0 ||
 || 1 || 2 || 540 || 85 || 1 || 0 || 1 || it is comment of lecture 1 ||
@@ -40,11 +40,11 @@ http://vkurse.googlecode.com/svn/trunk/ModelAPI/ClassDiagramAPI.png
 || 3 || 4 || 660 || 85 || 3 || 0 || 1 || it is comment of lecture 3 ||
 || 4 || 5 || 720 || 175 || 2 || 0 || 2 || it is comment of lecture 4 ||
 
-== ScheduleChangesTable ==
+=== ScheduleChangesTable ===
 || *ID* || *scheduleID* || *week* || *day* || *startTime* || *length* || *lectureID* || *roomID* || *teacherID* || *comment* ||
 || 0 || 0 || 1 || 1 || 540 || 85 || 0 || 0 || 0 || it is comment of change ||
 
-== TeachersTable ==
+=== TeachersTable ===
 || *ID* || *name* || *degree* ||
 || 0 || Юрий Аммосов ||  ||
 || 1 || Сергей Коновалов ||  ||
