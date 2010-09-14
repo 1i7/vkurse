@@ -1,7 +1,7 @@
 #summary main page
 
 = Архитектура проекта =
-http://vkurse.googlecode.com/svn/trunk/architecture/architec.png
+http://vkurse.googlecode.com/svn/doc/architecture/architec.png
 
 
 
