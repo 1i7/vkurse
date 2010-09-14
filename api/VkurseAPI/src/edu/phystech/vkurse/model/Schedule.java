@@ -21,10 +21,11 @@ public class Schedule extends DbTableRecord
     protected String comment;
 
     public Schedule() {}
-    public Schedule(int id, byte day, int startTime, int length, int lectureID,
-            int roomID, int teacherID, String comment)
+    public Schedule(int id, int groupID, byte day, int startTime, int length,
+            int lectureID, int roomID, int teacherID, String comment)
     {
         this.id = id;
+        this.groupID = groupID;
         this.day = day;
         this.startTime = startTime;
         this.length = length;

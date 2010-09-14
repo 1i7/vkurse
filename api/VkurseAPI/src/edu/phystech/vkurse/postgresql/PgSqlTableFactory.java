@@ -46,12 +46,12 @@ public class PgSqlTableFactory implements TableFactory
 
     public ScheduleTable getScheduleTable()
     {
-        return new ScheduleTestTable();
+        return new SchedulePgSqlTable();
     }
 
     public ScheduleChangesTable getScheduleChangesTable()
     {
-        return new ScheduleChangesTestTable();
+        return new ScheduleChangesPgSqlTable();
     }
 
     public TeachersTable getTeachersTable()
