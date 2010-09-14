@@ -1,7 +1,7 @@
 /**
  * @author Администратор
  *
- * это сообщение должно будет появиться в реопозитории)
+ * 
  */
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
