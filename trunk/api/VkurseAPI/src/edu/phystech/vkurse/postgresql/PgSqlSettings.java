@@ -31,7 +31,8 @@ public class PgSqlSettings
     
     //  PostgreSQL
     private static String jdbcDriverClass = "org.postgresql.Driver";
-    private static String url = "jdbc:postgresql://localhost/inno2010_vkurse;default_schema=true;";
+    private static String url =
+            "jdbc:postgresql://localhost/inno2010_vkurse;default_schema=true;";
     //jdbc:postgresql://localhost:5432/mydatabase?searchpath=myschema
     private static String dbName = "inno2010_vkurse";
     private static String username = "innocourse-dtb";
@@ -44,8 +45,8 @@ public class PgSqlSettings
     private static String dbName = "inno2010_vkurse";
     private static String username = "root";
     private static String password = "mysql";  // Поздравляю, теперь вы знаете
-                                // пароль рута на моем локальном сервере MySQL,
-                                // только там ничего инетересного.  :-P
+    // пароль рута на моем локальном сервере MySQL, только там нет ничего
+    // инетересного.  :-P
     */
     
     private PgSqlSettings(){}
