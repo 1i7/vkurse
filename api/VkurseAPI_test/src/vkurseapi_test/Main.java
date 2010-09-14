@@ -278,67 +278,113 @@ public class Main
         System.out.println("");
     }
 
+
+
+    
     //  Тестирование работоспособности модулей
     public static void ModulesTest() throws edu.phystech.vkurse.model.TableException
     {
+        //CopyFromTest();
+        
         TableFactory factory = new PgSqlTableFactory();
-        ExamType l = null;
-        ExamTypesTable lt = factory.getExamTypesTable();
+        Teacher l = null;
+        TeachersTable lt = factory.getTeachersTable();
 
         // get
         l = lt.get(0);
         if (l != null)
         {
-            System.out.println("  ExamType:");
+            System.out.println("  Teacher:");
             System.out.println("id:         " + l.getID());
             System.out.println("name:       '" + l.getName()+"'");
+            System.out.println("degree:     '" + l.getDegree()+"'");
         }
         System.out.println("");
 
         // getAll
-        ShowAllExamTypes();
+        ShowAll();
 
         //  insert
-        System.out.println("  Insert:");
-        l.setID(1000);
-        l.setName("Temp exam type");
-        lt.insert(l);
-        ShowAllExamTypes();
+        try
+        {
+            System.out.println("  Insert:");
+            l.setID(1000);
+            l.setName("Temp name");
+            lt.insert(l);
+            ShowAll();
+        } catch (TableException ex)
+        {
+            System.out.println("Exception: " + ex.getMessage());
+        }
 
         //  update
-        System.out.println("  Update:");
-        l.setName("Updated name");
-        lt.update(l);
-        ShowAllExamTypes();
+        try
+        {
+            System.out.println("  Update:");
+            l.setName("Updated name");
+            lt.update(l);
+            ShowAll();
+        } catch (TableException ex)
+        {
+            System.out.println("Exception: " + ex.getMessage());
+        }
 
         //  remove
-        System.out.println("  Remove:");
-        lt.remove(l.getID());
-        ShowAllExamTypes();
+        try
+        {
+            System.out.println("  Remove:");
+            lt.remove(l.getID());
+            ShowAll();
+        } catch (TableException ex)
+        {
+            System.out.println("Exception: " + ex.getMessage());
+        }
     }
 
-    public static void ShowAllExamTypes() throws edu.phystech.vkurse.model.TableException
+    public static void ShowAll() throws edu.phystech.vkurse.model.TableException
     {
         TableFactory factory = new PgSqlTableFactory();
-        ExamType l = null;
-        ExamTypesTable lt = factory.getExamTypesTable();
+        Teacher l = null;
+        TeachersTable lt = factory.getTeachersTable();
         
         // getAll
         int i;
         java.util.Vector lst = lt.getAll();
         for (i=0; i<lst.size(); ++i)
         {
-            System.out.println("  ExamType "+i+":");
-            l = (ExamType)lst.get(i);
+            System.out.println("  Teacher "+i+":");
+            l = (Teacher)lst.get(i);
             if (l != null)
             {
                 System.out.println("id:         " + l.getID());
                 System.out.println("name:       '" + l.getName()+"'");
+                System.out.println("degree:     '" + l.getDegree()+"'");
             }
             else
             {
-                System.out.println("No data about exam type");
+                System.out.println("No data about Teacher");
             }
+        }
+        System.out.println("");
+        System.out.println("");
+    }
+
+    public static void CopyFromTest() throws edu.phystech.vkurse.model.TableException
+    {
+        TableFactory factory = new PgSqlTableFactory();
+        Teacher l = null;
+        TeachersTable lt = factory.getTeachersTable();
+        
+        TableFactory Tfactory = new TestTableFactory();
+        TeachersTable Tlt = Tfactory.getTeachersTable();
+
+        int i;
+        java.util.Vector lst = Tlt.getAll();
+        for (i=0; i<lst.size(); ++i)
+        {
+            System.out.println("Copying: " + i);
+            l = (Teacher)lst.get(i);
+            lt.insert(l);
         }
         System.out.println("");
         System.out.println("");

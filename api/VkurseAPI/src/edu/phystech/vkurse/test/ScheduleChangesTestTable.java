@@ -73,4 +73,17 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         }
         return r;
     }
+
+    public java.util.Vector findByGroupDay(int groupID, byte day) throws TableException
+    {
+        Vector r = new Vector();
+        int i;
+        for (i=0; i<data.size(); ++i)
+        {
+            ScheduleChange s = data.get(i);
+            if ((s.getGroupID()==groupID)&&(s.getDay()==day))
+                r.add(s);
+        }
+        return r;
+    }
 }
