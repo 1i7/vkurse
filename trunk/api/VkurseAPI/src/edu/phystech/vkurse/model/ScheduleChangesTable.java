@@ -18,5 +18,5 @@ public interface ScheduleChangesTable
     public java.util.Vector getAll() throws TableException;
 
     //  Выдает список изменений занятий определенной группы в определенный день
-    public java.util.Vector findByGroupDay(int groupID, byte day) throws TableException;
+    public java.util.Vector findByGroupWeekDay(int groupID, int week, byte day) throws TableException;
 }

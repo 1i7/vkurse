@@ -15,7 +15,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
     ArrayList<ScheduleChange> data = new ArrayList<ScheduleChange>();
     public ScheduleChangesTestTable()
     {
-        data.add(new ScheduleChange(0, 0, 1, (byte)1, 540, 85, 0, 0, 0, "it is comment of change"));
+        data.add(new ScheduleChange(0, 0, 1, 0, (byte)1, 540, 85, 0, 0, 0, "it is comment of change"));
     }
 
     public boolean insert(ScheduleChange item) throws TableException
@@ -74,14 +74,14 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         return r;
     }
 
-    public java.util.Vector findByGroupDay(int groupID, byte day) throws TableException
+    public java.util.Vector findByGroupWeekDay(int groupID, int week, byte day) throws TableException
     {
         Vector r = new Vector();
         int i;
         for (i=0; i<data.size(); ++i)
         {
             ScheduleChange s = data.get(i);
-            if ((s.getGroupID()==groupID)&&(s.getDay()==day))
+            if ((s.getGroupID()==groupID) && (s.getDay()==day) && (s.getWeek()==week))
                 r.add(s);
         }
         return r;

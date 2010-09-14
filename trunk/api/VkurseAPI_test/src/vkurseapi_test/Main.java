@@ -280,6 +280,11 @@ public class Main
 
 
 
+
+
+
+
+
     
     //  Тестирование работоспособности модулей
     public static void ModulesTest() throws edu.phystech.vkurse.model.TableException
@@ -287,17 +292,25 @@ public class Main
         //CopyFromTest();
         
         TableFactory factory = new PgSqlTableFactory();
-        Teacher l = null;
-        TeachersTable lt = factory.getTeachersTable();
+        ScheduleChange l = null;
+        ScheduleChangesTable lt = factory.getScheduleChangesTable();
 
         // get
         l = lt.get(0);
         if (l != null)
         {
-            System.out.println("  Teacher:");
+            System.out.println("  Schedule:");
             System.out.println("id:         " + l.getID());
-            System.out.println("name:       '" + l.getName()+"'");
-            System.out.println("degree:     '" + l.getDegree()+"'");
+            System.out.println("scheduleID: " + l.getScheduleID());
+            System.out.println("week:       " + l.getWeek());
+            System.out.println("groupID:    " + l.getGroupID());
+            System.out.println("day:        " + l.getDay());
+            System.out.println("startTime:  " + l.getStartTime());
+            System.out.println("length:     " + l.getLength());
+            System.out.println("lectureID:  " + l.getLectureID());
+            System.out.println("roomID:     " + l.getRoomID());
+            System.out.println("teacherID:  " + l.getTeacherID());
+            System.out.println("comment:    " + l.getComment());
         }
         System.out.println("");
 
@@ -309,7 +322,7 @@ public class Main
         {
             System.out.println("  Insert:");
             l.setID(1000);
-            l.setName("Temp name");
+            l.setComment("Temp comment");
             lt.insert(l);
             ShowAll();
         } catch (TableException ex)
@@ -321,7 +334,7 @@ public class Main
         try
         {
             System.out.println("  Update:");
-            l.setName("Updated name");
+            l.setComment("Updated comment");
             lt.update(l);
             ShowAll();
         } catch (TableException ex)
@@ -339,30 +352,42 @@ public class Main
         {
             System.out.println("Exception: " + ex.getMessage());
         }
+
+        // find
+        System.out.println("  findByGroupWeekDay:");
+        DoFind();
     }
 
     public static void ShowAll() throws edu.phystech.vkurse.model.TableException
     {
         TableFactory factory = new PgSqlTableFactory();
-        Teacher l = null;
-        TeachersTable lt = factory.getTeachersTable();
+        ScheduleChange l = null;
+        ScheduleChangesTable lt = factory.getScheduleChangesTable();
         
         // getAll
         int i;
         java.util.Vector lst = lt.getAll();
         for (i=0; i<lst.size(); ++i)
         {
-            System.out.println("  Teacher "+i+":");
-            l = (Teacher)lst.get(i);
+            System.out.println("  ScheduleChange "+i+":");
+            l = (ScheduleChange)lst.get(i);
             if (l != null)
             {
                 System.out.println("id:         " + l.getID());
-                System.out.println("name:       '" + l.getName()+"'");
-                System.out.println("degree:     '" + l.getDegree()+"'");
+                System.out.println("scheduleID: " + l.getScheduleID());
+                System.out.println("week:       " + l.getWeek());
+                System.out.println("groupID:    " + l.getGroupID());
+                System.out.println("day:        " + l.getDay());
+                System.out.println("startTime:  " + l.getStartTime());
+                System.out.println("length:     " + l.getLength());
+                System.out.println("lectureID:  " + l.getLectureID());
+                System.out.println("roomID:     " + l.getRoomID());
+                System.out.println("teacherID:  " + l.getTeacherID());
+                System.out.println("comment:    " + l.getComment());
             }
             else
             {
-                System.out.println("No data about Teacher");
+                System.out.println("No data about Schedule");
             }
         }
         System.out.println("");
@@ -372,21 +397,59 @@ public class Main
     public static void CopyFromTest() throws edu.phystech.vkurse.model.TableException
     {
         TableFactory factory = new PgSqlTableFactory();
-        Teacher l = null;
-        TeachersTable lt = factory.getTeachersTable();
+        ScheduleChange l = null;
+        ScheduleChangesTable lt = factory.getScheduleChangesTable();
         
         TableFactory Tfactory = new TestTableFactory();
-        TeachersTable Tlt = Tfactory.getTeachersTable();
+        ScheduleChangesTable Tlt = Tfactory.getScheduleChangesTable();
 
         int i;
         java.util.Vector lst = Tlt.getAll();
         for (i=0; i<lst.size(); ++i)
         {
             System.out.println("Copying: " + i);
-            l = (Teacher)lst.get(i);
+            l = (ScheduleChange)lst.get(i);
             lt.insert(l);
         }
         System.out.println("");
         System.out.println("");
     }
+
+
+    public static void DoFind() throws edu.phystech.vkurse.model.TableException
+    {
+        TableFactory factory = new PgSqlTableFactory();
+        ScheduleChange l = null;
+        ScheduleChangesTable lt = factory.getScheduleChangesTable();
+
+        // getAll
+        int i;
+        java.util.Vector lst = lt.findByGroupWeekDay(0, 1, (byte)1);
+        for (i=0; i<lst.size(); ++i)
+        {
+            System.out.println("  ScheduleChange "+i+":");
+            l = (ScheduleChange)lst.get(i);
+            if (l != null)
+            {
+                System.out.println("id:         " + l.getID());
+                System.out.println("scheduleID: " + l.getScheduleID());
+                System.out.println("week:       " + l.getWeek());
+                System.out.println("groupID:    " + l.getGroupID());
+                System.out.println("day:        " + l.getDay());
+                System.out.println("startTime:  " + l.getStartTime());
+                System.out.println("length:     " + l.getLength());
+                System.out.println("lectureID:  " + l.getLectureID());
+                System.out.println("roomID:     " + l.getRoomID());
+                System.out.println("teacherID:  " + l.getTeacherID());
+                System.out.println("comment:    " + l.getComment());
+            }
+            else
+            {
+                System.out.println("No data about Schedule");
+            }
+        }
+        System.out.println("");
+        System.out.println("");
+    }
+
 }
