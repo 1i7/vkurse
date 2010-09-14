@@ -16,4 +16,7 @@ public interface ScheduleChangesTable
     public ScheduleChange get(int ID) throws TableException;
     public boolean remove(int ID) throws TableException;
     public java.util.Vector getAll() throws TableException;
+
+    //  Выдает список изменений занятий определенной группы в определенный день
+    public java.util.Vector findByGroupDay(int groupID, byte day) throws TableException;
 }

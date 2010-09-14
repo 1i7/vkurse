@@ -31,7 +31,7 @@ public class PgSqlTableFactory implements TableFactory
 
     public GroupsTable getGroupsTable()
     {
-        return new GroupsTestTable();
+        return new GroupsPgSqlTable();
     }
 
     public LecturesTable getLecturesTable()
@@ -41,7 +41,7 @@ public class PgSqlTableFactory implements TableFactory
 
     public RoomsTable getRoomsTable()
     {
-        return new RoomsTestTable();
+        return new RoomsPgSqlTable();
     }
 
     public ScheduleTable getScheduleTable()
@@ -56,6 +56,6 @@ public class PgSqlTableFactory implements TableFactory
 
     public TeachersTable getTeachersTable()
     {
-        return new TeachersTestTable();
+        return new TeachersPgSqlTable();
     }
 }
