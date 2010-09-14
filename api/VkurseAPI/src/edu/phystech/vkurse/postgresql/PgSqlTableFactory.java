@@ -26,7 +26,7 @@ public class PgSqlTableFactory implements TableFactory
 {
     public ExamTypesTable getExamTypesTable()
     {
-        return new ExamTypesTestTable();
+        return new ExamTypesPgSqlTable();
     }
 
     public GroupsTable getGroupsTable()

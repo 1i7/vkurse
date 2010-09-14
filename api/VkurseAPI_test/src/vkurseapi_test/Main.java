@@ -8,6 +8,8 @@ package vkurseapi_test;
  * классы, какие именно использовать, и как с ними работать. Демонстрируется
  * использование фабрики классов, на примере классов Lecture и LecturesTable
  * демонстрируется получение, добавление, изменение и удаление данных.
+ *
+ * Кроме этого проект используется для тестирования реализованных классов.
  */
 
 
@@ -25,6 +27,13 @@ import java.util.*;
 public class Main
 {
     public static void main(String[] args) throws edu.phystech.vkurse.model.TableException
+    {
+        //UsageExample();
+        ModulesTest();
+    }
+
+    //  Пример использования библиотеки
+    public static void UsageExample() throws edu.phystech.vkurse.model.TableException
     {
         //  Эта команда выводит текст в стандарный поток вывода. Обычно это
         //  консоль, но если запускать из под NetBeans 6.8, то текст выводится
@@ -267,8 +276,71 @@ public class Main
         }
         System.out.println("");
         System.out.println("");
-         
-        
     }
 
+    //  Тестирование работоспособности модулей
+    public static void ModulesTest() throws edu.phystech.vkurse.model.TableException
+    {
+        TableFactory factory = new PgSqlTableFactory();
+        ExamType l = null;
+        ExamTypesTable lt = factory.getExamTypesTable();
+
+        // get
+        l = lt.get(0);
+        if (l != null)
+        {
+            System.out.println("  ExamType:");
+            System.out.println("id:         " + l.getID());
+            System.out.println("name:       '" + l.getName()+"'");
+        }
+        System.out.println("");
+
+        // getAll
+        ShowAllExamTypes();
+
+        //  insert
+        System.out.println("  Insert:");
+        l.setID(1000);
+        l.setName("Temp exam type");
+        lt.insert(l);
+        ShowAllExamTypes();
+
+        //  update
+        System.out.println("  Update:");
+        l.setName("Updated name");
+        lt.update(l);
+        ShowAllExamTypes();
+
+        //  remove
+        System.out.println("  Remove:");
+        lt.remove(l.getID());
+        ShowAllExamTypes();
+    }
+
+    public static void ShowAllExamTypes() throws edu.phystech.vkurse.model.TableException
+    {
+        TableFactory factory = new PgSqlTableFactory();
+        ExamType l = null;
+        ExamTypesTable lt = factory.getExamTypesTable();
+        
+        // getAll
+        int i;
+        java.util.Vector lst = lt.getAll();
+        for (i=0; i<lst.size(); ++i)
+        {
+            System.out.println("  ExamType "+i+":");
+            l = (ExamType)lst.get(i);
+            if (l != null)
+            {
+                System.out.println("id:         " + l.getID());
+                System.out.println("name:       '" + l.getName()+"'");
+            }
+            else
+            {
+                System.out.println("No data about exam type");
+            }
+        }
+        System.out.println("");
+        System.out.println("");
+    }
 }
