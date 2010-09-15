@@ -32,7 +32,8 @@ public class PgSqlSettings
     //  PostgreSQL
     private static String jdbcDriverClass = "org.postgresql.Driver";
     private static String url =
-            "jdbc:postgresql://localhost/inno2010_vkurse;default_schema=true;";
+            //"jdbc:postgresql://localhost/inno2010_vkurse;default_schema=true;";
+            "jdbc:postgresql://localhost/inno2010_vkurse?searchpath=public";
     //jdbc:postgresql://localhost:5432/mydatabase?searchpath=myschema
     private static String dbName = "inno2010_vkurse";
     private static String username = "innocourse-dtb";

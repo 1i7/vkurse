@@ -110,7 +110,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                "select * from "+PgSqlSettings.getDbName()+".ExamTypes where (id="+ID+")"
+                "select * from ExamTypes where (id="+ID+")"
                 //"select * from ExamTypes"
                 );
 
@@ -179,7 +179,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
 
             Statement st = dbConn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from "+PgSqlSettings.getDbName()+".ExamTypes");
+            ResultSet rs = st.executeQuery("select * from ExamTypes");
 
             while (rs.next())
             {

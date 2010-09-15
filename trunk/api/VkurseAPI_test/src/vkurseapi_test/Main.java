@@ -28,7 +28,12 @@ public class Main
 {
     public static void main(String[] args) throws edu.phystech.vkurse.model.TableException
     {
-        //UsageExample();
+        UsageExample();
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         ModulesTest();
     }
 

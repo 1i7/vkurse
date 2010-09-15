@@ -111,7 +111,7 @@ public class GroupsPgSqlTable implements GroupsTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                "select * from "+PgSqlSettings.getDbName()+".Groups where (id="+ID+")"
+                "select * from Groups where (id="+ID+")"
                 //"select * from Groups"
                 );
 
@@ -180,7 +180,7 @@ public class GroupsPgSqlTable implements GroupsTable
 
             Statement st = dbConn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from "+PgSqlSettings.getDbName()+".Groups");
+            ResultSet rs = st.executeQuery("select * from Groups");
 
             while (rs.next())
             {
