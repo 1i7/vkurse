@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Vkurse_demo</string>
+	<string name="app2_name">Schedule</string>
+	<string name="app3_name">Information</string>
+    
+    <string name="hello">Добро пожаловать!</string>
+    <string name="first_line">Выбор группы</string>
+    <string name="spin_promt">-Номер группы-</string>
+    <string name="spin_two_promt">-Номер группы-</string>
+    <string name="forward_button_text">Далее</string>
+    <string name="timetable">Расписание</string>
+       
+    <color name="background">#006000</color>
+    <color name="text">#101010</color>
+    <color name="blue">#000080</color>
+    <color name="lightblue">#506099</color>
+</resources>

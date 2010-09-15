@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="30dip"
+    android:background="@drawable/background2">
+   
+ 
+
+<TextView android:id="@+id/dateDisplay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    
+    />
+    
+<TableLayout
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:stretchColumns="1"
+	>
+
+<TableRow>
+    
+<Button android:id="@+id/pickDate"
+        android:text="Изменить дату"
+        android:height = "60dip"
+		android:width = "100dip"
+		android:layout_gravity="left"
+		android:textColor="@color/blue"
+        />
+        
+<Button android:id="@+id/changeGroup"
+        android:text="Изменить группу"
+        android:height = "60dip"
+		android:width = "100dip"
+		android:layout_gravity="right"
+		android:textColor="@color/blue" 
+		/>
+
+</TableRow>
+
+ <TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:paddingLeft="50sp"
+    android:layout_gravity="center"
+    android:text="@string/timetable"
+    android:textSize="25sp"
+    android:textColor="@color/blue"
+    />
+
+
+
+
+<ListView
+	android:id="@android:id/list"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:textSize="18sp"
+	android:background="@color/lightblue"
+	android:choiceMode ="singleChoice"
+	/>
+</TableLayout>
+</LinearLayout>
