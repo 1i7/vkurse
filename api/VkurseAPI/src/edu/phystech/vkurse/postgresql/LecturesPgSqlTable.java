@@ -108,7 +108,7 @@ public class LecturesPgSqlTable implements LecturesTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                "select * from "+PgSqlSettings.getDbName()+".Lectures where (id="+ID+")"
+                "select * from Lectures where (id="+ID+")"
                 //"select * from Lectures"
                 );
 
@@ -178,7 +178,7 @@ public class LecturesPgSqlTable implements LecturesTable
 
             Statement st = dbConn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from "+PgSqlSettings.getDbName()+".Lectures");
+            ResultSet rs = st.executeQuery("select * from Lectures");
 
             while (rs.next())
             {

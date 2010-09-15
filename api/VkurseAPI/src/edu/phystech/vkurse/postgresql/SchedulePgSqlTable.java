@@ -125,7 +125,7 @@ public class SchedulePgSqlTable implements ScheduleTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                "select * from "+PgSqlSettings.getDbName()+".Schedule where (id="+ID+")"
+                "select * from Schedule where (id="+ID+")"
                 //"select * from Schedule"
                 );
 
@@ -214,7 +214,7 @@ public class SchedulePgSqlTable implements ScheduleTable
 
             Statement st = dbConn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from "+PgSqlSettings.getDbName()+".Schedule");
+            ResultSet rs = st.executeQuery("select * from Schedule");
 
             while (rs.next())
             {

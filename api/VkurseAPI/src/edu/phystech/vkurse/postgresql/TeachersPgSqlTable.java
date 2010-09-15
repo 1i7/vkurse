@@ -111,7 +111,7 @@ public class TeachersPgSqlTable implements TeachersTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                "select * from "+PgSqlSettings.getDbName()+".Teachers where (id="+ID+")"
+                "select * from Teachers where (id="+ID+")"
                 //"select * from Teachers"
                 );
 
@@ -180,7 +180,7 @@ public class TeachersPgSqlTable implements TeachersTable
 
             Statement st = dbConn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from "+PgSqlSettings.getDbName()+".Teachers");
+            ResultSet rs = st.executeQuery("select * from Teachers");
 
             while (rs.next())
             {

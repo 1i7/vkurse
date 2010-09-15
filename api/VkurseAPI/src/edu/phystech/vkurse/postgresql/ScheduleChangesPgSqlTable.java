@@ -129,7 +129,8 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                "select * from "+PgSqlSettings.getDbName()+".ScheduleChanges where (id="+ID+")"
+                //"select * from ScheduleChanges where (id="+ID+")"
+                "select * from ScheduleChanges where (id="+ID+")"
                 //"select * from Schedule"
                 );
 
@@ -220,7 +221,8 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
 
             Statement st = dbConn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from "+PgSqlSettings.getDbName()+".ScheduleChanges");
+            //ResultSet rs = st.executeQuery("select * from ScheduleChanges");
+            ResultSet rs = st.executeQuery("select * from ScheduleChanges");
 
             while (rs.next())
             {
@@ -271,7 +273,8 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                    "select * from " + PgSqlSettings.getDbName() + ".ScheduleChanges" +
+                    //"select * from " + PgSqlSettings.getDbName() + ".ScheduleChanges" +
+                    "select * from ScheduleChanges " +
                     " where day=" + day + " and groupID=" + groupID +
                     " and week=" + week
                     );

@@ -110,7 +110,7 @@ public class RoomsPgSqlTable implements RoomsTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                "select * from "+PgSqlSettings.getDbName()+".Rooms where (id="+ID+")"
+                "select * from Rooms where (id="+ID+")"
                 //"select * from Rooms"
                 );
 
@@ -179,7 +179,7 @@ public class RoomsPgSqlTable implements RoomsTable
 
             Statement st = dbConn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from "+PgSqlSettings.getDbName()+".Rooms");
+            ResultSet rs = st.executeQuery("select * from Rooms");
 
             while (rs.next())
             {
