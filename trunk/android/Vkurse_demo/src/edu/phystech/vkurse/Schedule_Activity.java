@@ -134,12 +134,12 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
                     //items[k].length = Sc.getLength();
                    // Names[k] = factory.getLecturesTable().get(Sc.getLectureID()).getName();
                 	
-                	Names[0]="!";
+                	
                 	Names[k]="Пусто";
                 }
                 else
                 {
-                	Names[0]="!";
+                	
                 	Names[k]="Пусто";
                 }
             }

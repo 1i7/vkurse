@@ -21,11 +21,11 @@ import edu.phystech.vkurse.test.*;
 
 public class Class_Info  extends ListActivity {
 	
-	String test[] ={"lorem", "ipsum", "dolor", "sit", "amet",
+	/*String test[] ={"lorem", "ipsum", "dolor", "sit", "amet",
 			"consectetuer", "adipiscing", "elit", "morbi", "vel",
 			"ligula", "vitae", "arcu", "aliquet", "mollis",
 			"etiam", "vel", "erat", "placerat", "ante",
-			"porttitor", "sodales", "pellentesque", "augue", "purus"};
+			"porttitor", "sodales", "pellentesque", "augue", "purus"};*/
 	String sGroups[];
 	int Ident[];
 	
@@ -43,7 +43,7 @@ public class Class_Info  extends ListActivity {
     tLecture items[];
     
     class infoLecture{
-    	public String name;
+    	public String name ;
     	public String room;
     	public String teacher;
     	public int start;
@@ -103,40 +103,13 @@ public class Class_Info  extends ListActivity {
 	                Schedule Sc = scht.get(k);
 	                if ((Sc.getGroupID() == Ident[j])&&(day==((Sc.getDay()+1) % 7)))
 	                {
-	                	//Lecture[k].name = factory.getLecturesTable().get(Sc.getLectureID()).getName();
-	 	               // Lecture[k].start = Sc.getStartTime();
-	 	                //Lecture[k].length = Sc.getLength();
-	 	               // Lecture[k].room = factory.getRoomsTable().get(Sc.getRoomID()).getName();
-	 	               // Lecture[k].teacher = factory.getTeachersTable().get(Sc.getLectureID()).getName();
-	                	Lecture[0].name = "---";
-	                	Lecture[0].room = "000";
-	                	Lecture[0].teacher = "---";
-	                	Lecture[0].start = 0;
-	                	Lecture[0].length = 0;
-	                	
-	                	Lecture[k].name = "---";
-	                	Lecture[k].room = "000";
-	                	Lecture[k].teacher = "---";
-	                	Lecture[k].start = 0;
-	                	Lecture[k].length = 0;
-	                    
+	                	Lecture[k].name = factory.getLecturesTable().get(Sc.getLectureID()).getName();
+	 	                Lecture[k].start = Sc.getStartTime();
+	 	                Lecture[k].length = Sc.getLength();
+	 	                Lecture[k].room = factory.getRoomsTable().get(Sc.getRoomID()).getName();
+	 	                Lecture[k].teacher = factory.getTeachersTable().get(Sc.getLectureID()).getName();
 	                }
-	                else
-	                {
-	                	Lecture[0].name = "---";
-	                	Lecture[0].room = "000";
-	                	Lecture[0].teacher = "---";
-	                	Lecture[0].start = 0;
-	                	Lecture[0].length = 0;
-	                	
-	                	Lecture[k].name = "---";
-	                	Lecture[k].room = "000";
-	                	Lecture[k].teacher = "---";
-	                	Lecture[k].start = 0;
-	                	Lecture[k].length = 0;
-	                	
-	                }
-	                
+	            
 	            }
 	            catch (Exception exc)
 	            {
@@ -147,6 +120,6 @@ public class Class_Info  extends ListActivity {
 	        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, thisLecture));
 	        
 	       // TextView text = (TextView)findViewById(R.id.TextView01);
-	       // text.setText(new StringBuilder() .append(Lecture[0].name));
+	        //text.setText(new StringBuilder() .append(Lecture[0].name));
     }
 }
