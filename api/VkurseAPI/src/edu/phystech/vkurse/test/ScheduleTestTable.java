@@ -16,10 +16,10 @@ public class ScheduleTestTable implements ScheduleTable
     ArrayList<Schedule> data = new ArrayList<Schedule>();
     public ScheduleTestTable()
     {
-        data.add(new Schedule(0, 0, (byte)1, 480, 85, 0, 0, 0, "it is comment of lecture 0"));
-        data.add(new Schedule(1, 0, (byte)2, 540, 85, 1, 0, 1, "it is comment of lecture 1"));
-        data.add(new Schedule(2, 0, (byte)3, 600, 200, 2, 0, 2, "it is comment of lecture 2"));
-        data.add(new Schedule(3, 0, (byte)4, 660, 85, 3, 0, 1, "it is comment of lecture 3"));
+        data.add(new Schedule(0, 4, (byte)1, 480, 85, 0, 0, 0, "it is comment of lecture 0"));
+        data.add(new Schedule(1, 3, (byte)2, 540, 85, 1, 1, 1, "it is comment of lecture 1"));
+        data.add(new Schedule(2, 2, (byte)3, 600, 200, 2, 2, 2, "it is comment of lecture 2"));
+        data.add(new Schedule(3, 1, (byte)4, 660, 85, 3, 1, 1, "it is comment of lecture 3"));
         data.add(new Schedule(4, 0, (byte)5, 720, 175, 2, 0, 2, "it is comment of lecture 4"));
     }
 
