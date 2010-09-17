@@ -26,7 +26,7 @@ public class ScheduleChange extends DbTableRecord
     public ScheduleChange(int id, int scheduleID, int week, int groupID, byte day, int startTime, int length, int lectureID, int roomID, int teacherID, String comment)
     {
         this.id = id;
-        this.lectureID = lectureID;
+        this.scheduleID = scheduleID;
         this.week = week;
         this.groupID = groupID;
         this.day = day;
