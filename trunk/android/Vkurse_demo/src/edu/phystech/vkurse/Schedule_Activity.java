@@ -129,13 +129,13 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
                 Schedule Sc = scht.get(k);
                 if ((Sc.getGroupID() == Ident[j])&&(cl.get(Calendar.DAY_OF_WEEK)==((Sc.getDay()+1) % 7)))
                 {
-                    //items[k].name = factory.getLecturesTable().get(Sc.getLectureID()).getName();
-                    //items[k].start = Sc.getStartTime();
-                    //items[k].length = Sc.getLength();
-                   // Names[k] = factory.getLecturesTable().get(Sc.getLectureID()).getName();
+                    items[k].name = factory.getLecturesTable().get(Sc.getLectureID()).getName();
+                    items[k].start = Sc.getStartTime();
+                    items[k].length = Sc.getLength();
+                    Names[k] = factory.getLecturesTable().get(Sc.getLectureID()).getName();
                 	
                 	
-                	Names[k]="Пусто";
+                	//Names[k]="Пусто";
                 }
                 else
                 {
