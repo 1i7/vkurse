@@ -88,6 +88,16 @@ public class VkurseClient
     }
 
 
+    public void Test()
+    {
+        try
+        {
+            //java.util.List<Lecture> l
+            System.out.println(lecturesTable.getAll().getClass().getName());
+        } catch (Exception ex) { }
+    }
+
+
     private int DoMainMenu()
     {
         System.out.println("          MAIN  MENU:");
@@ -159,6 +169,8 @@ public class VkurseClient
             if (13 == mnu) EditScheduleChangeEntry();
             if (14 == mnu) RemoveScheduleChangeEntry();
             if (15 == mnu) CreateScheduleChangeEntry();
+
+            if (20 == mnu) Test();
         }
     }
 

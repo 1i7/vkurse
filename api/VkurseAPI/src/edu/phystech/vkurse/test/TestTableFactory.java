@@ -12,9 +12,9 @@ import edu.phystech.vkurse.model.*;
  */
 public class TestTableFactory implements TableFactory
 {
-    public String GetSourceName()
+    public String getSourceName()
     {
-        return "Test data. Ver: 20.09.2010";
+        return "Test data. Ver: 20.09.2010 v2";
     }
 
     public ExamTypesTable getExamTypesTable()
