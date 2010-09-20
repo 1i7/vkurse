@@ -93,7 +93,9 @@ public class VkurseClient
         try
         {
             //java.util.List<Lecture> l
-            System.out.println(lecturesTable.getAll().getClass().getName());
+            //System.out.println(lecturesTable.getAll().getClass().getName());
+            System.out.println(tableFactory.getSourceName());
+            System.out.println();
         } catch (Exception ex) { }
     }
 
