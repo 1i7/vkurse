@@ -16,11 +16,12 @@ public class GroupsTestTable implements GroupsTable
     ArrayList<Group> data = new ArrayList<Group>();
     public GroupsTestTable()
     {
-        data.add(new Group(0, "791", "3"));
-        data.add(new Group(1, "792", "3"));
-        data.add(new Group(2, "793", "3"));
-        data.add(new Group(3, "794", "3"));
-        data.add(new Group(4, "798", "3"));
+        data.add(new Group(100, "Test data - group", "1"));
+        data.add(new Group(0, "791", "4"));
+        data.add(new Group(1, "792", "4"));
+        data.add(new Group(2, "793", "4"));
+        data.add(new Group(3, "794", "4"));
+        data.add(new Group(4, "798", "4"));
     }
 
     public boolean insert(Group item) throws TableException

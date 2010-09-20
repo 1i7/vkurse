@@ -5,18 +5,6 @@
 
 package edu.phystech.vkurse.postgresql;
 import edu.phystech.vkurse.model.*;
-import edu.phystech.vkurse.test.*;
-
-/**
- * В данный момент работа с БД реализована только для LecturesTable
- */
-
-/**
- * ToDO:  После написания (хотя бы объявления с "затычками") всех классов
- * для работы с PostgreSQL изменить фабрику, чтобы создавала именно их,
- * а не тестовые классы. Подключение пакета edu.phystech.vkurse.test.*,
- * соответственно, убрать.
- */
 
 /**
  *
@@ -24,6 +12,14 @@ import edu.phystech.vkurse.test.*;
  */
 public class PgSqlTableFactory implements TableFactory
 {
+    public String GetSourceName()
+    {
+        return "SQL server. " +
+                "jdbcDriverClass='" + PgSqlSettings.getJdbcDriverClass() + "' " +
+                "url='" + PgSqlSettings.getUrl() + "' " +
+                "dbName='" + PgSqlSettings.getDbName() + "'";
+    }
+
     public ExamTypesTable getExamTypesTable()
     {
         return new ExamTypesPgSqlTable();

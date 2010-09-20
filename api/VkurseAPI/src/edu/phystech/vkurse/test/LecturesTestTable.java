@@ -16,10 +16,23 @@ public class LecturesTestTable implements LecturesTable
     ArrayList<Lecture> data = new ArrayList<Lecture>();
     public LecturesTestTable()
     {
+        /*
         data.add(new Lecture(0, "Innovative practics", 0, ""));
         data.add(new Lecture(1, "Physics", 1, ""));
         data.add(new Lecture(2, "Math", 0, ""));
         data.add(new Lecture(3, "Programming", 1, ""));
+        */
+        data.add(new Lecture(100, "Test data - lecture", 100, "comment"));
+        data.add(new Lecture(0, "Innovative practics", 0, "Comment"));
+        data.add(new Lecture(11, "Convex analysis (seminar)", 0, " "));
+        data.add(new Lecture(12, "Theoretical physics (lecture)", 0, "  "));
+        data.add(new Lecture(13, "Theoretical physics (seminar)", 0, "  "));
+        data.add(new Lecture(14, "Jurisprudence", 2, " "));
+        data.add(new Lecture(10, "Convex analysis (lecture", 0, "  "));
+        data.add(new Lecture(15, "Computational math (lecture)", 0, " "));
+        data.add(new Lecture(16, "Computational math (seminar)", 0, "  "));
+        data.add(new Lecture(17, "Foreign language", 1, " "));
+        data.add(new Lecture(18, "Military training", 0, " "));
     }
 
     public boolean insert(Lecture item) throws TableException

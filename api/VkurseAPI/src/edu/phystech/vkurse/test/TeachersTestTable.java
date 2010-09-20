@@ -16,9 +16,12 @@ public class TeachersTestTable implements TeachersTable
     ArrayList<Teacher> data = new ArrayList<Teacher>();
     public TeachersTestTable()
     {
-        data.add(new Teacher(0, "Юрий Аммосов", ""));
-        data.add(new Teacher(1, "Сергей Коновалов", ""));
-        data.add(new Teacher(2, "Юрий Белоусов", ""));
+        data.add(new Teacher(100, "Test data - teacher", "degree"));
+        data.add(new Teacher(0, "Аммосов Ю.П.", ""));
+        data.add(new Teacher(10, "Половинкин Е.С.", "Профессор"));
+        data.add(new Teacher(11, "Белоусов Ю.М.", "Профессор"));
+        data.add(new Teacher(12, "Осипов Д.Л.", ""));
+        data.add(new Teacher(13, "Надеждин Б.Б.", ""));
     }
 
     public boolean insert(Teacher item) throws TableException

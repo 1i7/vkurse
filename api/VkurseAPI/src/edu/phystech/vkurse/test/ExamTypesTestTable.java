@@ -16,8 +16,10 @@ public class ExamTypesTestTable implements ExamTypesTable
     ArrayList<ExamType> data = new ArrayList<ExamType>();
     public ExamTypesTestTable()
     {
-        data.add(new ExamType(0, "Exam"));
-        data.add(new ExamType(1, "Test"));
+        data.add(new ExamType(100, "Test data - exam type"));
+        data.add(new ExamType(0, "Экзамен"));
+        data.add(new ExamType(1, "Зачет"));
+        data.add(new ExamType(2, "Дифференцированный зачет"));
     }
 
     public boolean insert(ExamType item) throws TableException

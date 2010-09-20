@@ -16,9 +16,21 @@ public class RoomsTestTable implements RoomsTable
     ArrayList<Room> data = new ArrayList<Room>();
     public RoomsTestTable()
     {
+        /*
         data.add(new Room(0, "123 ГК"));
         data.add(new Room(1, "Большая физическая"));
         data.add(new Room(2, "115 КПМ"));
+         */
+        data.add(new Room(100, "Test data - room"));
+        data.add(new Room(0, "202 НК"));
+        data.add(new Room(1, "113 ГК"));
+        data.add(new Room(2, "430 ГК"));
+        data.add(new Room(3, "115 КПМ"));
+        data.add(new Room(4, "110 КПМ"));
+        data.add(new Room(5, "301 ЛК"));
+        data.add(new Room(6, "515 ГК"));
+        data.add(new Room(7, "417 ГК"));
+        data.add(new Room(8, "802 КПМ"));
     }
 
     public boolean insert(Room item) throws TableException
