@@ -15,6 +15,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
     ArrayList<ScheduleChange> data = new ArrayList<ScheduleChange>();
     public ScheduleChangesTestTable()
     {
+        data.add(new ScheduleChange(100, 100, 100, 100, (byte)2, 540, 85, 100, 100, 100, "comment of change"));
         data.add(new ScheduleChange(0, 0, 1, 0, (byte)1, 540, 85, 0, 0, 0, "it is comment of change"));
     }
 
