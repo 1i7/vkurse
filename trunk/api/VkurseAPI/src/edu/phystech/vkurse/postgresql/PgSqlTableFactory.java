@@ -12,7 +12,7 @@ import edu.phystech.vkurse.model.*;
  */
 public class PgSqlTableFactory implements TableFactory
 {
-    public String GetSourceName()
+    public String getSourceName()
     {
         return "SQL server. " +
                 "jdbcDriverClass='" + PgSqlSettings.getJdbcDriverClass() + "' " +

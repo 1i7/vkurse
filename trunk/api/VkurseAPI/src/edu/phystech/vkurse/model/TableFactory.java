@@ -18,5 +18,5 @@ public interface TableFactory
     public ScheduleTable getScheduleTable();
     public ScheduleChangesTable getScheduleChangesTable();
     public TeachersTable getTeachersTable();
-    public String GetSourceName();
+    public String getSourceName();
 }
