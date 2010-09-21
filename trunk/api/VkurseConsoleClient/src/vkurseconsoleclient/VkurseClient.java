@@ -96,7 +96,10 @@ public class VkurseClient
             //System.out.println(lecturesTable.getAll().getClass().getName());
             System.out.println(tableFactory.getSourceName());
             System.out.println();
-        } catch (Exception ex) { }
+        } catch (Exception ex)
+        {
+            System.out.println(ex.toString());
+        }
     }
 
 
