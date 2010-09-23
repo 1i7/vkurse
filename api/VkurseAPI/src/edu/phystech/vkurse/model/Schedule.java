@@ -98,4 +98,19 @@ public class Schedule extends DbTableRecord
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override public String toString()
+    {
+        String r = "ID=" + id + " ";
+        r += "groupID=" + groupID + " ";
+        r += "day=" + day + " ";
+        r += "startTime=" + startTime + " ";
+        r += "length=" + length + " ";
+        r += "lectureID=" + lectureID + " ";
+        r += "roomID=" + roomID + " ";
+        r += "teacherID=" + teacherID + " ";
+        r += "comment='" + comment + "' ";
+        r = r.trim();
+        return r;
+    }
 }
