@@ -29,13 +29,11 @@ public abstract class DbTableRecord
         String p = "";
         boolean inStr = false;
         int i;
-        System.out.println("data=" + data + "           len="+data.length());
         for (i=0; i<data.length(); i++)
         {
             //String c = data.substring(i, 1);
             String c = data.substring(i, i+1);
             p += c;
-            System.out.println("" + i + "   " + c);
             if ((!inStr) && (c.equals(" ")))
             {
                 readParam(p);
@@ -48,7 +46,6 @@ public abstract class DbTableRecord
 
     private void readParam(String p)
     {
-        System.out.println(p);
         String d = p;
         while (d.startsWith(" ")) d = d.substring(1, d.length());
         while (d.endsWith(" ")) d = d.substring(0, d.length()-1);
