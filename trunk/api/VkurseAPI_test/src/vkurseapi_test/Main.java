@@ -28,13 +28,26 @@ public class Main
 {
     public static void main(String[] args) throws edu.phystech.vkurse.model.TableException
     {
+        
         UsageExample();
+
         System.out.println("");
         System.out.println("");
         System.out.println("");
         System.out.println("");
         System.out.println("");
+
         ModulesTest();
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+         
+        Lecture l = new Lecture();
+        l.readData("ID=666 name='lecture name' examTypeID=13 comment='lect comment'");
+        System.out.println(l.toString());
     }
 
     //  Пример использования библиотеки
