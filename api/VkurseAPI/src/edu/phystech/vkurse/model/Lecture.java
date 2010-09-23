@@ -51,9 +51,18 @@ public class Lecture extends DbTableRecord
     @Override public String toString()
     {
         String r = "ID=" + id + " ";
+        r += "name='" + name + "' ";
         r += "examTypeID=" + examTypeID + " ";
         r += "comment='" + comment + "' ";
         r = r.trim();
         return r;
+    }
+
+    void setData(String n, String d)
+    {
+        if (n.equals("ID")) this.id = Integer.parseInt(d);
+        if (n.equals("name")) this.name = d;
+        if (n.equals("examTypeID")) this.examTypeID = Integer.parseInt(d);
+        if (n.equals("comment")) this.comment = d;
     }
 }

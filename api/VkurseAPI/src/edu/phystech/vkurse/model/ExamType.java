@@ -33,7 +33,12 @@ public class ExamType extends DbTableRecord
     {
         String r = "ID=" + id + " ";
         r += "name='" + name + "' ";
-        r = r.trim();
         return r;
+    }
+
+    void setData(String n, String d)
+    {
+        if (n.equals("ID")) this.id = Integer.parseInt(d);
+        if (n.equals("name")) this.name = d;
     }
 }

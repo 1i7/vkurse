@@ -134,4 +134,19 @@ public class ScheduleChange extends DbTableRecord
         r = r.trim();
         return r;
     }
+
+    void setData(String n, String d)
+    {
+        if (n.equals("ID")) this.id = Integer.parseInt(d);
+        if (n.equals("scheduleID")) this.scheduleID = Integer.parseInt(d);
+        if (n.equals("week")) this.week = Integer.parseInt(d);
+        if (n.equals("groupID")) this.groupID = Integer.parseInt(d);
+        if (n.equals("day")) this.day = (byte)Integer.parseInt(d);
+        if (n.equals("startTime")) this.startTime = Integer.parseInt(d);
+        if (n.equals("length")) this.length = Integer.parseInt(d);
+        if (n.equals("lectureID")) this.lectureID = Integer.parseInt(d);
+        if (n.equals("roomID")) this.roomID = Integer.parseInt(d);
+        if (n.equals("teacherID")) this.teacherID = Integer.parseInt(d);
+        if (n.equals("comment")) this.comment = d;
+    }
 }
