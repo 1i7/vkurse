@@ -155,6 +155,8 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
             {
             }
         }
+
+        LecturesForm.append(net.Version());
         Display.getDisplay(this).setCurrent(LecturesForm);
     }
 
