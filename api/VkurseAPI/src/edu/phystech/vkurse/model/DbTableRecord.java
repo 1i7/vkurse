@@ -29,10 +29,13 @@ public abstract class DbTableRecord
         String p = "";
         boolean inStr = false;
         int i;
+        System.out.println("data=" + data + "           len="+data.length());
         for (i=0; i<data.length(); i++)
         {
-            String c = data.substring(i, 1);
+            //String c = data.substring(i, 1);
+            String c = data.substring(i, i+1);
             p += c;
+            System.out.println("" + i + "   " + c);
             if ((!inStr) && (c.equals(" ")))
             {
                 readParam(p);
@@ -40,17 +43,24 @@ public abstract class DbTableRecord
             }
             if (c.equals("'")) inStr = !inStr;
         }
+        if (!p.equals("")) readParam(p);
     }
 
     private void readParam(String p)
     {
-        String d = p.trim();
+        System.out.println(p);
+        String d = p;
+        while (d.startsWith(" ")) d = d.substring(1, d.length());
+        while (d.endsWith(" ")) d = d.substring(0, d.length()-1);
         int a = d.indexOf("=");
-        String l = d.substring(0, a);
-        String r = d.substring(a+1, d.length()-a-1);
-        if (r.startsWith("'")) r = r.substring(1, r.length()-1);
-        if (r.endsWith("'")) r = r.substring(0, r.length()-1);
-        setData(l, r);
+        if (a>0)
+        {
+            String l = d.substring(0, a);
+            String r = d.substring(a+1, d.length());
+            if (r.startsWith("'")) r = r.substring(1, r.length());
+            if (r.endsWith("'")) r = r.substring(0, r.length()-1);
+            setData(l, r);
+        }
     }
 
     abstract void setData(String n, String d);
