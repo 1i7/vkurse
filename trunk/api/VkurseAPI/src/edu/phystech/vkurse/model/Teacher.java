@@ -37,4 +37,13 @@ public class Teacher extends DbTableRecord
     public void setDegree(String degree) {
         this.degree = degree;
     }
+
+    @Override public String toString()
+    {
+        String r = "ID=" + id + " ";
+        r += "name='" + name + "' ";
+        r += "degree='" + degree + "' ";
+        r = r.trim();
+        return r;
+    }
 }

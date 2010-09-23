@@ -33,4 +33,12 @@ public class Room extends DbTableRecord
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override public String toString()
+    {
+        String r = "ID=" + id + " ";
+        r += "name='" + name + "' ";
+        r = r.trim();
+        return r;
+    }
 }

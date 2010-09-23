@@ -49,4 +49,13 @@ public class Group extends DbTableRecord
     public void setCourse(String course) {
         this.course = course;
     }
+
+    @Override public String toString()
+    {
+        String r = "ID=" + id + " ";
+        r += "name='" + name + "' ";
+        r += "course='" + course + "' ";
+        r = r.trim();
+        return r;
+    }
 }

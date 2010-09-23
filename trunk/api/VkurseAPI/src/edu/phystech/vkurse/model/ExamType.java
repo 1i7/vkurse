@@ -28,4 +28,12 @@ public class ExamType extends DbTableRecord
     {
         return name;
     }
+
+    @Override public String toString()
+    {
+        String r = "ID=" + id + " ";
+        r += "name='" + name + "' ";
+        r = r.trim();
+        return r;
+    }
 }
