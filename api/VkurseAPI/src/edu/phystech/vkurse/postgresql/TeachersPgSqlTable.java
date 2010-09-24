@@ -41,7 +41,7 @@ public class TeachersPgSqlTable implements TeachersTable
                         ");");
                  */
                 r = (st.executeUpdate("insert into Teachers values(" +
-                        item.getID() + ", '" + item.getName() + "', '" + item.getDegree() + "'" +
+                        item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "', '" + item.getDegree().replace("'", "<apostrophe>") + "'" +
                         ");") > 0);
 
                 st.close();
@@ -76,8 +76,8 @@ public class TeachersPgSqlTable implements TeachersTable
                 Statement st = dbConn.createStatement();
 
                 String cmd = "update Teachers set " +
-                        "name = '" + item.getName() + "', " +
-                        "degree = '" + item.getDegree() + "' " +
+                        "name = '" + item.getName().replace("'", "<apostrophe>") + "', " +
+                        "degree = '" + item.getDegree().replace("'", "<apostrophe>") + "' " +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
 
@@ -117,7 +117,7 @@ public class TeachersPgSqlTable implements TeachersTable
 
             if (rs.next())
             {
-                r = new Teacher(rs.getInt("ID"), rs.getString("name"), rs.getString("degree"));
+                r = new Teacher(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"), rs.getString("degree").replace("<apostrophe>", "'"));
             }
             rs.close();
             st.close();
@@ -184,7 +184,7 @@ public class TeachersPgSqlTable implements TeachersTable
 
             while (rs.next())
             {
-                r.add(new Teacher(rs.getInt("ID"), rs.getString("name"), rs.getString("degree")));
+                r.add(new Teacher(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"), rs.getString("degree").replace("<apostrophe>", "'")));
             }
             rs.close();
             st.close();

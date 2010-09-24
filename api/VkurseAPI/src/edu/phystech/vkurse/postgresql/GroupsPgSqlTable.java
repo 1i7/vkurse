@@ -41,7 +41,7 @@ public class GroupsPgSqlTable implements GroupsTable
                         ");");
                  */
                 r = (st.executeUpdate("insert into Groups values(" +
-                        item.getID() + ", '" + item.getName() + "', '" + item.getCourse() + "'" +
+                        item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "', '" + item.getCourse().replace("'", "<apostrophe>") + "'" +
                         ");") > 0);
 
                 st.close();
@@ -77,7 +77,7 @@ public class GroupsPgSqlTable implements GroupsTable
 
                 String cmd = "update Groups set " +
                         "name = '" + item.getName() + "', " +
-                        "course = '" + item.getCourse() + "' " +
+                        "course = '" + item.getCourse().replace("'", "<apostrophe>") + "' " +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
 
@@ -117,7 +117,7 @@ public class GroupsPgSqlTable implements GroupsTable
 
             if (rs.next())
             {
-                r = new Group(rs.getInt("ID"), rs.getString("name"), rs.getString("course"));
+                r = new Group(rs.getInt("ID"), rs.getString("name").replace("'", "<apostrophe>"), rs.getString("course").replace("'", "<apostrophe>"));
             }
             rs.close();
             st.close();
@@ -184,7 +184,7 @@ public class GroupsPgSqlTable implements GroupsTable
 
             while (rs.next())
             {
-                r.add(new Group(rs.getInt("ID"), rs.getString("name"), rs.getString("course")));
+                r.add(new Group(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"), rs.getString("course").replace("<apostrophe>", "'")));
             }
             rs.close();
             st.close();

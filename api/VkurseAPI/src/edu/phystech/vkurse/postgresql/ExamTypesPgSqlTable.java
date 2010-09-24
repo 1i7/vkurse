@@ -41,7 +41,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
                         ");");
                  */
                 r = (st.executeUpdate("insert into ExamTypes values(" +
-                        item.getID() + ", '" + item.getName() + "'" +
+                        item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "'" +
                         ");") > 0);
 
                 st.close();
@@ -76,7 +76,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
                 Statement st = dbConn.createStatement();
 
                 String cmd = "update ExamTypes set " +
-                        "name = '" + item.getName() + "' " +
+                        "name = '" + item.getName().replace("'", "<apostrophe>") + "' " +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
 
@@ -116,7 +116,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
 
             if (rs.next())
             {
-                r = new ExamType(rs.getInt("ID"), rs.getString("name"));
+                r = new ExamType(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"));
             }
             rs.close();
             st.close();
@@ -183,7 +183,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
 
             while (rs.next())
             {
-                r.add(new ExamType(rs.getInt("ID"), rs.getString("name")));
+                r.add(new ExamType(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'")));
             }
             rs.close();
             st.close();

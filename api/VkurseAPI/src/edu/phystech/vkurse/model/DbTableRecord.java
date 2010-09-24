@@ -56,6 +56,7 @@ public abstract class DbTableRecord
             String r = d.substring(a+1, d.length());
             if (r.startsWith("'")) r = r.substring(1, r.length());
             if (r.endsWith("'")) r = r.substring(0, r.length()-1);
+            r = r.replace("<apostrophe>", "'");
             setData(l, r);
         }
     }

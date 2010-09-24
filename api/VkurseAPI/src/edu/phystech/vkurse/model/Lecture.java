@@ -54,6 +54,7 @@ public class Lecture extends DbTableRecord
         r += "name='" + name + "' ";
         r += "examTypeID=" + examTypeID + " ";
         r += "comment='" + comment + "' ";
+        r = r.replace("'", "<apostrophe>");
         r = r.trim();
         return r;
     }

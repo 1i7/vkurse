@@ -49,7 +49,7 @@ public class SchedulePgSqlTable implements ScheduleTable
                         item.getLectureID() + ", " +
                         item.getRoomID() + ", " +
                         item.getTeacherID() + ", " +
-                        "'" + item.getComment() + "'" +
+                        "'" + item.getComment().replace("'", "<apostrophe>") + "'" +
                         ");") > 0);
 
                 st.close();
@@ -91,7 +91,7 @@ public class SchedulePgSqlTable implements ScheduleTable
                         "lectureID = " + item.getLectureID() + ", " +
                         "roomID = " + item.getRoomID() + ", " +
                         "teacherID = " + item.getTeacherID() + ", " +
-                        "comment = '" + item.getComment() + "'" +
+                        "comment = '" + item.getComment().replace("'", "<apostrophe>") + "'" +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
 
@@ -140,7 +140,7 @@ public class SchedulePgSqlTable implements ScheduleTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
-                        rs.getString("comment")
+                        rs.getString("comment").replace("<apostrophe>", "'")
                         );
             }
                         /*
@@ -227,7 +227,7 @@ public class SchedulePgSqlTable implements ScheduleTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
-                        rs.getString("comment")
+                        rs.getString("comment").replace("<apostrophe>", "'")
                         );
 
                 r.add(s);
@@ -263,7 +263,7 @@ public class SchedulePgSqlTable implements ScheduleTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                    "select * from " + PgSqlSettings.getDbName() + ".Schedule" +
+                    "select * from Schedule" +
                     " where day=" + day + " and groupID=" + groupID
                     );
 
@@ -278,7 +278,7 @@ public class SchedulePgSqlTable implements ScheduleTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
-                        rs.getString("comment")
+                        rs.getString("comment").replace("<apostrophe>", "'")
                         );
 
                 r.add(s);

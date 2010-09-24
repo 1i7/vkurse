@@ -36,8 +36,8 @@ public class LecturesPgSqlTable implements LecturesTable
                 Statement st = dbConn.createStatement();
 
                 r = (st.executeUpdate("insert into Lectures values(" +
-                        item.getID() + ", '" + item.getName() + "', " +
-                        item.getExamTypeID() + ", '" + item.getComment() + "'" + 
+                        item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "', " +
+                        item.getExamTypeID() + ", '" + item.getComment().replace("'", "<apostrophe>") + "'" +
                         ");") > 0);
 
                 st.close();
@@ -72,9 +72,9 @@ public class LecturesPgSqlTable implements LecturesTable
                 Statement st = dbConn.createStatement();
 
                 String cmd = "update Lectures set " +
-                        "name = '" + item.getName() + "', " +
+                        "name = '" + item.getName().replace("'", "<apostrophe>") + "', " +
                         "examTypeID = " + item.getExamTypeID() + ", " +
-                        "comment = '" + item.getComment() + "' " +
+                        "comment = '" + item.getComment().replace("'", "<apostrophe>") + "' " +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
 
@@ -114,8 +114,8 @@ public class LecturesPgSqlTable implements LecturesTable
 
             if (rs.next())
             {
-                r = new Lecture(rs.getInt("ID"), rs.getString("name"),
-                        rs.getInt("examTypeID"), rs.getString("comment"));
+                r = new Lecture(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"),
+                        rs.getInt("examTypeID"), rs.getString("comment").replace("<apostrophe>", "'"));
             }
             rs.close();
             st.close();
@@ -183,8 +183,8 @@ public class LecturesPgSqlTable implements LecturesTable
             while (rs.next())
             {
                 
-                r.add(new Lecture(rs.getInt("ID"), rs.getString("name"),
-                          rs.getInt("examTypeID"), rs.getString("comment")));
+                r.add(new Lecture(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"),
+                          rs.getInt("examTypeID"), rs.getString("comment").replace("<apostrophe>", "'")));
             }
             rs.close();
             st.close();

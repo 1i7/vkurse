@@ -41,7 +41,7 @@ public class RoomsPgSqlTable implements RoomsTable
                         ");");
                  */
                 r = (st.executeUpdate("insert into Rooms values(" +
-                        item.getID() + ", '" + item.getName() + "'" +
+                        item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "'" +
                         ");") > 0);
 
                 st.close();
@@ -76,7 +76,7 @@ public class RoomsPgSqlTable implements RoomsTable
                 Statement st = dbConn.createStatement();
 
                 String cmd = "update Rooms set " +
-                        "name = '" + item.getName() + "' " +
+                        "name = '" + item.getName().replace("'", "<apostrophe>") + "' " +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
 
@@ -116,7 +116,7 @@ public class RoomsPgSqlTable implements RoomsTable
 
             if (rs.next())
             {
-                r = new Room(rs.getInt("ID"), rs.getString("name"));
+                r = new Room(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"));
             }
             rs.close();
             st.close();
@@ -183,7 +183,7 @@ public class RoomsPgSqlTable implements RoomsTable
 
             while (rs.next())
             {
-                r.add(new Room(rs.getInt("ID"), rs.getString("name")));
+                r.add(new Room(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'")));
             }
             rs.close();
             st.close();

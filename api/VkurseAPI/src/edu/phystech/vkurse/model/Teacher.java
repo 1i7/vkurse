@@ -43,6 +43,7 @@ public class Teacher extends DbTableRecord
         String r = "ID=" + id + " ";
         r += "name='" + name + "' ";
         r += "degree='" + degree + "' ";
+        r = r.replace("'", "<apostrophe>");
         r = r.trim();
         return r;
     }
