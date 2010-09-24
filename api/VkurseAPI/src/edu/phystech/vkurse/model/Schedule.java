@@ -109,8 +109,7 @@ public class Schedule extends DbTableRecord
         r += "lectureID=" + lectureID + " ";
         r += "roomID=" + roomID + " ";
         r += "teacherID=" + teacherID + " ";
-        r += "comment='" + comment + "' ";
-        r = r.replace("'", "<apostrophe>");
+        r += "comment='" + comment.replace("'", "<apostrophe>") + "' ";
         r = r.trim();
         return r;
     }

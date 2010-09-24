@@ -51,10 +51,10 @@ public class Lecture extends DbTableRecord
     @Override public String toString()
     {
         String r = "ID=" + id + " ";
-        r += "name='" + name + "' ";
+        r += "name='" + name.replace("'", "<apostrophe>") + "' ";
         r += "examTypeID=" + examTypeID + " ";
-        r += "comment='" + comment + "' ";
-        r = r.replace("'", "<apostrophe>");
+        r += "comment='" + comment.replace("'", "<apostrophe>") + "' ";
+        //r = r.replace("'", "<apostrophe>");
         r = r.trim();
         return r;
     }
