@@ -55,6 +55,7 @@ public class Group extends DbTableRecord
         String r = "ID=" + id + " ";
         r += "name='" + name + "' ";
         r += "course='" + course + "' ";
+        r = r.replace("'", "<apostrophe>");
         r = r.trim();
         return r;
     }

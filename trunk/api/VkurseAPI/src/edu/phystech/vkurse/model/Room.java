@@ -38,6 +38,7 @@ public class Room extends DbTableRecord
     {
         String r = "ID=" + id + " ";
         r += "name='" + name + "' ";
+        r = r.replace("'", "<apostrophe>");
         r = r.trim();
         return r;
     }

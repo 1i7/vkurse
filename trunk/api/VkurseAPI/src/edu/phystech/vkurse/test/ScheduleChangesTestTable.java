@@ -87,4 +87,17 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         }
         return r;
     }
+
+    public java.util.Vector findByScheduleID(int scheduleID) throws TableException
+    {
+        Vector r = new Vector();
+        int i;
+        for (i=0; i<data.size(); ++i)
+        {
+            ScheduleChange s = data.get(i);
+            if ((s.getScheduleID()==scheduleID))
+                r.add(s);
+        }
+        return r;
+    }
 }

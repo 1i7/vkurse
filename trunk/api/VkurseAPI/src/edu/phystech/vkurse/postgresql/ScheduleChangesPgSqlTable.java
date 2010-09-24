@@ -51,7 +51,7 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         item.getLectureID() + ", " +
                         item.getRoomID() + ", " +
                         item.getTeacherID() + ", " +
-                        "'" + item.getComment() + "'" +
+                        "'" + item.getComment().replace("'", "<apostrophe>") + "'" +
                         ");") > 0);
 
                 st.close();
@@ -95,7 +95,7 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         "lectureID = " + item.getLectureID() + ", " +
                         "roomID = " + item.getRoomID() + ", " +
                         "teacherID = " + item.getTeacherID() + ", " +
-                        "comment = '" + item.getComment() + "'" +
+                        "comment = '" + item.getComment().replace("'", "<apostrophe>") + "'" +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
 
@@ -147,7 +147,7 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
-                        rs.getString("comment")
+                        rs.getString("comment").replace("<apostrophe>", "'")
                         );
             }
                         /*
@@ -237,7 +237,7 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
-                        rs.getString("comment")
+                        rs.getString("comment").replace("<apostrophe>", "'")
                         );
 
                 r.add(s);
@@ -292,7 +292,61 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
-                        rs.getString("comment")
+                        rs.getString("comment").replace("<apostrophe>", "'")
+                        );
+
+                r.add(s);
+            }
+            rs.close();
+            st.close();
+            dbConn.close();
+        } catch (java.lang.Exception exc)
+        {
+            throw new TableException("An error occured while working with server: " + exc.toString(), exc);
+        }
+
+        return r;
+    }
+
+
+    public java.util.Vector findByScheduleID(int scheduleID) throws TableException
+    {
+        java.util.Vector r = new java.util.Vector();
+
+        try
+        {
+            Class.forName(PgSqlSettings.getJdbcDriverClass()).newInstance();
+        } catch (java.lang.Exception exc)
+        {
+            throw new TableException("Cannot load JDBC driver. It is porbably not installed correctly. Connection string is:  "+PgSqlSettings.getJdbcDriverClass(), exc);
+        }
+
+        try
+        {
+            Connection dbConn = DriverManager.getConnection(PgSqlSettings.getUrl(), PgSqlSettings.getUsername(), PgSqlSettings.getPassword());
+
+            Statement st = dbConn.createStatement();
+
+            ResultSet rs = st.executeQuery(
+                    //"select * from " + PgSqlSettings.getDbName() + ".ScheduleChanges" +
+                    "select * from ScheduleChanges " +
+                    " where scheduleID=" + scheduleID
+                    );
+
+            while (rs.next())
+            {
+                ScheduleChange s = new ScheduleChange(
+                        rs.getInt("ID"),
+                        rs.getInt("scheduleID"),
+                        rs.getInt("week"),
+                        rs.getInt("groupID"),
+                        (byte)rs.getInt("day"),
+                        rs.getInt("startTime"),
+                        rs.getInt("length"),
+                        rs.getInt("lectureID"),
+                        rs.getInt("roomID"),
+                        rs.getInt("teacherID"),
+                        rs.getString("comment").replace("<apostrophe>", "'")
                         );
 
                 r.add(s);

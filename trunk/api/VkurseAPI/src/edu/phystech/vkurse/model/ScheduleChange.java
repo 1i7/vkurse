@@ -131,6 +131,7 @@ public class ScheduleChange extends DbTableRecord
         r += "roomID=" + roomID + " ";
         r += "teacherID=" + teacherID + " ";
         r += "comment='" + comment + "' ";
+        r = r.replace("'", "<apostrophe>");
         r = r.trim();
         return r;
     }
