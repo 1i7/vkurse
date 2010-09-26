@@ -32,7 +32,12 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
     private int Day;
     private int WeekDay;
     String sGroups[];
-    String Names[] ;
+    
+    String Schedule[];
+    String LectureName[];
+    int LectureStart[];
+    int LectureLenght[];
+    
     int Ident[];
     
     static final int DATE_DIALOG_ID = 0;
@@ -42,12 +47,6 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
     ScheduleTable scht =  factory.getScheduleTable();
     Vector vSchedule ;
     
-    class tLecture{
-    	public String name;
-    	public int start;
-    	public int length;
-    };
-    tLecture items[];
     
     
     /** Called when the activity is first created. */ 
@@ -92,6 +91,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
              vGroups = gt.getAll();
              sGroups = new String[vGroups.size()];
              Ident = new int[vGroups.size()];
+             Schedule = new String[vGroups.size()];
              
         } 
         catch (Exception exc)
@@ -115,8 +115,10 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
        try
         {
             vSchedule = scht.getAll();
-            Names = new String[vSchedule.size()];
-            items = new tLecture[vSchedule.size()];
+            Schedule = new String[vSchedule.size()];
+            LectureName = new String[vSchedule.size()];
+            LectureStart = new int[vSchedule.size()];
+            LectureLenght = new int[vSchedule.size()];
         }
         catch (Exception exc)
         {
@@ -129,18 +131,22 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
                 Schedule Sc = scht.get(k);
                 if ((Sc.getGroupID() == Ident[j])&&(cl.get(Calendar.DAY_OF_WEEK)==((Sc.getDay()+1) % 7)))
                 {
-                    items[k].name = factory.getLecturesTable().get(Sc.getLectureID()).getName();
-                    items[k].start = Sc.getStartTime();
-                    items[k].length = Sc.getLength();
-                    Names[k] = factory.getLecturesTable().get(Sc.getLectureID()).getName();
+                    LectureName[k] = factory.getLecturesTable().get(Sc.getLectureID()).getName();
+                    LectureStart[k] = Sc.getStartTime();
+                    LectureLenght[k] = Sc.getLength();
+                    
                 	
+                    //int end = items[k].start +items[k].length;
+                    Schedule[k]= LectureStart[k] +LectureName[k];
                 	
                 	//Names[k]="Пусто";
                 }
                 else
                 {
+                	LectureStart[k] = 00;
+                	LectureName[k] = " Empty";
                 	
-                	Names[k]="Пусто";
+                	Schedule[k]= LectureStart[k] +LectureName[k];
                 }
             }
             catch (Exception exc)
@@ -149,9 +155,9 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
             
             
         }
-       if ( Names[0]!= null )
+       if ( Schedule[0]!= null )
        {
-        	setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Names));
+        	setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Schedule));
         	getListView().setTextFilterEnabled(true);
         }
 	

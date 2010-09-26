@@ -21,11 +21,7 @@ import edu.phystech.vkurse.test.*;
 
 public class Class_Info  extends ListActivity {
 	
-	/*String test[] ={"lorem", "ipsum", "dolor", "sit", "amet",
-			"consectetuer", "adipiscing", "elit", "morbi", "vel",
-			"ligula", "vitae", "arcu", "aliquet", "mollis",
-			"etiam", "vel", "erat", "placerat", "ante",
-			"porttitor", "sodales", "pellentesque", "augue", "purus"};*/
+	
 	String sGroups[];
 	int Ident[];
 	
@@ -35,21 +31,14 @@ public class Class_Info  extends ListActivity {
     Vector vSchedule ;
     Vector vGroups;
     
-    class tLecture{
-    	public String name;
-    	public int start;
-    	public int length;
-    };
-    tLecture items[];
+   
     
-    class infoLecture{
-    	public String name ;
-    	public String room;
-    	public String teacher;
-    	public int start;
-    	public int length;
-    };
-    infoLecture Lecture[];
+    String LectureName[];
+    String LectureTeacher[];
+    String LectureRoom[];
+    int LectureStart[];
+    int LectureLenght[];
+    
     
 	@SuppressWarnings("unchecked")
 	public void onCreate(Bundle savedInstanceState) {
@@ -90,7 +79,11 @@ public class Class_Info  extends ListActivity {
 	       try
 	        {
 	            vSchedule = scht.getAll();
-	            Lecture = new infoLecture[vSchedule.size()];
+	            LectureName = new String[vSchedule.size()];
+	            LectureTeacher = new String[vSchedule.size()];
+	            LectureRoom = new String[vSchedule.size()];
+	            LectureStart = new int[vSchedule.size()];
+	            LectureLenght = new int[vSchedule.size()];
 	        }
 	        catch (Exception exc)
 	        {
@@ -103,11 +96,11 @@ public class Class_Info  extends ListActivity {
 	                Schedule Sc = scht.get(k);
 	                if ((Sc.getGroupID() == Ident[j])&&(day==((Sc.getDay()+1) % 7)))
 	                {
-	                	Lecture[k].name = factory.getLecturesTable().get(Sc.getLectureID()).getName();
-	 	                Lecture[k].start = Sc.getStartTime();
-	 	                Lecture[k].length = Sc.getLength();
-	 	                Lecture[k].room = factory.getRoomsTable().get(Sc.getRoomID()).getName();
-	 	                Lecture[k].teacher = factory.getTeachersTable().get(Sc.getLectureID()).getName();
+	                	LectureName[k] = factory.getLecturesTable().get(Sc.getLectureID()).getName();
+	 	                LectureStart[k] = Sc.getStartTime();
+	 	                LectureLenght[k] = Sc.getLength();
+	 	                LectureRoom[k] = factory.getRoomsTable().get(Sc.getRoomID()).getName();
+	 	                LectureTeacher[k] = factory.getTeachersTable().get(Sc.getLectureID()).getName();
 	                }
 	            
 	            }
@@ -116,7 +109,10 @@ public class Class_Info  extends ListActivity {
 	            }
 	        } 
 	        
-	        String thisLecture[]={Lecture[num].name, Lecture[num].room, Lecture[num].teacher};
+	       // LectureName[num] = "Empty";
+	       // LectureRoom[num] = "Empty";
+	       // LectureTeacher[num] = "Empty";
+	        String thisLecture[]={LectureName[num], LectureRoom[num], LectureTeacher[num]};
 	        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, thisLecture));
 	        
 	       // TextView text = (TextView)findViewById(R.id.TextView01);
