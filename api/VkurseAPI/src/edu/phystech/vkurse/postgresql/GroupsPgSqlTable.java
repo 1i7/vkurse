@@ -76,7 +76,7 @@ public class GroupsPgSqlTable implements GroupsTable
                 Statement st = dbConn.createStatement();
 
                 String cmd = "update Groups set " +
-                        "name = '" + item.getName() + "', " +
+                        "name = '" + item.getName().replace("'", "<apostrophe>") + "', " +
                         "course = '" + item.getCourse().replace("'", "<apostrophe>") + "' " +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
