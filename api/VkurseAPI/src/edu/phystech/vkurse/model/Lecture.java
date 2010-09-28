@@ -48,7 +48,8 @@ public class Lecture extends DbTableRecord
         this.comment = comment;
     }
 
-    @Override public String toString()
+    //@Override public String toString()
+    public String toStringData()
     {
         String r = "ID=" + id + " ";
         r += "name='" + name.replace("'", "<apostrophe>") + "' ";
