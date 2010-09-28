@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws" targetNamespace="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="ArrayOf_xsd_string">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getAllResponse">
+    <wsdl:part name="getAllReturn" type="impl:ArrayOf_xsd_string" />
+  </wsdl:message>
+  <wsdl:message name="getAllRequest" />
+  <wsdl:message name="updateResponse">
+    <wsdl:part name="updateReturn" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="removeResponse">
+    <wsdl:part name="removeReturn" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="updateRequest">
+    <wsdl:part name="examType" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="insertResponse">
+    <wsdl:part name="insertReturn" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="insertRequest">
+    <wsdl:part name="examType" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getResponse">
+    <wsdl:part name="getReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getRequest">
+    <wsdl:part name="ID" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="removeRequest">
+    <wsdl:part name="ID" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:portType name="ExamTypeService">
+    <wsdl:operation name="get" parameterOrder="ID">
+      <wsdl:input name="getRequest" message="impl:getRequest" />
+      <wsdl:output name="getResponse" message="impl:getResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="remove" parameterOrder="ID">
+      <wsdl:input name="removeRequest" message="impl:removeRequest" />
+      <wsdl:output name="removeResponse" message="impl:removeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="insert" parameterOrder="examType">
+      <wsdl:input name="insertRequest" message="impl:insertRequest" />
+      <wsdl:output name="insertResponse" message="impl:insertResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="update" parameterOrder="examType">
+      <wsdl:input name="updateRequest" message="impl:updateRequest" />
+      <wsdl:output name="updateResponse" message="impl:updateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAll">
+      <wsdl:input name="getAllRequest" message="impl:getAllRequest" />
+      <wsdl:output name="getAllResponse" message="impl:getAllResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ExamTypeServiceSoapBinding" type="impl:ExamTypeService">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="get">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRequest">
+        <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getResponse">
+        <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="remove">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="removeRequest">
+        <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="removeResponse">
+        <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insert">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="insertRequest">
+        <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="insertResponse">
+        <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="updateRequest">
+        <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="updateResponse">
+        <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAll">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAllRequest">
+        <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getAllResponse">
+        <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ExamTypeServiceService">
+    <wsdl:port name="ExamTypeService" binding="impl:ExamTypeServiceSoapBinding">
+      <wsdlsoap:address location="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

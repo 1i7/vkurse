@@ -1,0 +1,22 @@
+D:\ApX\_VS\VkurseClient\VkurseClient\bin\Debug\VkurseClient.exe.config
+D:\ApX\_VS\VkurseClient\VkurseClient\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\ApX\_VS\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.Form1.resources
+D:\ApX\_VS\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.Properties.Resources.resources
+D:\ApX\_VS\VkurseClient\VkurseClient\obj\x86\Debug\ResGen.read.1.tlog
+D:\ApX\_VS\VkurseClient\VkurseClient\obj\x86\Debug\ResGen.write.1.tlog
+D:\ApX\_VS\VkurseClient\VkurseClient\bin\Debug\VkurseClient.exe
+D:\ApX\_VS\VkurseClient\VkurseClient\bin\Debug\VkurseClient.pdb
+D:\ApX\_VS\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.exe
+D:\ApX\_VS\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.pdb
+D:\ApX\_VS\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.ScheduleInfoForm.resources
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\bin\Debug\VkurseClient.exe.config
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.exe
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.pdb
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.Form1.resources
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.Properties.Resources.resources
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.ScheduleInfoForm.resources
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\ResGen.read.1.tlog
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\ResGen.write.1.tlog
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\bin\Debug\VkurseClient.exe
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\bin\Debug\VkurseClient.pdb
