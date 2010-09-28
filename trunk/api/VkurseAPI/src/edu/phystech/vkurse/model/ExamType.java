@@ -29,7 +29,8 @@ public class ExamType extends DbTableRecord
         return name;
     }
 
-    @Override public String toString()
+    //@Override public String toString()
+    public String toStringData()
     {
         String r = "ID=" + id + " ";
         r += "name='" + name.replace("'", "<apostrophe>") + "' ";
