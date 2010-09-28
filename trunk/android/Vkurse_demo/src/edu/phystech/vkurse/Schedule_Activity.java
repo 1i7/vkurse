@@ -80,8 +80,64 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         // display the current date (this method is below)
         updateDisplay();
         
+        getSchedule(WeekDay);
+        
+        GroupsTable gt =  factory.getGroupsTable();
+        Vector vGroups;
+        try
+        {
+             vGroups = gt.getAll();
+             sGroups = new String[vGroups.size()];
+             Ident = new int[vGroups.size()];
+             Schedule = new String[vGroups.size()];
+             
+        } 
+        catch (Exception exc)
+        {
+            vGroups = new Vector();
+        }
+        for (int i = 0; i< vGroups.size()+ 1; i++)
+        {
+           try
+           {
+	           Group g = gt.get(i);
+	           sGroups[i] = g.getName();
+	           Ident[i] = g.getID();
+           }
+           catch (Exception exc)
+           {
+           }
+        }
+        
+        
+        
         Intent myInt = getIntent();
         int j = myInt.getIntExtra("from_spin",0);
+	
+       TextView GroupDisplay = (TextView) findViewById(R.id.groupDisplay);
+       GroupDisplay.setText(new StringBuilder().append(sGroups[j]).append(" group"));
+	}
+	
+	public void onListItemClick(ListView parent, View v, int position, long id)
+	{
+		Intent i = new Intent(this, Class_Info.class);
+		
+		//final Calendar c = Calendar.getInstance();
+		
+		Intent myInt = getIntent();
+        int j = myInt.getIntExtra("from_spin",0);
+    	ListView list = (ListView) findViewById(android.R.id.list);
+    	i.putExtra("from_list",list.getCheckedItemPosition());
+    	i.putExtra("day", WeekDay);
+    	i.putExtra("from_spin_again",j);
+    	
+    	startActivity(i);
+	}
+	//get information from DB and load ListView
+	private void getSchedule(int weekDay){
+		Intent myInt = getIntent();
+        int j = myInt.getIntExtra("from_spin",0);
+        
         //TableFactory factory = new TestTableFactory();
         GroupsTable gt =  factory.getGroupsTable();
         Vector vGroups;
@@ -129,7 +185,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
             try
             {
                 Schedule Sc = scht.get(k);
-                if ((Sc.getGroupID() == Ident[j])&&(cl.get(Calendar.DAY_OF_WEEK)==((Sc.getDay()+1) % 7)))
+                if ((Sc.getGroupID() == Ident[j])&&(weekDay==((Sc.getDay()+1) % 7)))
                 {
                     LectureName[k] = factory.getLecturesTable().get(Sc.getLectureID()).getName();
                     LectureStart[k] = Sc.getStartTime();
@@ -137,7 +193,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
                     
                 	
                     //int end = items[k].start +items[k].length;
-                    Schedule[k]= LectureStart[k] +LectureName[k];
+                    Schedule[k]= LectureStart[k] +" "+LectureName[k];
                 	
                 	//Names[k]="Пусто";
                 }
@@ -160,24 +216,6 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         	setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Schedule));
         	getListView().setTextFilterEnabled(true);
         }
-	
-        
-	}
-	
-	public void onListItemClick(ListView parent, View v, int position, long id)
-	{
-		Intent i = new Intent(this, Class_Info.class);
-		
-		final Calendar c = Calendar.getInstance();
-		
-		Intent myInt = getIntent();
-        int j = myInt.getIntExtra("from_spin",0);
-    	ListView list = (ListView) findViewById(android.R.id.list);
-    	i.putExtra("from_list",list.getCheckedItemPosition());
-    	i.putExtra("day", c.get(Calendar.DAY_OF_WEEK));
-    	i.putExtra("from_spin_again",j);
-    	
-    	startActivity(i);
 	}
 	
 	// updates the date in the TextView
@@ -189,6 +227,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
                     .append(Month + 1).append("-")
                     .append(Year).append(", ")
                     .append(WeekDay));
+        getSchedule(WeekDay);
     }
     
     private DatePickerDialog.OnDateSetListener DateSetListener =
@@ -199,7 +238,11 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
                     Year = year;
                     Month = monthOfYear;
                     Day = dayOfMonth;
+                    final Calendar cl = Calendar.getInstance();
+                    cl.set(year, monthOfYear, dayOfMonth);
+                    WeekDay = cl.get(Calendar.DAY_OF_WEEK);
                     updateDisplay();
+                    
                 }
             };
            
