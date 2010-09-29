@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(344, 298);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ScheduleInfoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Информация";
             this.ResumeLayout(false);
 
