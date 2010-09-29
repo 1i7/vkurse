@@ -39,6 +39,11 @@ namespace VkurseClient.TeacherService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         VkurseClient.TeacherService.getAllResponse getAll(VkurseClient.TeacherService.getAllRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper namespace (http://DefaultNamespace) of message findFreeIDRequest does not match the default value (http://nebula.innolab.net.ru:8180/axis/TeacherService.jws)
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        VkurseClient.TeacherService.findFreeIDResponse findFreeID(VkurseClient.TeacherService.findFreeIDRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -204,6 +209,33 @@ namespace VkurseClient.TeacherService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeID", WrapperNamespace="http://DefaultNamespace", IsWrapped=true)]
+    public partial class findFreeIDRequest {
+        
+        public findFreeIDRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeIDResponse", WrapperNamespace="http://nebula.innolab.net.ru:8180/axis/TeacherService.jws", IsWrapped=true)]
+    public partial class findFreeIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public int findFreeIDReturn;
+        
+        public findFreeIDResponse() {
+        }
+        
+        public findFreeIDResponse(int findFreeIDReturn) {
+            this.findFreeIDReturn = findFreeIDReturn;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface TeacherServiceChannel : VkurseClient.TeacherService.TeacherService, System.ServiceModel.IClientChannel {
     }
@@ -288,6 +320,17 @@ namespace VkurseClient.TeacherService {
             VkurseClient.TeacherService.getAllRequest inValue = new VkurseClient.TeacherService.getAllRequest();
             VkurseClient.TeacherService.getAllResponse retVal = ((VkurseClient.TeacherService.TeacherService)(this)).getAll(inValue);
             return retVal.getAllReturn;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        VkurseClient.TeacherService.findFreeIDResponse VkurseClient.TeacherService.TeacherService.findFreeID(VkurseClient.TeacherService.findFreeIDRequest request) {
+            return base.Channel.findFreeID(request);
+        }
+        
+        public int findFreeID() {
+            VkurseClient.TeacherService.findFreeIDRequest inValue = new VkurseClient.TeacherService.findFreeIDRequest();
+            VkurseClient.TeacherService.findFreeIDResponse retVal = ((VkurseClient.TeacherService.TeacherService)(this)).findFreeID(inValue);
+            return retVal.findFreeIDReturn;
         }
     }
 }

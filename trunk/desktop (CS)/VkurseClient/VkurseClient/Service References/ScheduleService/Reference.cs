@@ -44,6 +44,11 @@ namespace VkurseClient.ScheduleService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         VkurseClient.ScheduleService.findByGroupDayResponse findByGroupDay(VkurseClient.ScheduleService.findByGroupDayRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper namespace (http://DefaultNamespace) of message findFreeIDRequest does not match the default value (http://nebula.innolab.net.ru:8180/axis/ScheduleService.jws)
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        VkurseClient.ScheduleService.findFreeIDResponse findFreeID(VkurseClient.ScheduleService.findFreeIDRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -219,12 +224,12 @@ namespace VkurseClient.ScheduleService {
         public int groupID;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=1)]
-        public sbyte day;
+        public int day;
         
         public findByGroupDayRequest() {
         }
         
-        public findByGroupDayRequest(int groupID, sbyte day) {
+        public findByGroupDayRequest(int groupID, int day) {
             this.groupID = groupID;
             this.day = day;
         }
@@ -244,6 +249,33 @@ namespace VkurseClient.ScheduleService {
         
         public findByGroupDayResponse(string[] findByGroupDayReturn) {
             this.findByGroupDayReturn = findByGroupDayReturn;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeID", WrapperNamespace="http://DefaultNamespace", IsWrapped=true)]
+    public partial class findFreeIDRequest {
+        
+        public findFreeIDRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeIDResponse", WrapperNamespace="http://nebula.innolab.net.ru:8180/axis/ScheduleService.jws", IsWrapped=true)]
+    public partial class findFreeIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public int findFreeIDReturn;
+        
+        public findFreeIDResponse() {
+        }
+        
+        public findFreeIDResponse(int findFreeIDReturn) {
+            this.findFreeIDReturn = findFreeIDReturn;
         }
     }
     
@@ -338,12 +370,23 @@ namespace VkurseClient.ScheduleService {
             return base.Channel.findByGroupDay(request);
         }
         
-        public string[] findByGroupDay(int groupID, sbyte day) {
+        public string[] findByGroupDay(int groupID, int day) {
             VkurseClient.ScheduleService.findByGroupDayRequest inValue = new VkurseClient.ScheduleService.findByGroupDayRequest();
             inValue.groupID = groupID;
             inValue.day = day;
             VkurseClient.ScheduleService.findByGroupDayResponse retVal = ((VkurseClient.ScheduleService.ScheduleService)(this)).findByGroupDay(inValue);
             return retVal.findByGroupDayReturn;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        VkurseClient.ScheduleService.findFreeIDResponse VkurseClient.ScheduleService.ScheduleService.findFreeID(VkurseClient.ScheduleService.findFreeIDRequest request) {
+            return base.Channel.findFreeID(request);
+        }
+        
+        public int findFreeID() {
+            VkurseClient.ScheduleService.findFreeIDRequest inValue = new VkurseClient.ScheduleService.findFreeIDRequest();
+            VkurseClient.ScheduleService.findFreeIDResponse retVal = ((VkurseClient.ScheduleService.ScheduleService)(this)).findFreeID(inValue);
+            return retVal.findFreeIDReturn;
         }
     }
 }

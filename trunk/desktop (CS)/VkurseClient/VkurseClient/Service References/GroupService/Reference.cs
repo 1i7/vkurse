@@ -39,6 +39,11 @@ namespace VkurseClient.GroupService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         VkurseClient.GroupService.getAllResponse getAll(VkurseClient.GroupService.getAllRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper namespace (http://DefaultNamespace) of message findFreeIDRequest does not match the default value (http://nebula.innolab.net.ru:8180/axis/GroupService.jws)
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        VkurseClient.GroupService.findFreeIDResponse findFreeID(VkurseClient.GroupService.findFreeIDRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -204,6 +209,33 @@ namespace VkurseClient.GroupService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeID", WrapperNamespace="http://DefaultNamespace", IsWrapped=true)]
+    public partial class findFreeIDRequest {
+        
+        public findFreeIDRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeIDResponse", WrapperNamespace="http://nebula.innolab.net.ru:8180/axis/GroupService.jws", IsWrapped=true)]
+    public partial class findFreeIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public int findFreeIDReturn;
+        
+        public findFreeIDResponse() {
+        }
+        
+        public findFreeIDResponse(int findFreeIDReturn) {
+            this.findFreeIDReturn = findFreeIDReturn;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface GroupServiceChannel : VkurseClient.GroupService.GroupService, System.ServiceModel.IClientChannel {
     }
@@ -288,6 +320,17 @@ namespace VkurseClient.GroupService {
             VkurseClient.GroupService.getAllRequest inValue = new VkurseClient.GroupService.getAllRequest();
             VkurseClient.GroupService.getAllResponse retVal = ((VkurseClient.GroupService.GroupService)(this)).getAll(inValue);
             return retVal.getAllReturn;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        VkurseClient.GroupService.findFreeIDResponse VkurseClient.GroupService.GroupService.findFreeID(VkurseClient.GroupService.findFreeIDRequest request) {
+            return base.Channel.findFreeID(request);
+        }
+        
+        public int findFreeID() {
+            VkurseClient.GroupService.findFreeIDRequest inValue = new VkurseClient.GroupService.findFreeIDRequest();
+            VkurseClient.GroupService.findFreeIDResponse retVal = ((VkurseClient.GroupService.GroupService)(this)).findFreeID(inValue);
+            return retVal.findFreeIDReturn;
         }
     }
 }

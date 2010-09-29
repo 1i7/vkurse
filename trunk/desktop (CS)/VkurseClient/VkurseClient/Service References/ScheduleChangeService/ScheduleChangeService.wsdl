@@ -18,7 +18,7 @@
   <wsdl:message name="findByGroupWeekDayRequest">
     <wsdl:part name="groupID" type="xsd:int" />
     <wsdl:part name="week" type="xsd:int" />
-    <wsdl:part name="day" type="xsd:byte" />
+    <wsdl:part name="day" type="xsd:int" />
   </wsdl:message>
   <wsdl:message name="insertRequest">
     <wsdl:part name="scheduleChange" type="xsd:string" />
@@ -29,12 +29,16 @@
   <wsdl:message name="findByGroupWeekDayResponse">
     <wsdl:part name="findByGroupWeekDayReturn" type="impl:ArrayOf_xsd_string" />
   </wsdl:message>
+  <wsdl:message name="findFreeIDResponse">
+    <wsdl:part name="findFreeIDReturn" type="xsd:int" />
+  </wsdl:message>
   <wsdl:message name="updateResponse">
     <wsdl:part name="updateReturn" type="xsd:boolean" />
   </wsdl:message>
   <wsdl:message name="findByScheduleIDResponse">
     <wsdl:part name="findByScheduleIDReturn" type="impl:ArrayOf_xsd_string" />
   </wsdl:message>
+  <wsdl:message name="findFreeIDRequest" />
   <wsdl:message name="insertResponse">
     <wsdl:part name="insertReturn" type="xsd:boolean" />
   </wsdl:message>
@@ -82,6 +86,10 @@
     <wsdl:operation name="findByScheduleID" parameterOrder="scheduleID">
       <wsdl:input name="findByScheduleIDRequest" message="impl:findByScheduleIDRequest" />
       <wsdl:output name="findByScheduleIDResponse" message="impl:findByScheduleIDResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="findFreeID">
+      <wsdl:input name="findFreeIDRequest" message="impl:findFreeIDRequest" />
+      <wsdl:output name="findFreeIDResponse" message="impl:findFreeIDResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ScheduleChangeServiceSoapBinding" type="impl:ScheduleChangeService">
@@ -146,6 +154,15 @@
         <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
       <wsdl:output name="findByScheduleIDResponse">
+        <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ScheduleChangeService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findFreeID">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="findFreeIDRequest">
+        <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="findFreeIDResponse">
         <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ScheduleChangeService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>

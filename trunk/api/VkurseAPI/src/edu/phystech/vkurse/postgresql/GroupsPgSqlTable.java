@@ -197,4 +197,43 @@ public class GroupsPgSqlTable implements GroupsTable
         return r;
     }
 
+
+    public int findFreeID() throws TableException
+    {
+        int r = 0;
+
+        try
+        {
+            Class.forName(PgSqlSettings.getJdbcDriverClass()).newInstance();
+        } catch (java.lang.Exception exc)
+        {
+            throw new TableException("Cannot load JDBC driver. It is porbably not installed correctly. Connection string is:  "+PgSqlSettings.getJdbcDriverClass(), exc);
+        }
+
+        try
+        {
+            Connection dbConn = DriverManager.getConnection(PgSqlSettings.getUrl(), PgSqlSettings.getUsername(), PgSqlSettings.getPassword());
+
+            Statement st = dbConn.createStatement();
+
+            ResultSet rs = st.executeQuery(
+                "select MAX(ID) as mx from Groups"
+                //"select * from ExamTypes"
+                );
+
+            if (rs.next())
+            {
+                r = rs.getInt("mx");
+            }
+            rs.close();
+            st.close();
+            dbConn.close();
+        } catch (java.lang.Exception exc)
+        {
+            throw new TableException("An error occured while working with server: " + exc.toString(), exc);
+        }
+
+        r++;
+        return r;
+    }
 }

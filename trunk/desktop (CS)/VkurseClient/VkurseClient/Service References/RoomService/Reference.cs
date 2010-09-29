@@ -39,6 +39,11 @@ namespace VkurseClient.RoomService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         VkurseClient.RoomService.getAllResponse getAll(VkurseClient.RoomService.getAllRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper namespace (http://DefaultNamespace) of message findFreeIDRequest does not match the default value (http://nebula.innolab.net.ru:8180/axis/RoomService.jws)
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        VkurseClient.RoomService.findFreeIDResponse findFreeID(VkurseClient.RoomService.findFreeIDRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -204,6 +209,33 @@ namespace VkurseClient.RoomService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeID", WrapperNamespace="http://DefaultNamespace", IsWrapped=true)]
+    public partial class findFreeIDRequest {
+        
+        public findFreeIDRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeIDResponse", WrapperNamespace="http://nebula.innolab.net.ru:8180/axis/RoomService.jws", IsWrapped=true)]
+    public partial class findFreeIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public int findFreeIDReturn;
+        
+        public findFreeIDResponse() {
+        }
+        
+        public findFreeIDResponse(int findFreeIDReturn) {
+            this.findFreeIDReturn = findFreeIDReturn;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface RoomServiceChannel : VkurseClient.RoomService.RoomService, System.ServiceModel.IClientChannel {
     }
@@ -288,6 +320,17 @@ namespace VkurseClient.RoomService {
             VkurseClient.RoomService.getAllRequest inValue = new VkurseClient.RoomService.getAllRequest();
             VkurseClient.RoomService.getAllResponse retVal = ((VkurseClient.RoomService.RoomService)(this)).getAll(inValue);
             return retVal.getAllReturn;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        VkurseClient.RoomService.findFreeIDResponse VkurseClient.RoomService.RoomService.findFreeID(VkurseClient.RoomService.findFreeIDRequest request) {
+            return base.Channel.findFreeID(request);
+        }
+        
+        public int findFreeID() {
+            VkurseClient.RoomService.findFreeIDRequest inValue = new VkurseClient.RoomService.findFreeIDRequest();
+            VkurseClient.RoomService.findFreeIDResponse retVal = ((VkurseClient.RoomService.RoomService)(this)).findFreeID(inValue);
+            return retVal.findFreeIDReturn;
         }
     }
 }

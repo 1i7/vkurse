@@ -92,4 +92,17 @@ public class RoomService
         return r;
 	}
 
+	
+	public int findFreeID()
+	{
+		int r = 0;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			RoomsTable lt = factory.getRoomsTable();
+			r = lt.findFreeID();
+		} catch (Exception ex) { }
+        return r;
+	}
+
 }

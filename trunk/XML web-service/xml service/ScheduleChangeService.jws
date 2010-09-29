@@ -93,14 +93,14 @@ public class ScheduleChangeService
 	}
 
 
-	public String[] findByGroupWeekDay(int groupID, int week, byte day)
+	public String[] findByGroupWeekDay(int groupID, int week, int day)
 	{
 		String[] r = new String[0];
 		try
 		{
 			TableFactory factory = new PgSqlTableFactory();
 			ScheduleChangesTable lt = factory.getScheduleChangesTable();
-			Vector data = lt.findByGroupWeekDay(groupID, week, day);
+			Vector data = lt.findByGroupWeekDay(groupID, week, (byte)day);
 			r = new String[data.size()];
 			int i;
 			for (i=0; i<data.size(); ++i)
@@ -132,5 +132,17 @@ public class ScheduleChangeService
         return r;
 	}
 
+	
+	public int findFreeID()
+	{
+		int r = 0;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			ScheduleChangesTable lt = factory.getScheduleChangesTable();
+			r = lt.findFreeID();
+		} catch (Exception ex) { }
+        return r;
+	}
 
 }

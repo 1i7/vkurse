@@ -92,4 +92,17 @@ public class TeacherService
         return r;
 	}
 
+	
+	public int findFreeID()
+	{
+		int r = 0;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			TeachersTable lt = factory.getTeachersTable();
+			r = lt.findFreeID();
+		} catch (Exception ex) { }
+        return r;
+	}
+
 }
