@@ -45,8 +45,12 @@ namespace VkurseClient
             monthCalendar1.SelectionRange.Start = DateTime.Now;
             monthCalendar1.SelectionRange.End = DateTime.Now;
 
+            LoadingForm lf = new LoadingForm();
+            lf.Show();
+            Application.DoEvents();
             RefreshGroupsList();
             ShowSchedule();
+            lf.Close();
         }
 
 

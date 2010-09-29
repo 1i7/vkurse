@@ -20,3 +20,4 @@ D:\Физтех\! Инновационный практикум\svn\trunk\deskto
 D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\ResGen.write.1.tlog
 D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\bin\Debug\VkurseClient.exe
 D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\bin\Debug\VkurseClient.pdb
+D:\Физтех\! Инновационный практикум\svn\trunk\desktop (CS)\VkurseClient\VkurseClient\obj\x86\Debug\VkurseClient.LoadingForm.resources
