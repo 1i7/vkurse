@@ -12,39 +12,43 @@
       </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="getAllRequest" />
   <wsdl:message name="getAllResponse">
     <wsdl:part name="getAllReturn" type="impl:ArrayOf_xsd_string" />
   </wsdl:message>
-  <wsdl:message name="getAllRequest" />
   <wsdl:message name="removeResponse">
     <wsdl:part name="removeReturn" type="xsd:boolean" />
-  </wsdl:message>
-  <wsdl:message name="updateResponse">
-    <wsdl:part name="updateReturn" type="xsd:boolean" />
   </wsdl:message>
   <wsdl:message name="findByGroupDayResponse">
     <wsdl:part name="findByGroupDayReturn" type="impl:ArrayOf_xsd_string" />
   </wsdl:message>
-  <wsdl:message name="findByGroupDayRequest">
-    <wsdl:part name="groupID" type="xsd:int" />
-    <wsdl:part name="day" type="xsd:byte" />
-  </wsdl:message>
-  <wsdl:message name="insertRequest">
-    <wsdl:part name="schedule" type="xsd:string" />
-  </wsdl:message>
+  <wsdl:message name="findFreeIDRequest" />
   <wsdl:message name="getResponse">
     <wsdl:part name="getReturn" type="xsd:string" />
-  </wsdl:message>
-  <wsdl:message name="updateRequest">
-    <wsdl:part name="schedule" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="insertResponse">
     <wsdl:part name="insertReturn" type="xsd:boolean" />
   </wsdl:message>
-  <wsdl:message name="getRequest">
+  <wsdl:message name="removeRequest">
     <wsdl:part name="ID" type="xsd:int" />
   </wsdl:message>
-  <wsdl:message name="removeRequest">
+  <wsdl:message name="findFreeIDResponse">
+    <wsdl:part name="findFreeIDReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part name="updateReturn" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="insertRequest">
+    <wsdl:part name="schedule" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="findByGroupDayRequest">
+    <wsdl:part name="groupID" type="xsd:int" />
+    <wsdl:part name="day" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateRequest">
+    <wsdl:part name="schedule" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getRequest">
     <wsdl:part name="ID" type="xsd:int" />
   </wsdl:message>
   <wsdl:portType name="ScheduleService">
@@ -71,6 +75,10 @@
     <wsdl:operation name="findByGroupDay" parameterOrder="groupID day">
       <wsdl:input name="findByGroupDayRequest" message="impl:findByGroupDayRequest" />
       <wsdl:output name="findByGroupDayResponse" message="impl:findByGroupDayResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="findFreeID">
+      <wsdl:input name="findFreeIDRequest" message="impl:findFreeIDRequest" />
+      <wsdl:output name="findFreeIDResponse" message="impl:findFreeIDResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ScheduleServiceSoapBinding" type="impl:ScheduleService">
@@ -126,6 +134,15 @@
         <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
       <wsdl:output name="findByGroupDayResponse">
+        <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ScheduleService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findFreeID">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="findFreeIDRequest">
+        <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="findFreeIDResponse">
         <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ScheduleService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>

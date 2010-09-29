@@ -49,6 +49,11 @@ namespace VkurseClient.ScheduleChangeService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         VkurseClient.ScheduleChangeService.findByScheduleIDResponse findByScheduleID(VkurseClient.ScheduleChangeService.findByScheduleIDRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper namespace (http://DefaultNamespace) of message findFreeIDRequest does not match the default value (http://nebula.innolab.net.ru:8180/axis/ScheduleChangeService.jws)
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        VkurseClient.ScheduleChangeService.findFreeIDResponse findFreeID(VkurseClient.ScheduleChangeService.findFreeIDRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -227,12 +232,12 @@ namespace VkurseClient.ScheduleChangeService {
         public int week;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=2)]
-        public sbyte day;
+        public int day;
         
         public findByGroupWeekDayRequest() {
         }
         
-        public findByGroupWeekDayRequest(int groupID, int week, sbyte day) {
+        public findByGroupWeekDayRequest(int groupID, int week, int day) {
             this.groupID = groupID;
             this.week = week;
             this.day = day;
@@ -287,6 +292,33 @@ namespace VkurseClient.ScheduleChangeService {
         
         public findByScheduleIDResponse(string[] findByScheduleIDReturn) {
             this.findByScheduleIDReturn = findByScheduleIDReturn;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeID", WrapperNamespace="http://DefaultNamespace", IsWrapped=true)]
+    public partial class findFreeIDRequest {
+        
+        public findFreeIDRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="findFreeIDResponse", WrapperNamespace="http://nebula.innolab.net.ru:8180/axis/ScheduleChangeService.jws", IsWrapped=true)]
+    public partial class findFreeIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public int findFreeIDReturn;
+        
+        public findFreeIDResponse() {
+        }
+        
+        public findFreeIDResponse(int findFreeIDReturn) {
+            this.findFreeIDReturn = findFreeIDReturn;
         }
     }
     
@@ -381,7 +413,7 @@ namespace VkurseClient.ScheduleChangeService {
             return base.Channel.findByGroupWeekDay(request);
         }
         
-        public string[] findByGroupWeekDay(int groupID, int week, sbyte day) {
+        public string[] findByGroupWeekDay(int groupID, int week, int day) {
             VkurseClient.ScheduleChangeService.findByGroupWeekDayRequest inValue = new VkurseClient.ScheduleChangeService.findByGroupWeekDayRequest();
             inValue.groupID = groupID;
             inValue.week = week;
@@ -400,6 +432,17 @@ namespace VkurseClient.ScheduleChangeService {
             inValue.scheduleID = scheduleID;
             VkurseClient.ScheduleChangeService.findByScheduleIDResponse retVal = ((VkurseClient.ScheduleChangeService.ScheduleChangeService)(this)).findByScheduleID(inValue);
             return retVal.findByScheduleIDReturn;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        VkurseClient.ScheduleChangeService.findFreeIDResponse VkurseClient.ScheduleChangeService.ScheduleChangeService.findFreeID(VkurseClient.ScheduleChangeService.findFreeIDRequest request) {
+            return base.Channel.findFreeID(request);
+        }
+        
+        public int findFreeID() {
+            VkurseClient.ScheduleChangeService.findFreeIDRequest inValue = new VkurseClient.ScheduleChangeService.findFreeIDRequest();
+            VkurseClient.ScheduleChangeService.findFreeIDResponse retVal = ((VkurseClient.ScheduleChangeService.ScheduleChangeService)(this)).findFreeID(inValue);
+            return retVal.findFreeIDReturn;
         }
     }
 }

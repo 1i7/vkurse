@@ -16,4 +16,5 @@ public interface TeachersTable
     public Teacher get(int ID) throws TableException;
     public boolean remove(int ID) throws TableException;
     public java.util.Vector getAll() throws TableException;
+    public int findFreeID() throws TableException;
 }

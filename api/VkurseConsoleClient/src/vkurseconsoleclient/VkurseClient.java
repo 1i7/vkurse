@@ -125,6 +125,8 @@ public class VkurseClient
         System.out.println("14: Remove schedule changes entry");
         System.out.println("15: Create new schedule changes entry");
         System.out.println("");
+        System.out.println("16: Show free IDs");
+        System.out.println("");
         System.out.println("0:  Exit");
 
         int r = ConsoleReadInt(-1);
@@ -142,6 +144,7 @@ public class VkurseClient
         System.out.println("3:  Edit");
         System.out.println("4:  Remove");
         System.out.println("5:  Create new");
+        System.out.println("6:  Get free ID");
         System.out.println("");
         System.out.println("0:  Back");
 
@@ -174,6 +177,8 @@ public class VkurseClient
             if (13 == mnu) EditScheduleChangeEntry();
             if (14 == mnu) RemoveScheduleChangeEntry();
             if (15 == mnu) CreateScheduleChangeEntry();
+
+            if (16 == mnu) ShowFreeIDs();
 
             if (20 == mnu) Test();
         }
@@ -281,6 +286,15 @@ public class VkurseClient
                         System.out.println("Exam type was added");
                     else
                         System.out.println("Exam type was NOT added");
+                } catch (Exception Ex) {}
+                System.out.println("");
+            }
+
+            if (6 == mnu)
+            {
+                try
+                {
+                    System.out.println("Free ID:  " + examTypesTable.findFreeID());
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
@@ -394,6 +408,15 @@ public class VkurseClient
                         System.out.println("Group was added");
                     else
                         System.out.println("Group was NOT added");
+                } catch (Exception Ex) {}
+                System.out.println("");
+            }
+
+            if (6 == mnu)
+            {
+                try
+                {
+                    System.out.println("Free ID:  " + groupsTable.findFreeID());
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
@@ -549,6 +572,15 @@ public class VkurseClient
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
+
+            if (6 == mnu)
+            {
+                try
+                {
+                    System.out.println("Free ID:  " + lecturesTable.findFreeID());
+                } catch (Exception Ex) {}
+                System.out.println("");
+            }
         }
     }
 
@@ -654,6 +686,15 @@ public class VkurseClient
                         System.out.println("Room was added");
                     else
                         System.out.println("Room was NOT added");
+                } catch (Exception Ex) {}
+                System.out.println("");
+            }
+
+            if (6 == mnu)
+            {
+                try
+                {
+                    System.out.println("Free ID:  " + roomsTable.findFreeID());
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
@@ -767,6 +808,15 @@ public class VkurseClient
                         System.out.println("Teacher was added");
                     else
                         System.out.println("Teacher was NOT added");
+                } catch (Exception Ex) {}
+                System.out.println("");
+            }
+
+            if (6 == mnu)
+            {
+                try
+                {
+                    System.out.println("Free ID:  " + teachersTable.findFreeID());
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
@@ -1462,4 +1512,18 @@ public class VkurseClient
         System.out.println("");
     }
 
+
+    private void ShowFreeIDs()
+    {
+        try
+        {
+            System.out.println("Free schedule ID:  " + scheduleTable.findFreeID());
+            System.out.println("Free schedule changes ID:  " + scheduleChangesTable.findFreeID());
+        } catch (Exception ex)
+        {
+            System.out.println("Exception!");
+            System.out.print(ex);
+        }
+        System.out.println("");
+    }
 }

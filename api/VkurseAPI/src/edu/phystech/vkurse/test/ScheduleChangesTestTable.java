@@ -100,4 +100,17 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         }
         return r;
     }
+
+    public int findFreeID() throws TableException
+    {
+        int r = 0;
+        int i;
+        for (i = 0; i < data.size(); i++)
+        {
+            int ID = data.get(i).getID();
+            if (ID > r) r = ID;
+        }
+        r++;
+        return r;
+    }
 }

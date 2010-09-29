@@ -92,4 +92,17 @@ public class LectureService
         return r;
 	}
 
+	
+	public int findFreeID()
+	{
+		int r = 0;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			LecturesTable lt = factory.getLecturesTable();
+			r = lt.findFreeID();
+		} catch (Exception ex) { }
+        return r;
+	}
+
 }
