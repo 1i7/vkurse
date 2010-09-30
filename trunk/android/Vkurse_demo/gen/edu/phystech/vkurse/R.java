@@ -23,12 +23,13 @@ public final class R {
     }
     public static final class id {
         public static final int TextView01=0x7f060002;
-        public static final int changeGroup=0x7f060005;
+        public static final int changeGroup=0x7f060006;
         public static final int dateDisplay=0x7f060003;
-        public static final int forward_button=0x7f060007;
+        public static final int forward_button=0x7f060008;
+        public static final int groupDisplay=0x7f060004;
         public static final int ok_button=0x7f060001;
-        public static final int pickDate=0x7f060004;
-        public static final int spin=0x7f060006;
+        public static final int pickDate=0x7f060005;
+        public static final int spin=0x7f060007;
         public static final int spin2=0x7f060000;
     }
     public static final class layout {

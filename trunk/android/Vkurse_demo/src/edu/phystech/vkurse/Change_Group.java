@@ -26,12 +26,12 @@ public class Change_Group extends Activity implements OnClickListener{
         View forwardButton = findViewById(R.id.ok_button);
         forwardButton.setOnClickListener(this);
         
-        TableFactory factory = new TestTableFactory();
-        GroupsTable gt =  factory.getGroupsTable();
-        Vector vGroups ;
+        Groups factory = new Groups();
+        //upsTable gt =  factory.getGroupsTable();
+        Vector<Group> vGroups ;
         try
         {
-             vGroups = gt.getAll();
+             vGroups = factory.getAll();
              sGroups = new String[vGroups.size()];
         } 
         catch (Exception exc)
@@ -42,7 +42,7 @@ public class Change_Group extends Activity implements OnClickListener{
         {
            try
            {
-           Group g = gt.get(i);
+           Group g = vGroups.elementAt(i);
            sGroups[i] = g.getName();
            }
            catch (Exception exc)

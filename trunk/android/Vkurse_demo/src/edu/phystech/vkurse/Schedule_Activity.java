@@ -30,10 +30,10 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
     private int Year;
     private int Month;
     private int Day;
-    private int WeekDay;
+    private byte WeekDay;
     String sGroups[];
     
-    String Schedule[];
+    String Answer[];
     String LectureName[];
     int LectureStart[];
     int LectureLenght[];
@@ -43,11 +43,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
     static final int DATE_DIALOG_ID = 0;
     
     
-    TableFactory factory = new TestTableFactory();
-    ScheduleTable scht =  factory.getScheduleTable();
-    Vector vSchedule ;
-    
-    
+   
     
     /** Called when the activity is first created. */ 
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +56,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         Year = cl.get(Calendar.YEAR);
         Month = cl.get(Calendar.MONTH);
         Day = cl.get(Calendar.DAY_OF_MONTH);
-        WeekDay = cl.get(Calendar.DAY_OF_WEEK);
+        WeekDay = (byte)(cl.get(Calendar.DAY_OF_WEEK));
 
         
         DateDisplay = (TextView) findViewById(R.id.dateDisplay);
@@ -82,14 +78,15 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         
         getSchedule(WeekDay);
         
-        GroupsTable gt =  factory.getGroupsTable();
-        Vector vGroups;
+        Groups factory = new Groups();
+        Vector<Group> vGroups ;
+       
         try
         {
-             vGroups = gt.getAll();
+             vGroups = factory.getAll();
              sGroups = new String[vGroups.size()];
              Ident = new int[vGroups.size()];
-             Schedule = new String[vGroups.size()];
+             
              
         } 
         catch (Exception exc)
@@ -100,7 +97,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         {
            try
            {
-	           Group g = gt.get(i);
+        	   Group g = vGroups.elementAt(i);
 	           sGroups[i] = g.getName();
 	           Ident[i] = g.getID();
            }
@@ -122,7 +119,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
 	{
 		Intent i = new Intent(this, Class_Info.class);
 		
-		//final Calendar c = Calendar.getInstance();
+		
 		
 		Intent myInt = getIntent();
         int j = myInt.getIntExtra("from_spin",0);
@@ -134,20 +131,20 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
     	startActivity(i);
 	}
 	//get information from DB and load ListView
-	private void getSchedule(int weekDay){
+	private void getSchedule(byte weekDay){
 		Intent myInt = getIntent();
         int j = myInt.getIntExtra("from_spin",0);
         
-        //TableFactory factory = new TestTableFactory();
-        GroupsTable gt =  factory.getGroupsTable();
-        Vector vGroups;
+        
+        Groups factory = new Groups();
+        Vector<Group> vGroups ;
         
         try
         {
-             vGroups = gt.getAll();
+             vGroups = factory.getAll();
              sGroups = new String[vGroups.size()];
              Ident = new int[vGroups.size()];
-             Schedule = new String[vGroups.size()];
+             
              
         } 
         catch (Exception exc)
@@ -158,7 +155,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         {
            try
            {
-	           Group g = gt.get(i);
+        	   Group g = vGroups.elementAt(i);
 	           sGroups[i] = g.getName();
 	           Ident[i] = g.getID();
            }
@@ -167,11 +164,16 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
            }
         }
         
+        Schedules scht = new Schedules();
+        Vector<Schedule> vSchedule;
+        Lectures lct = new Lectures();
+        Lecture Lect;
         
        try
         {
-            vSchedule = scht.getAll();
-            Schedule = new String[vSchedule.size()];
+            vSchedule = scht.findByGroupDay(Ident[j], weekDay);
+           
+            Answer = new String[vSchedule.size()];
             LectureName = new String[vSchedule.size()];
             LectureStart = new int[vSchedule.size()];
             LectureLenght = new int[vSchedule.size()];
@@ -182,38 +184,40 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         }
         for (int k = 0; k< vSchedule.size()+ 1; k++)
         {
-            try
-            {
-                Schedule Sc = scht.get(k);
-                if ((Sc.getGroupID() == Ident[j])&&(weekDay==((Sc.getDay()+1) % 7)))
-                {
-                    LectureName[k] = factory.getLecturesTable().get(Sc.getLectureID()).getName();
-                    LectureStart[k] = Sc.getStartTime();
-                    LectureLenght[k] = Sc.getLength();
-                    
-                	
-                    //int end = items[k].start +items[k].length;
-                    Schedule[k]= LectureStart[k] +" "+LectureName[k];
-                	
-                	//Names[k]="Пусто";
-                }
-                else
-                {
-                	LectureStart[k] = 00;
-                	LectureName[k] = " Empty";
-                	
-                	Schedule[k]= LectureStart[k] +LectureName[k];
-                }
-            }
+	            try
+	            {
+	            	if(vSchedule.size()!=0)
+	            	{
+		            	Schedule Sc = vSchedule.elementAt(k);
+		            	Lect = lct.get(Sc.getLectureID());
+		            	LectureName[k] = Lect.getName();
+		                LectureStart[k] = Sc.getStartTime();
+		                LectureLenght[k] = Sc.getLength();
+		                Answer[k]= LectureStart[k] +" "+LectureName[k];
+	            	}
+	            	else
+	                {
+	                    LectureStart[k] = 00;
+	                    LectureName[k] = " Empty";
+	                    	
+	                    Answer[k]= LectureStart[k] +LectureName[k];
+	                }
+	            
+	            }
+        	 
+                
+            
+        
             catch (Exception exc)
             {
             }
-            
-            
         }
-       if ( Schedule[0]!= null )
+            
+            
+        
+       if ( Answer[0]!= null )
        {
-        	setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Schedule));
+        	setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Answer));
         	getListView().setTextFilterEnabled(true);
         }
 	}
@@ -240,7 +244,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
                     Day = dayOfMonth;
                     final Calendar cl = Calendar.getInstance();
                     cl.set(year, monthOfYear, dayOfMonth);
-                    WeekDay = cl.get(Calendar.DAY_OF_WEEK);
+                    WeekDay = (byte)cl.get(Calendar.DAY_OF_WEEK);
                     updateDisplay();
                     
                 }

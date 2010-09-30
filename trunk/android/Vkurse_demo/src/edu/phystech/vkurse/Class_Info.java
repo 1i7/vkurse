@@ -17,6 +17,7 @@ import android.widget.ListView;
 import edu.phystech.vkurse.model.*;
 
 import java.util.*;
+
 import edu.phystech.vkurse.test.*;
 
 public class Class_Info  extends ListActivity {
@@ -48,12 +49,15 @@ public class Class_Info  extends ListActivity {
 			Intent myInt = getIntent();
 			int j = myInt.getIntExtra("from_spin_again", 0);
 	        int num = myInt.getIntExtra("from_list",0);
-	        int day = myInt.getIntExtra("day", 0);
+	        byte day = myInt.getByteExtra("day", (byte)0);
+	       
 	        
+	        Groups factory = new Groups();
+	        Vector<Group> vGroups ;
 	        
 	        try
 	        {
-	             vGroups = gt.getAll();
+	             vGroups = factory.getAll();
 	             sGroups = new String[vGroups.size()];
 	             Ident = new int[vGroups.size()];
 	             
@@ -66,7 +70,7 @@ public class Class_Info  extends ListActivity {
 	        {
 	           try
 	           {
-		           Group g = gt.get(i);
+	        	   Group g = vGroups.elementAt(i);
 		           sGroups[i] = g.getName();
 		           Ident[i] = g.getID();
 	           }
@@ -75,15 +79,19 @@ public class Class_Info  extends ListActivity {
 	           }
 	        }
 	        
+	        Schedules scht = new Schedules();
+	        Vector<Schedule> vSchedule;
+	        Lectures lct = new Lectures();
+	        Lecture Lect;
 	        
 	       try
 	        {
-	            vSchedule = scht.getAll();
+	            vSchedule = scht.findByGroupDay(Ident[j], (byte)(day));
 	            LectureName = new String[vSchedule.size()];
-	            LectureTeacher = new String[vSchedule.size()];
-	            LectureRoom = new String[vSchedule.size()];
 	            LectureStart = new int[vSchedule.size()];
 	            LectureLenght = new int[vSchedule.size()];
+	            LectureRoom = new String[vSchedule.size()];
+	            LectureTeacher = new String[vSchedule.size()];
 	        }
 	        catch (Exception exc)
 	        {
@@ -93,25 +101,30 @@ public class Class_Info  extends ListActivity {
 	        {
 	            try
 	            {
-	                Schedule Sc = scht.get(k);
-	                if ((Sc.getGroupID() == Ident[j])&&(day==((Sc.getDay()+1) % 7)))
-	                {
-	                	LectureName[k] = factory.getLecturesTable().get(Sc.getLectureID()).getName();
-	 	                LectureStart[k] = Sc.getStartTime();
-	 	                LectureLenght[k] = Sc.getLength();
-	 	                LectureRoom[k] = factory.getRoomsTable().get(Sc.getRoomID()).getName();
-	 	                LectureTeacher[k] = factory.getTeachersTable().get(Sc.getLectureID()).getName();
-	                }
-	            
+	            	Schedule Sc = vSchedule.elementAt(k);
+	            	Lect = lct.get(Sc.getLectureID());
+	            	LectureName[k] = Lect.getName();
+	                LectureStart[k] = Sc.getStartTime();
+	                LectureLenght[k] = Sc.getLength();
+	                Teacher teach ;
+	                Teachers TeacherTable = new Teachers();
+	                teach = TeacherTable.get(Sc.getTeacherID());
+	                LectureTeacher[k] = teach.getName();
+	                Room room;
+	                Rooms roomTable = new Rooms();
+	                room = roomTable.get(Sc.getRoomID());
+	                LectureRoom[k] = room.getName();
+	               
 	            }
+	                
+	              
 	            catch (Exception exc)
 	            {
 	            }
-	        } 
-	        
-	       // LectureName[num] = "Empty";
-	       // LectureRoom[num] = "Empty";
-	       // LectureTeacher[num] = "Empty";
+	            
+	            
+	        }
+	       
 	        String thisLecture[]={LectureName[num], LectureRoom[num], LectureTeacher[num]};
 	        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, thisLecture));
 	        
