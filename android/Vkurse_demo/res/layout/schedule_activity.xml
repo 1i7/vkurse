@@ -9,11 +9,7 @@
    
  
 
-<TextView android:id="@+id/dateDisplay"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    
-    />
+
     
 <TableLayout
 	android:layout_width="fill_parent"
@@ -21,6 +17,21 @@
 	android:stretchColumns="1"
 	>
 
+<TableRow>
+<TextView android:id="@+id/dateDisplay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    
+    />
+    
+<TextView android:id="@+id/groupDisplay"
+	android:gravity="right"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    
+    />
+    
+</TableRow>
 <TableRow>
     
 <Button android:id="@+id/pickDate"
@@ -50,8 +61,6 @@
     android:textSize="25sp"
     android:textColor="@color/blue"
     />
-
-
 
 
 <ListView

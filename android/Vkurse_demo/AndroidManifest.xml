@@ -17,5 +17,5 @@
 	<activity android:name=".Class_Info" android:label="@string/app3_name"></activity>
     </application>
 
-
+<uses-permission android:name="android.permission.INTERNET" />
 </manifest> 

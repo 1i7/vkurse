@@ -27,12 +27,12 @@ public class Welcome_Page extends Activity implements OnClickListener{
         forwardButton.setOnClickListener(this);
         
                 
-        TableFactory factory = new TestTableFactory();
-        GroupsTable gt =  factory.getGroupsTable();
-        Vector vGroups ;
+        Groups factory = new Groups();
+       
+        Vector<Group> vGroups ;
         try
         {
-             vGroups = gt.getAll();
+             vGroups = factory.getAll();
              sGroups = new String[vGroups.size()];
         } 
         catch (Exception exc)
@@ -43,7 +43,7 @@ public class Welcome_Page extends Activity implements OnClickListener{
         {
            try
            {
-           Group g = gt.get(i);
+           Group g = vGroups.elementAt(i);
            sGroups[i] = g.getName();
            }
            catch (Exception exc)
