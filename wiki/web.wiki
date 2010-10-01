@@ -4,6 +4,8 @@
 
 = [http://code.google.com/p/vkurse/wiki/Web_ScreenTemplate Эскиз дизайна] =
 
+= [http://code.google.com/p/vkurse/wiki/web_user Интерфейс пользователя] =
+
 = [http://code.google.com/p/vkurse/wiki/web_admin Интерфейс администратора] =
 
 
