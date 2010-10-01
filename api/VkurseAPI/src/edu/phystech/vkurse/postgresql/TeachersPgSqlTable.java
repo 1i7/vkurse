@@ -236,4 +236,15 @@ public class TeachersPgSqlTable implements TeachersTable
         r++;
         return r;
     }
+
+    public boolean insertWithNewID(Teacher item) throws TableException
+    {
+        boolean r = false;
+        if (item != null)
+        {
+            item.setID(this.findFreeID());
+            r = this.insert(item);
+        }
+        return r;
+    }
 }

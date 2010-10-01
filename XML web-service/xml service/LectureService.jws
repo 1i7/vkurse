@@ -54,7 +54,7 @@ public class LectureService
 			TableFactory factory = new PgSqlTableFactory();
 			LecturesTable lt = factory.getLecturesTable();
 			l = lt.get(ID);
-			if (l != null) r = l.toString();
+			if (l != null) r = l.toStringData();
 		} catch (Exception ex) { }
 		return r;
 	}
@@ -85,8 +85,8 @@ public class LectureService
 			int i;
 			for (i=0; i<data.size(); ++i)
 			{
-				//r.add(data.get(i).toString());
-				r[i] = data.get(i).toString();
+				//r.add(data.get(i).toStringData());
+				r[i] = ((Lecture)data.get(i)).toStringData();
 			}
 		} catch (Exception ex) { }
         return r;
@@ -103,6 +103,21 @@ public class LectureService
 			r = lt.findFreeID();
 		} catch (Exception ex) { }
         return r;
+	}
+
+
+	public boolean insertWithNewID(String lecture)
+	{
+		Lecture lect = new Lecture();
+		lect.readData(lecture);
+		boolean r = false;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			LecturesTable lt = factory.getLecturesTable();
+			r = lt.insertWithNewID(lect);
+		} catch (Exception ex) { }
+		return r;
 	}
 
 }

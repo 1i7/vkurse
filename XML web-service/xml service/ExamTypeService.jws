@@ -54,7 +54,7 @@ public class ExamTypeService
 			TableFactory factory = new PgSqlTableFactory();
 			ExamTypesTable lt = factory.getExamTypesTable();
 			l = lt.get(ID);
-			if (l != null) r = l.toString();
+			if (l != null) r = l.toStringData();
 		} catch (Exception ex) { }
 		return r;
 	}
@@ -85,8 +85,8 @@ public class ExamTypeService
 			int i;
 			for (i=0; i<data.size(); ++i)
 			{
-				//r.add(data.get(i).toString());
-				r[i] = data.get(i).toString();
+				//r.add(data.get(i).toStringData());
+				r[i] = ((ExamType)data.get(i)).toStringData();
 			}
 		} catch (Exception ex) { }
         return r;
@@ -105,4 +105,19 @@ public class ExamTypeService
         return r;
 	}
 
+	
+    public boolean insertWithNewID(String examType)
+	{
+		ExamType obj = new ExamType();
+		obj.readData(examType);
+		boolean r = false;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			ExamTypesTable lt = factory.getExamTypesTable();
+			r = lt.insertWithNewID(obj);
+		} catch (Exception ex) { }
+		return r;
+	}
+	
 }

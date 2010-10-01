@@ -50,7 +50,8 @@ public class Group extends DbTableRecord
         this.course = course;
     }
 
-    @Override public String toString()
+    //@Override public String toString()
+    public String toStringData()
     {
         String r = "ID=" + id + " ";
         r += "name='" + name.replace("'", "<apostrophe>") + "' ";

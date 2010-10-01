@@ -17,6 +17,7 @@ public interface ScheduleChangesTable
     public boolean remove(int ID) throws TableException;
     public java.util.Vector getAll() throws TableException;
     public int findFreeID() throws TableException;
+    public boolean insertWithNewID(ScheduleChange item) throws TableException;
 
     //  Выдает список изменений занятий определенной группы в определенный день
     public java.util.Vector findByGroupWeekDay(int groupID, int week, byte day) throws TableException;

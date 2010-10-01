@@ -17,4 +17,5 @@ public interface GroupsTable
     public boolean remove(int ID) throws TableException;
     public java.util.Vector getAll() throws TableException;
     public int findFreeID() throws TableException;
+    public boolean insertWithNewID(Group item) throws TableException;
 }
