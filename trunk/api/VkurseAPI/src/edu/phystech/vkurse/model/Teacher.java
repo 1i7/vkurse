@@ -38,7 +38,8 @@ public class Teacher extends DbTableRecord
         this.degree = degree;
     }
 
-    @Override public String toString()
+    //@Override public String toString()
+    public String toStringData()
     {
         String r = "ID=" + id + " ";
         r += "name='" + name.replace("'", "<apostrophe>") + "' ";

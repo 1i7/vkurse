@@ -54,7 +54,7 @@ public class GroupService
 			TableFactory factory = new PgSqlTableFactory();
 			GroupsTable lt = factory.getGroupsTable();
 			l = lt.get(ID);
-			if (l != null) r = l.toString();
+			if (l != null) r = l.toStringData();
 		} catch (Exception ex) { }
 		return r;
 	}
@@ -85,8 +85,8 @@ public class GroupService
 			int i;
 			for (i=0; i<data.size(); ++i)
 			{
-				//r.add(data.get(i).toString());
-				r[i] = data.get(i).toString();
+				//r.add(data.get(i).toStringData());
+				r[i] = ((Group)data.get(i)).toStringData();
 			}
 		} catch (Exception ex) { }
         return r;
@@ -104,5 +104,21 @@ public class GroupService
 		} catch (Exception ex) { }
         return r;
 	}
+	
+
+    public boolean insertWithNewID(String group)
+	{
+		Group obj = new Group();
+		obj.readData(group);
+		boolean r = false;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			GroupsTable lt = factory.getGroupsTable();
+			r = lt.insertWithNewID(obj);
+		} catch (Exception ex) { }
+		return r;
+	}
+	
 	
 }

@@ -118,7 +118,8 @@ public class ScheduleChange extends DbTableRecord
         this.comment = comment;
     }
 
-    @Override public String toString()
+    //@Override public String toString()
+    public String toStringData()
     {
         String r = "ID=" + id + " ";
         r += "scheduleID=" + scheduleID + " ";

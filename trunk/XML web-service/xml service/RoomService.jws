@@ -54,7 +54,7 @@ public class RoomService
 			TableFactory factory = new PgSqlTableFactory();
 			RoomsTable lt = factory.getRoomsTable();
 			l = lt.get(ID);
-			if (l != null) r = l.toString();
+			if (l != null) r = l.toStringData();
 		} catch (Exception ex) { }
 		return r;
 	}
@@ -85,8 +85,8 @@ public class RoomService
 			int i;
 			for (i=0; i<data.size(); ++i)
 			{
-				//r.add(data.get(i).toString());
-				r[i] = data.get(i).toString();
+				//r.add(data.get(i).toStringData());
+				r[i] = ((Room)data.get(i)).toStringData();
 			}
 		} catch (Exception ex) { }
         return r;
@@ -105,4 +105,19 @@ public class RoomService
         return r;
 	}
 
+	
+    public boolean insertWithNewID(String room)
+	{
+		Room obj = new Room();
+		obj.readData(room);
+		boolean r = false;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			RoomsTable lt = factory.getRoomsTable();
+			r = lt.insertWithNewID(obj);
+		} catch (Exception ex) { }
+		return r;
+	}
+	
 }

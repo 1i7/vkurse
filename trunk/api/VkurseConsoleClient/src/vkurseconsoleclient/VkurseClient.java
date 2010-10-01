@@ -95,6 +95,8 @@ public class VkurseClient
             //java.util.List<Lecture> l
             //System.out.println(lecturesTable.getAll().getClass().getName());
             System.out.println(tableFactory.getSourceName());
+            ExamType et = new ExamType(0, "aaa");
+            System.out.println(et.toStringData());
             System.out.println();
         } catch (Exception ex)
         {

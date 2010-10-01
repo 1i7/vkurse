@@ -54,7 +54,7 @@ public class ScheduleService
 			TableFactory factory = new PgSqlTableFactory();
 			ScheduleTable lt = factory.getScheduleTable();
 			l = lt.get(ID);
-			if (l != null) r = l.toString();
+			if (l != null) r = l.toStringData();
 		} catch (Exception ex) { }
 		return r;
 	}
@@ -85,8 +85,8 @@ public class ScheduleService
 			int i;
 			for (i=0; i<data.size(); ++i)
 			{
-				//r.add(data.get(i).toString());
-				r[i] = data.get(i).toString();
+				//r.add(data.get(i).toStringData());
+				r[i] = ((Schedule)data.get(i)).toStringData();
 			}
 		} catch (Exception ex) { }
         return r;
@@ -105,8 +105,8 @@ public class ScheduleService
 			int i;
 			for (i=0; i<data.size(); ++i)
 			{
-				//r.add(data.get(i).toString());
-				r[i] = data.get(i).toString();
+				//r.add(data.get(i).toStringData());
+				r[i] = ((Schedule)data.get(i)).toStringData();
 			}
 		} catch (Exception ex) { }
         return r;
@@ -125,4 +125,19 @@ public class ScheduleService
         return r;
 	}
 
+	
+    public boolean insertWithNewID(String schedule)
+	{
+		Schedule obj = new Schedule();
+		obj.readData(schedule);
+		boolean r = false;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			ScheduleTable lt = factory.getScheduleTable();
+			r = lt.insertWithNewID(obj);
+		} catch (Exception ex) { }
+		return r;
+	}
+	
 }
