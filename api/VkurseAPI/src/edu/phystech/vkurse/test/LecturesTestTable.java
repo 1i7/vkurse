@@ -19,27 +19,27 @@ public class LecturesTestTable implements LecturesTable
     public LecturesTestTable()
     {
         /*
-        data.add(new Lecture(0, "Innovative practics", 0, ""));
-        data.add(new Lecture(1, "Physics", 1, ""));
-        data.add(new Lecture(2, "Math", 0, ""));
-        data.add(new Lecture(3, "Programming", 1, ""));
+        data.addElement(new Lecture(0, "Innovative practics", 0, ""));
+        data.addElement(new Lecture(1, "Physics", 1, ""));
+        data.addElement(new Lecture(2, "Math", 0, ""));
+        data.addElement(new Lecture(3, "Programming", 1, ""));
         */
-        data.add(new Lecture(100, "Test data - lecture", 100, "comment"));
-        data.add(new Lecture(0, "Innovative practics", 0, "Comment"));
-        data.add(new Lecture(11, "Convex analysis (seminar)", 0, " "));
-        data.add(new Lecture(12, "Theoretical physics (lecture)", 0, "  "));
-        data.add(new Lecture(13, "Theoretical physics (seminar)", 0, "  "));
-        data.add(new Lecture(14, "Jurisprudence", 2, " "));
-        data.add(new Lecture(10, "Convex analysis (lecture", 0, "  "));
-        data.add(new Lecture(15, "Computational math (lecture)", 0, " "));
-        data.add(new Lecture(16, "Computational math (seminar)", 0, "  "));
-        data.add(new Lecture(17, "Foreign language", 1, " "));
-        data.add(new Lecture(18, "Military training", 0, " "));
+        data.addElement(new Lecture(100, "Test data - lecture", 100, "comment"));
+        data.addElement(new Lecture(0, "Innovative practics", 0, "Comment"));
+        data.addElement(new Lecture(11, "Convex analysis (seminar)", 0, " "));
+        data.addElement(new Lecture(12, "Theoretical physics (lecture)", 0, "  "));
+        data.addElement(new Lecture(13, "Theoretical physics (seminar)", 0, "  "));
+        data.addElement(new Lecture(14, "Jurisprudence", 2, " "));
+        data.addElement(new Lecture(10, "Convex analysis (lecture", 0, "  "));
+        data.addElement(new Lecture(15, "Computational math (lecture)", 0, " "));
+        data.addElement(new Lecture(16, "Computational math (seminar)", 0, "  "));
+        data.addElement(new Lecture(17, "Foreign language", 1, " "));
+        data.addElement(new Lecture(18, "Military training", 0, " "));
     }
 
     public boolean insert(Lecture item) throws TableException
     {
-        data.add(item);
+        data.addElement(item);
         return true;
     }
 
@@ -48,7 +48,7 @@ public class LecturesTestTable implements LecturesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Lecture)data.get(i)).getID() == item.getID()) data.set(i, item);
+            if (((Lecture)data.elementAt(i)).getID() == item.getID()) data.setElementAt(item,i);
         }
         return true;
     }
@@ -58,7 +58,7 @@ public class LecturesTestTable implements LecturesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Lecture)data.get(i)).getID() == ID) return (Lecture)data.get(i);
+            if (((Lecture)data.elementAt(i)).getID() == ID) return (Lecture)data.elementAt(i);
         }
         return null;
     }
@@ -69,11 +69,11 @@ public class LecturesTestTable implements LecturesTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Lecture)data.get(i)).getID() == ID) r = i;
+            if (((Lecture)data.elementAt(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
-            data.remove(r);
+            data.removeElementAt(r);
             return true;
         }
         else
@@ -88,7 +88,7 @@ public class LecturesTestTable implements LecturesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            r.add(data.get(i));
+            r.addElement(data.elementAt(i));
         }
         return r;
     }
@@ -99,7 +99,7 @@ public class LecturesTestTable implements LecturesTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = ((Lecture)data.get(i)).getID();
+            int ID = ((Lecture)data.elementAt(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

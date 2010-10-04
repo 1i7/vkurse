@@ -13,7 +13,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
     ChoiceGroup choiceGroups;
     DateField calender;
     String st[]={"ФИВТ"};
-    String sGroups[];// ={"191", "192", "193","194"};
+    String sGroups[] ={"191", "192", "193","194"};
 
     Networker net;
 
@@ -22,9 +22,13 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
     {
         settingsForm = new Form("Настройки");
 
-        TableFactory factory = new TestTableFactory();
-        GroupsTable gt =  factory.getGroupsTable();
-        Vector vGroups;
+
+        //TableFactory factory = new TestTableFactory();
+        //GroupsTable gt =  factory.getGroupsTable();
+        
+        /*
+        Vector vGroups = new Vector();
+        
         try
         {
              vGroups = gt.getAll();
@@ -44,7 +48,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
            catch (Exception exc)
            {
            }
-        }
+        }*/
 
         settingsForm.addCommand(new Command("ShowLectures",Command.SCREEN,2));
         settingsForm.addCommand(new Command("Exit",Command.SCREEN,3));
@@ -94,6 +98,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
 
     }
 
+    /*
     void append_record(Schedule rec)
     {
         StringItem siLabel;
@@ -139,6 +144,8 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
         resForm.append(siLabel);
     //    resForm.append(siLabel2);
     }
+     *
+     */
 
     public void SetLectures(Vector lectures)
     {
@@ -220,6 +227,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
             resForm.append(siLabel5);
             resForm.setCommandListener(this);
 
+            /*
             TableFactory factory = new TestTableFactory();
             ScheduleTable scht =  factory.getScheduleTable();
             Vector vSchedule ;
@@ -245,6 +253,8 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
                 {
                 }
             }
+             *
+             */
             
             Display.getDisplay(this).setCurrent(resForm);
         }

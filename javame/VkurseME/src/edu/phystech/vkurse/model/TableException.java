@@ -13,6 +13,6 @@ package edu.phystech.vkurse.model;
 public class TableException extends Exception
 {
     public TableException(String message){ super(message); }
-    public TableException(String message, Exception cause) { super(message); }
-    public TableException(Exception cause) { super(cause.toString()); }
+    //public TableException(String message, Exception cause) { super(message, cause); }
+    //public TableException(Exception cause) { super(cause); }
 }

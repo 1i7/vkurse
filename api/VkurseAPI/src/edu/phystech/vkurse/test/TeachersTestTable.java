@@ -18,17 +18,17 @@ public class TeachersTestTable implements TeachersTable
 
     public TeachersTestTable()
     {
-        data.add(new Teacher(100, "Test data - teacher", "degree"));
-        data.add(new Teacher(0, "Аммосов Ю.П.", ""));
-        data.add(new Teacher(10, "Половинкин Е.С.", "Профессор"));
-        data.add(new Teacher(11, "Белоусов Ю.М.", "Профессор"));
-        data.add(new Teacher(12, "Осипов Д.Л.", ""));
-        data.add(new Teacher(13, "Надеждин Б.Б.", ""));
+        data.addElement(new Teacher(100, "Test data - teacher", "degree"));
+        data.addElement(new Teacher(0, "Аммосов Ю.П.", ""));
+        data.addElement(new Teacher(10, "Половинкин Е.С.", "Профессор"));
+        data.addElement(new Teacher(11, "Белоусов Ю.М.", "Профессор"));
+        data.addElement(new Teacher(12, "Осипов Д.Л.", ""));
+        data.addElement(new Teacher(13, "Надеждин Б.Б.", ""));
     }
 
     public boolean insert(Teacher item) throws TableException
     {
-        data.add(item);
+        data.addElement(item);
         return true;
     }
 
@@ -37,7 +37,7 @@ public class TeachersTestTable implements TeachersTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Teacher)data.get(i)).getID() == item.getID()) data.set(i, item);
+            if (((Teacher)data.elementAt(i)).getID() == item.getID()) data.setElementAt(item,i);
         }
         return true;
     }
@@ -47,7 +47,7 @@ public class TeachersTestTable implements TeachersTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Teacher)data.get(i)).getID() == ID) return (Teacher)data.get(i);
+            if (((Teacher)data.elementAt(i)).getID() == ID) return (Teacher)data.elementAt(i);
         }
         return null;
     }
@@ -58,11 +58,11 @@ public class TeachersTestTable implements TeachersTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Teacher)data.get(i)).getID() == ID) r = i;
+            if (((Teacher)data.elementAt(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
-            data.remove(r);
+            data.removeElementAt(r);
             return true;
         }
         else
@@ -77,7 +77,7 @@ public class TeachersTestTable implements TeachersTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            r.add(data.get(i));
+            r.addElement(data.elementAt(i));
         }
         return r;
     }
@@ -88,7 +88,7 @@ public class TeachersTestTable implements TeachersTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = ((Teacher)data.get(i)).getID();
+            int ID = ((Teacher)data.elementAt(i)).getID();
             if (ID > r) r = ID;
         }
         r++;
