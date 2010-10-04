@@ -23,25 +23,38 @@ public class Networker implements Runnable {
     {
         try
         {
+
             SoapObject rpc = new SoapObject
-		("http://DefaultNamespace", "");
+		("http://DefaultNamespace", "getAll");
             /*
              Первый параметр - пространоство имён(зависит от сервера)
              Второй параметр - имя сервиса
              Оба смотрим в WSDL-файле
              */
 
-	    rpc.addProperty ("symbol", "1");
+	    //rpc.addProperty ("symbol", "1");
 
-	    String res[]=(String [])new HttpTransport
+	    Vector res = (Vector) new HttpTransport
 		("http://nebula.innolab.net.ru:8180/axis/LectureService.jws",
 		 "getAll").call (rpc);
+
+            Vector lectures = new Vector();
+            for(int i=0;i<res.size();i++)
+            {
+                Lecture l = new Lecture();
+                l.readData((String)(res.elementAt(i)));
+                
+                lectures.addElement(l);
+            }
+
+
+
+            middlet.SetLectures(lectures);
             /*
              Параметры: Url Адрес веб-сервера,
                         Имя вызываемого метода
              */
 
-            //return res;
         }
         catch (Exception e) {
 	    //e.printStackTrace ();
