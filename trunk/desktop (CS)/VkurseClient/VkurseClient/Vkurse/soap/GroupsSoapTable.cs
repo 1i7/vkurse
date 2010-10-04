@@ -148,6 +148,52 @@ namespace VkurseClient.edu.phystech.vkurse.soap
             return r;
         }
 
+
+        public int findFreeID()
+        {
+            int r = 0;
+
+            GroupService.GroupService client = new GroupService.GroupServiceClient();
+            try
+            {
+                GroupService.findFreeIDRequest request = new GroupService.findFreeIDRequest();
+                DebugHelper.AddLog("findFreeID:  ");
+                GroupService.findFreeIDResponse response = client.findFreeID(request);
+                DebugHelper.AddLog("Response: " + response.findFreeIDReturn);
+                r = response.findFreeIDReturn;
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.AddLog("Client exception: " + ex);
+            }
+
+            return r;
+        }
+
+
+        public bool insertWithNewID(Group item)
+        {
+            bool r = false;
+            if (item != null)
+            {
+                GroupService.GroupService client = new GroupService.GroupServiceClient();
+                try
+                {
+                    GroupService.insertWithNewIDRequest request = new GroupService.insertWithNewIDRequest();
+                    request.group = item.ToString();
+                    DebugHelper.AddLog("insert:  " + request.group);
+                    GroupService.insertWithNewIDResponse response = client.insertWithNewID(request);
+                    DebugHelper.AddLog("Response: " + response.insertWithNewIDReturn);
+                    r = response.insertWithNewIDReturn;
+                }
+                catch (Exception ex)
+                {
+                    DebugHelper.AddLog("Client exception: " + ex);
+                }
+            }
+            return r;
+        }
+
     }
 
 

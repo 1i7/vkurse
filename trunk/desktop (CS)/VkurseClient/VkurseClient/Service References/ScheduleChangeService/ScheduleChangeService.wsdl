@@ -48,12 +48,18 @@
   <wsdl:message name="findByScheduleIDRequest">
     <wsdl:part name="scheduleID" type="xsd:int" />
   </wsdl:message>
+  <wsdl:message name="insertWithNewIDRequest">
+    <wsdl:part name="scheduleChange" type="xsd:string" />
+  </wsdl:message>
   <wsdl:message name="removeRequest">
     <wsdl:part name="ID" type="xsd:int" />
   </wsdl:message>
   <wsdl:message name="getAllRequest" />
   <wsdl:message name="getAllResponse">
     <wsdl:part name="getAllReturn" type="impl:ArrayOf_xsd_string" />
+  </wsdl:message>
+  <wsdl:message name="insertWithNewIDResponse">
+    <wsdl:part name="insertWithNewIDReturn" type="xsd:boolean" />
   </wsdl:message>
   <wsdl:message name="removeResponse">
     <wsdl:part name="removeReturn" type="xsd:boolean" />
@@ -90,6 +96,10 @@
     <wsdl:operation name="findFreeID">
       <wsdl:input name="findFreeIDRequest" message="impl:findFreeIDRequest" />
       <wsdl:output name="findFreeIDResponse" message="impl:findFreeIDResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="insertWithNewID" parameterOrder="scheduleChange">
+      <wsdl:input name="insertWithNewIDRequest" message="impl:insertWithNewIDRequest" />
+      <wsdl:output name="insertWithNewIDResponse" message="impl:insertWithNewIDResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ScheduleChangeServiceSoapBinding" type="impl:ScheduleChangeService">
@@ -163,6 +173,15 @@
         <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
       <wsdl:output name="findFreeIDResponse">
+        <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ScheduleChangeService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertWithNewID">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="insertWithNewIDRequest">
+        <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="insertWithNewIDResponse">
         <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/ScheduleChangeService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>

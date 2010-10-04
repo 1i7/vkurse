@@ -44,6 +44,11 @@ namespace VkurseClient.LectureService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         VkurseClient.LectureService.findFreeIDResponse findFreeID(VkurseClient.LectureService.findFreeIDRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper namespace (http://DefaultNamespace) of message insertWithNewIDRequest does not match the default value (http://nebula.innolab.net.ru:8180/axis/LectureService.jws)
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        VkurseClient.LectureService.insertWithNewIDResponse insertWithNewID(VkurseClient.LectureService.insertWithNewIDRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -236,6 +241,40 @@ namespace VkurseClient.LectureService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertWithNewID", WrapperNamespace="http://DefaultNamespace", IsWrapped=true)]
+    public partial class insertWithNewIDRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public string lecture;
+        
+        public insertWithNewIDRequest() {
+        }
+        
+        public insertWithNewIDRequest(string lecture) {
+            this.lecture = lecture;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertWithNewIDResponse", WrapperNamespace="http://nebula.innolab.net.ru:8180/axis/LectureService.jws", IsWrapped=true)]
+    public partial class insertWithNewIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public bool insertWithNewIDReturn;
+        
+        public insertWithNewIDResponse() {
+        }
+        
+        public insertWithNewIDResponse(bool insertWithNewIDReturn) {
+            this.insertWithNewIDReturn = insertWithNewIDReturn;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface LectureServiceChannel : VkurseClient.LectureService.LectureService, System.ServiceModel.IClientChannel {
     }
@@ -331,6 +370,18 @@ namespace VkurseClient.LectureService {
             VkurseClient.LectureService.findFreeIDRequest inValue = new VkurseClient.LectureService.findFreeIDRequest();
             VkurseClient.LectureService.findFreeIDResponse retVal = ((VkurseClient.LectureService.LectureService)(this)).findFreeID(inValue);
             return retVal.findFreeIDReturn;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        VkurseClient.LectureService.insertWithNewIDResponse VkurseClient.LectureService.LectureService.insertWithNewID(VkurseClient.LectureService.insertWithNewIDRequest request) {
+            return base.Channel.insertWithNewID(request);
+        }
+        
+        public bool insertWithNewID(string lecture) {
+            VkurseClient.LectureService.insertWithNewIDRequest inValue = new VkurseClient.LectureService.insertWithNewIDRequest();
+            inValue.lecture = lecture;
+            VkurseClient.LectureService.insertWithNewIDResponse retVal = ((VkurseClient.LectureService.LectureService)(this)).insertWithNewID(inValue);
+            return retVal.insertWithNewIDReturn;
         }
     }
 }

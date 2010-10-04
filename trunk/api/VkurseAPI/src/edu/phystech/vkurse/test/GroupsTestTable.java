@@ -13,7 +13,9 @@ import java.util.*;
  */
 public class GroupsTestTable implements GroupsTable
 {
-    ArrayList<Group> data = new ArrayList<Group>();
+    //ArrayList<Group> data = new ArrayList<Group>();
+    java.util.Vector data = new java.util.Vector();
+
     public GroupsTestTable()
     {
         data.add(new Group(100, "Test data - group", "1"));
@@ -35,7 +37,7 @@ public class GroupsTestTable implements GroupsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == item.getID()) data.set(i, item);
+            if (((Group)data.get(i)).getID() == item.getID()) data.set(i, item);
         }
         return true;
     }
@@ -45,7 +47,7 @@ public class GroupsTestTable implements GroupsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) return data.get(i);
+            if (((Group)data.get(i)).getID() == ID) return (Group)data.get(i);
         }
         return null;
     }
@@ -56,7 +58,7 @@ public class GroupsTestTable implements GroupsTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) r = i;
+            if (((Group)data.get(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
@@ -86,7 +88,7 @@ public class GroupsTestTable implements GroupsTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = data.get(i).getID();
+            int ID = ((Group)data.get(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

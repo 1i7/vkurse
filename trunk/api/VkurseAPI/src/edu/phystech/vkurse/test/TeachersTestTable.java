@@ -13,7 +13,9 @@ import java.util.*;
  */
 public class TeachersTestTable implements TeachersTable
 {
-    ArrayList<Teacher> data = new ArrayList<Teacher>();
+    //ArrayList<Teacher> data = new ArrayList<Teacher>();
+    java.util.Vector data = new java.util.Vector();
+
     public TeachersTestTable()
     {
         data.add(new Teacher(100, "Test data - teacher", "degree"));
@@ -35,7 +37,7 @@ public class TeachersTestTable implements TeachersTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == item.getID()) data.set(i, item);
+            if (((Teacher)data.get(i)).getID() == item.getID()) data.set(i, item);
         }
         return true;
     }
@@ -45,7 +47,7 @@ public class TeachersTestTable implements TeachersTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) return data.get(i);
+            if (((Teacher)data.get(i)).getID() == ID) return (Teacher)data.get(i);
         }
         return null;
     }
@@ -56,7 +58,7 @@ public class TeachersTestTable implements TeachersTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) r = i;
+            if (((Teacher)data.get(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
@@ -86,7 +88,7 @@ public class TeachersTestTable implements TeachersTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = data.get(i).getID();
+            int ID = ((Teacher)data.get(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

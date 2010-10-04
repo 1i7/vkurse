@@ -13,7 +13,9 @@ import java.util.*;
  */
 public class ScheduleTestTable implements ScheduleTable
 {
-    ArrayList<Schedule> data = new ArrayList<Schedule>();
+    //ArrayList<Schedule> data = new ArrayList<Schedule>();
+    java.util.Vector data = new java.util.Vector();
+
     public ScheduleTestTable()
     {
         /*
@@ -73,7 +75,7 @@ public class ScheduleTestTable implements ScheduleTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == item.getID()) data.set(i, item);
+            if (((Schedule)data.get(i)).getID() == item.getID()) data.set(i, item);
         }
         return true;
     }
@@ -83,7 +85,7 @@ public class ScheduleTestTable implements ScheduleTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) return data.get(i);
+            if (((Schedule)data.get(i)).getID() == ID) return (Schedule)data.get(i);
         }
         return null;
     }
@@ -94,7 +96,7 @@ public class ScheduleTestTable implements ScheduleTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) r = i;
+            if (((Schedule)data.get(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
@@ -124,7 +126,7 @@ public class ScheduleTestTable implements ScheduleTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            Schedule s = data.get(i);
+            Schedule s = (Schedule)data.get(i);
             if ((s.getGroupID()==groupID)&&(s.getDay()==day))
                 r.add(s);
         }
@@ -137,7 +139,7 @@ public class ScheduleTestTable implements ScheduleTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = data.get(i).getID();
+            int ID = ((Schedule)data.get(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

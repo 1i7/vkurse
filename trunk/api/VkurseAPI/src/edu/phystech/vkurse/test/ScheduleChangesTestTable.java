@@ -12,7 +12,9 @@ import java.util.*;
  */
 public class ScheduleChangesTestTable implements ScheduleChangesTable
 {
-    ArrayList<ScheduleChange> data = new ArrayList<ScheduleChange>();
+    //ArrayList<ScheduleChange> data = new ArrayList<ScheduleChange>();
+    java.util.Vector data = new java.util.Vector();
+
     public ScheduleChangesTestTable()
     {
         data.add(new ScheduleChange(100, 100, 100, 100, (byte)2, 540, 85, 100, 100, 100, "comment of change"));
@@ -30,7 +32,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == item.getID()) data.set(i, item);
+            if (((ScheduleChange)data.get(i)).getID() == item.getID()) data.set(i, item);
         }
         return true;
     }
@@ -40,7 +42,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) return data.get(i);
+            if (((ScheduleChange)data.get(i)).getID() == ID) return (ScheduleChange)data.get(i);
         }
         return null;
     }
@@ -51,7 +53,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) r = i;
+            if (((ScheduleChange)data.get(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
@@ -81,7 +83,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            ScheduleChange s = data.get(i);
+            ScheduleChange s = (ScheduleChange)data.get(i);
             if ((s.getGroupID()==groupID) && (s.getDay()==day) && (s.getWeek()==week))
                 r.add(s);
         }
@@ -94,7 +96,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            ScheduleChange s = data.get(i);
+            ScheduleChange s = (ScheduleChange)data.get(i);
             if ((s.getScheduleID()==scheduleID))
                 r.add(s);
         }
@@ -107,7 +109,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = data.get(i).getID();
+            int ID = ((ScheduleChange)data.get(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

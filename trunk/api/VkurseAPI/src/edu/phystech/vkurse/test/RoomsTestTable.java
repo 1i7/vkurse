@@ -13,7 +13,9 @@ import java.util.*;
  */
 public class RoomsTestTable implements RoomsTable
 {
-    ArrayList<Room> data = new ArrayList<Room>();
+    //ArrayList<Room> data = new ArrayList<Room>();
+    java.util.Vector data = new java.util.Vector();
+
     public RoomsTestTable()
     {
         /*
@@ -44,7 +46,7 @@ public class RoomsTestTable implements RoomsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == item.getID()) data.set(i, item);
+            if (((Room)data.get(i)).getID() == item.getID()) data.set(i, item);
         }
         return true;
     }
@@ -54,7 +56,7 @@ public class RoomsTestTable implements RoomsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) return data.get(i);
+            if (((Room)data.get(i)).getID() == ID) return (Room)data.get(i);
         }
         return null;
     }
@@ -65,7 +67,7 @@ public class RoomsTestTable implements RoomsTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) r = i;
+            if (((Room)data.get(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
@@ -95,7 +97,7 @@ public class RoomsTestTable implements RoomsTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = data.get(i).getID();
+            int ID = ((Room)data.get(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

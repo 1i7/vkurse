@@ -148,6 +148,53 @@ namespace VkurseClient.edu.phystech.vkurse.soap
             return r;
         }
 
+
+        public int findFreeID()
+        {
+            int r = 0;
+
+            ExamTypeService.ExamTypeService client = new ExamTypeService.ExamTypeServiceClient();
+            try
+            {
+                ExamTypeService.findFreeIDRequest request = new ExamTypeService.findFreeIDRequest();
+                DebugHelper.AddLog("findFreeID:  ");
+                ExamTypeService.findFreeIDResponse response = client.findFreeID(request);
+                DebugHelper.AddLog("Response: " + response.findFreeIDReturn);
+                r = response.findFreeIDReturn;
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.AddLog("Client exception: " + ex);
+            }
+
+            return r;
+        }
+
+
+        public bool insertWithNewID(ExamType item)
+        {
+            bool r = false;
+            if (item != null)
+            {
+                ExamTypeService.ExamTypeService client = new ExamTypeService.ExamTypeServiceClient();
+                try
+                {
+                    ExamTypeService.insertWithNewIDRequest request = new ExamTypeService.insertWithNewIDRequest();
+                    request.examType = item.ToString();
+                    DebugHelper.AddLog("insert:  " + request.examType);
+                    ExamTypeService.insertWithNewIDResponse response = client.insertWithNewID(request);
+                    DebugHelper.AddLog("Response: " + response.insertWithNewIDReturn);
+                    r = response.insertWithNewIDReturn;
+                }
+                catch (Exception ex)
+                {
+                    DebugHelper.AddLog("Client exception: " + ex);
+                }
+            }
+            return r;
+        }
+
+
     }
 
 
