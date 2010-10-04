@@ -44,6 +44,11 @@ namespace VkurseClient.ExamTypeService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         VkurseClient.ExamTypeService.findFreeIDResponse findFreeID(VkurseClient.ExamTypeService.findFreeIDRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper namespace (http://DefaultNamespace) of message insertWithNewIDRequest does not match the default value (http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws)
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        VkurseClient.ExamTypeService.insertWithNewIDResponse insertWithNewID(VkurseClient.ExamTypeService.insertWithNewIDRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -236,6 +241,40 @@ namespace VkurseClient.ExamTypeService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertWithNewID", WrapperNamespace="http://DefaultNamespace", IsWrapped=true)]
+    public partial class insertWithNewIDRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public string examType;
+        
+        public insertWithNewIDRequest() {
+        }
+        
+        public insertWithNewIDRequest(string examType) {
+            this.examType = examType;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertWithNewIDResponse", WrapperNamespace="http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws", IsWrapped=true)]
+    public partial class insertWithNewIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public bool insertWithNewIDReturn;
+        
+        public insertWithNewIDResponse() {
+        }
+        
+        public insertWithNewIDResponse(bool insertWithNewIDReturn) {
+            this.insertWithNewIDReturn = insertWithNewIDReturn;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ExamTypeServiceChannel : VkurseClient.ExamTypeService.ExamTypeService, System.ServiceModel.IClientChannel {
     }
@@ -331,6 +370,18 @@ namespace VkurseClient.ExamTypeService {
             VkurseClient.ExamTypeService.findFreeIDRequest inValue = new VkurseClient.ExamTypeService.findFreeIDRequest();
             VkurseClient.ExamTypeService.findFreeIDResponse retVal = ((VkurseClient.ExamTypeService.ExamTypeService)(this)).findFreeID(inValue);
             return retVal.findFreeIDReturn;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        VkurseClient.ExamTypeService.insertWithNewIDResponse VkurseClient.ExamTypeService.ExamTypeService.insertWithNewID(VkurseClient.ExamTypeService.insertWithNewIDRequest request) {
+            return base.Channel.insertWithNewID(request);
+        }
+        
+        public bool insertWithNewID(string examType) {
+            VkurseClient.ExamTypeService.insertWithNewIDRequest inValue = new VkurseClient.ExamTypeService.insertWithNewIDRequest();
+            inValue.examType = examType;
+            VkurseClient.ExamTypeService.insertWithNewIDResponse retVal = ((VkurseClient.ExamTypeService.ExamTypeService)(this)).insertWithNewID(inValue);
+            return retVal.insertWithNewIDReturn;
         }
     }
 }

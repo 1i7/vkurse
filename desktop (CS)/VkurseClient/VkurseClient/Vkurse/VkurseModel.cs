@@ -17,6 +17,8 @@ namespace VkurseClient.edu.phystech.vkurse.model
         ExamType get(int ID);
         bool remove(int ID);
         List<ExamType> getAll();
+        int findFreeID();
+        bool insertWithNewID(ExamType item);
     }
 
 
@@ -27,6 +29,8 @@ namespace VkurseClient.edu.phystech.vkurse.model
         Group get(int ID);
         bool remove(int ID);
         List<Group> getAll();
+        int findFreeID();
+        bool insertWithNewID(Group item);
     }
 
 
@@ -37,6 +41,8 @@ namespace VkurseClient.edu.phystech.vkurse.model
         Lecture get(int ID);
         bool remove(int ID);
         List<Lecture> getAll();
+        int findFreeID();
+        bool insertWithNewID(Lecture item);
     }
 
 
@@ -47,6 +53,8 @@ namespace VkurseClient.edu.phystech.vkurse.model
         Room get(int ID);
         bool remove(int ID);
         List<Room> getAll();
+        int findFreeID();
+        bool insertWithNewID(Room item);
     }
 
 
@@ -57,6 +65,8 @@ namespace VkurseClient.edu.phystech.vkurse.model
         Schedule get(int ID);
         bool remove(int ID);
         List<Schedule> getAll();
+        int findFreeID();
+        bool insertWithNewID(Schedule item);
 
         //  Выдает список занятий определенной группы в определенный день
         List<Schedule> findByGroupDay(int groupID, byte day);
@@ -70,6 +80,8 @@ namespace VkurseClient.edu.phystech.vkurse.model
         ScheduleChange get(int ID);
         bool remove(int ID);
         List<ScheduleChange> getAll();
+        int findFreeID();
+        bool insertWithNewID(ScheduleChange item);
 
         //  Выдает список изменений занятий определенной группы в определенный день
         List<ScheduleChange> findByGroupWeekDay(int groupID, int week, byte day);
@@ -85,6 +97,8 @@ namespace VkurseClient.edu.phystech.vkurse.model
         Teacher get(int ID);
         bool remove(int ID);
         List<Teacher> getAll();
+        int findFreeID();
+        bool insertWithNewID(Teacher item);
     }
 
 

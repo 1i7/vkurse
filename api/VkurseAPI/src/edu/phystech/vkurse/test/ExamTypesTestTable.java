@@ -13,7 +13,9 @@ import java.util.*;
  */
 public class ExamTypesTestTable implements ExamTypesTable
 {
-    ArrayList<ExamType> data = new ArrayList<ExamType>();
+    //ArrayList<ExamType> data = new ArrayList<ExamType>();
+    java.util.Vector data = new java.util.Vector();
+
     public ExamTypesTestTable()
     {
         data.add(new ExamType(100, "Test data - exam type"));
@@ -33,7 +35,7 @@ public class ExamTypesTestTable implements ExamTypesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == item.getID()) data.set(i, item);
+            if (((ExamType)data.get(i)).getID() == item.getID()) data.set(i, item);
         }
         return true;
     }
@@ -43,7 +45,7 @@ public class ExamTypesTestTable implements ExamTypesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) return data.get(i);
+            if (((ExamType)data.get(i)).getID() == ID) return (ExamType)data.get(i);
         }
         return null;
     }
@@ -54,7 +56,7 @@ public class ExamTypesTestTable implements ExamTypesTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) r = i;
+            if (((ExamType)data.get(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
@@ -84,7 +86,7 @@ public class ExamTypesTestTable implements ExamTypesTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = data.get(i).getID();
+            int ID = ((ExamType)data.get(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

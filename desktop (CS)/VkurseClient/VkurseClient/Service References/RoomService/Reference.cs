@@ -44,6 +44,11 @@ namespace VkurseClient.RoomService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         VkurseClient.RoomService.findFreeIDResponse findFreeID(VkurseClient.RoomService.findFreeIDRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper namespace (http://DefaultNamespace) of message insertWithNewIDRequest does not match the default value (http://nebula.innolab.net.ru:8180/axis/RoomService.jws)
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        VkurseClient.RoomService.insertWithNewIDResponse insertWithNewID(VkurseClient.RoomService.insertWithNewIDRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -236,6 +241,40 @@ namespace VkurseClient.RoomService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertWithNewID", WrapperNamespace="http://DefaultNamespace", IsWrapped=true)]
+    public partial class insertWithNewIDRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public string room;
+        
+        public insertWithNewIDRequest() {
+        }
+        
+        public insertWithNewIDRequest(string room) {
+            this.room = room;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertWithNewIDResponse", WrapperNamespace="http://nebula.innolab.net.ru:8180/axis/RoomService.jws", IsWrapped=true)]
+    public partial class insertWithNewIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public bool insertWithNewIDReturn;
+        
+        public insertWithNewIDResponse() {
+        }
+        
+        public insertWithNewIDResponse(bool insertWithNewIDReturn) {
+            this.insertWithNewIDReturn = insertWithNewIDReturn;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface RoomServiceChannel : VkurseClient.RoomService.RoomService, System.ServiceModel.IClientChannel {
     }
@@ -331,6 +370,18 @@ namespace VkurseClient.RoomService {
             VkurseClient.RoomService.findFreeIDRequest inValue = new VkurseClient.RoomService.findFreeIDRequest();
             VkurseClient.RoomService.findFreeIDResponse retVal = ((VkurseClient.RoomService.RoomService)(this)).findFreeID(inValue);
             return retVal.findFreeIDReturn;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        VkurseClient.RoomService.insertWithNewIDResponse VkurseClient.RoomService.RoomService.insertWithNewID(VkurseClient.RoomService.insertWithNewIDRequest request) {
+            return base.Channel.insertWithNewID(request);
+        }
+        
+        public bool insertWithNewID(string room) {
+            VkurseClient.RoomService.insertWithNewIDRequest inValue = new VkurseClient.RoomService.insertWithNewIDRequest();
+            inValue.room = room;
+            VkurseClient.RoomService.insertWithNewIDResponse retVal = ((VkurseClient.RoomService.RoomService)(this)).insertWithNewID(inValue);
+            return retVal.insertWithNewIDReturn;
         }
     }
 }

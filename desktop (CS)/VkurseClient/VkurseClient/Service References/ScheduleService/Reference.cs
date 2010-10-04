@@ -49,6 +49,11 @@ namespace VkurseClient.ScheduleService {
         [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
         VkurseClient.ScheduleService.findFreeIDResponse findFreeID(VkurseClient.ScheduleService.findFreeIDRequest request);
+        
+        // CODEGEN: Generating message contract since the wrapper namespace (http://DefaultNamespace) of message insertWithNewIDRequest does not match the default value (http://nebula.innolab.net.ru:8180/axis/ScheduleService.jws)
+        [System.ServiceModel.OperationContractAttribute(Action="", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(Style=System.ServiceModel.OperationFormatStyle.Rpc, SupportFaults=true, Use=System.ServiceModel.OperationFormatUse.Encoded)]
+        VkurseClient.ScheduleService.insertWithNewIDResponse insertWithNewID(VkurseClient.ScheduleService.insertWithNewIDRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -279,6 +284,40 @@ namespace VkurseClient.ScheduleService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertWithNewID", WrapperNamespace="http://DefaultNamespace", IsWrapped=true)]
+    public partial class insertWithNewIDRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public string schedule;
+        
+        public insertWithNewIDRequest() {
+        }
+        
+        public insertWithNewIDRequest(string schedule) {
+            this.schedule = schedule;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="insertWithNewIDResponse", WrapperNamespace="http://nebula.innolab.net.ru:8180/axis/ScheduleService.jws", IsWrapped=true)]
+    public partial class insertWithNewIDResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="", Order=0)]
+        public bool insertWithNewIDReturn;
+        
+        public insertWithNewIDResponse() {
+        }
+        
+        public insertWithNewIDResponse(bool insertWithNewIDReturn) {
+            this.insertWithNewIDReturn = insertWithNewIDReturn;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ScheduleServiceChannel : VkurseClient.ScheduleService.ScheduleService, System.ServiceModel.IClientChannel {
     }
@@ -387,6 +426,18 @@ namespace VkurseClient.ScheduleService {
             VkurseClient.ScheduleService.findFreeIDRequest inValue = new VkurseClient.ScheduleService.findFreeIDRequest();
             VkurseClient.ScheduleService.findFreeIDResponse retVal = ((VkurseClient.ScheduleService.ScheduleService)(this)).findFreeID(inValue);
             return retVal.findFreeIDReturn;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        VkurseClient.ScheduleService.insertWithNewIDResponse VkurseClient.ScheduleService.ScheduleService.insertWithNewID(VkurseClient.ScheduleService.insertWithNewIDRequest request) {
+            return base.Channel.insertWithNewID(request);
+        }
+        
+        public bool insertWithNewID(string schedule) {
+            VkurseClient.ScheduleService.insertWithNewIDRequest inValue = new VkurseClient.ScheduleService.insertWithNewIDRequest();
+            inValue.schedule = schedule;
+            VkurseClient.ScheduleService.insertWithNewIDResponse retVal = ((VkurseClient.ScheduleService.ScheduleService)(this)).insertWithNewID(inValue);
+            return retVal.insertWithNewIDReturn;
         }
     }
 }

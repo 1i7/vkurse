@@ -214,6 +214,52 @@ namespace VkurseClient.edu.phystech.vkurse.soap
         }
 
 
+        public int findFreeID()
+        {
+            int r = 0;
+
+            ScheduleChangeService.ScheduleChangeService client = new ScheduleChangeService.ScheduleChangeServiceClient();
+            try
+            {
+                ScheduleChangeService.findFreeIDRequest request = new ScheduleChangeService.findFreeIDRequest();
+                DebugHelper.AddLog("findFreeID:  ");
+                ScheduleChangeService.findFreeIDResponse response = client.findFreeID(request);
+                DebugHelper.AddLog("Response: " + response.findFreeIDReturn);
+                r = response.findFreeIDReturn;
+            }
+            catch (Exception ex)
+            {
+                DebugHelper.AddLog("Client exception: " + ex);
+            }
+
+            return r;
+        }
+
+
+        public bool insertWithNewID(ScheduleChange item)
+        {
+            bool r = false;
+            if (item != null)
+            {
+                ScheduleChangeService.ScheduleChangeService client = new ScheduleChangeService.ScheduleChangeServiceClient();
+                try
+                {
+                    ScheduleChangeService.insertWithNewIDRequest request = new ScheduleChangeService.insertWithNewIDRequest();
+                    request.scheduleChange = item.ToString();
+                    DebugHelper.AddLog("insert:  " + request.scheduleChange);
+                    ScheduleChangeService.insertWithNewIDResponse response = client.insertWithNewID(request);
+                    DebugHelper.AddLog("Response: " + response.insertWithNewIDReturn);
+                    r = response.insertWithNewIDReturn;
+                }
+                catch (Exception ex)
+                {
+                    DebugHelper.AddLog("Client exception: " + ex);
+                }
+            }
+            return r;
+        }
+
+
     }
 
 

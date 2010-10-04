@@ -13,7 +13,9 @@ import java.util.*;
  */
 public class LecturesTestTable implements LecturesTable
 {
-    ArrayList<Lecture> data = new ArrayList<Lecture>();
+    //ArrayList<Lecture> data = new ArrayList<Lecture>();
+    java.util.Vector data = new java.util.Vector();
+
     public LecturesTestTable()
     {
         /*
@@ -46,7 +48,7 @@ public class LecturesTestTable implements LecturesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == item.getID()) data.set(i, item);
+            if (((Lecture)data.get(i)).getID() == item.getID()) data.set(i, item);
         }
         return true;
     }
@@ -56,7 +58,7 @@ public class LecturesTestTable implements LecturesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) return data.get(i);
+            if (((Lecture)data.get(i)).getID() == ID) return (Lecture)data.get(i);
         }
         return null;
     }
@@ -67,7 +69,7 @@ public class LecturesTestTable implements LecturesTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (data.get(i).getID() == ID) r = i;
+            if (((Lecture)data.get(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
@@ -97,7 +99,7 @@ public class LecturesTestTable implements LecturesTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = data.get(i).getID();
+            int ID = ((Lecture)data.get(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

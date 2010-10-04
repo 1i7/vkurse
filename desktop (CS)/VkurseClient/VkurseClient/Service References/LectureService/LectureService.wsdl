@@ -12,37 +12,43 @@
       </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="findFreeIDResponse">
-    <wsdl:part name="findFreeIDReturn" type="xsd:int" />
-  </wsdl:message>
   <wsdl:message name="removeResponse">
     <wsdl:part name="removeReturn" type="xsd:boolean" />
   </wsdl:message>
-  <wsdl:message name="updateResponse">
-    <wsdl:part name="updateReturn" type="xsd:boolean" />
-  </wsdl:message>
+  <wsdl:message name="getAllRequest" />
   <wsdl:message name="getAllResponse">
     <wsdl:part name="getAllReturn" type="impl:ArrayOf_xsd_string" />
   </wsdl:message>
-  <wsdl:message name="getAllRequest" />
-  <wsdl:message name="getRequest">
-    <wsdl:part name="ID" type="xsd:int" />
+  <wsdl:message name="insertWithNewIDResponse">
+    <wsdl:part name="insertWithNewIDReturn" type="xsd:boolean" />
   </wsdl:message>
   <wsdl:message name="removeRequest">
     <wsdl:part name="ID" type="xsd:int" />
   </wsdl:message>
-  <wsdl:message name="findFreeIDRequest" />
-  <wsdl:message name="insertRequest">
+  <wsdl:message name="insertWithNewIDRequest">
     <wsdl:part name="lecture" type="xsd:string" />
   </wsdl:message>
+  <wsdl:message name="findFreeIDRequest" />
   <wsdl:message name="getResponse">
     <wsdl:part name="getReturn" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="updateRequest">
-    <wsdl:part name="lecture" type="xsd:string" />
-  </wsdl:message>
   <wsdl:message name="insertResponse">
     <wsdl:part name="insertReturn" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="findFreeIDResponse">
+    <wsdl:part name="findFreeIDReturn" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part name="updateReturn" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="getRequest">
+    <wsdl:part name="ID" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="insertRequest">
+    <wsdl:part name="lecture" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateRequest">
+    <wsdl:part name="lecture" type="xsd:string" />
   </wsdl:message>
   <wsdl:portType name="LectureService">
     <wsdl:operation name="get" parameterOrder="ID">
@@ -68,6 +74,10 @@
     <wsdl:operation name="findFreeID">
       <wsdl:input name="findFreeIDRequest" message="impl:findFreeIDRequest" />
       <wsdl:output name="findFreeIDResponse" message="impl:findFreeIDResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="insertWithNewID" parameterOrder="lecture">
+      <wsdl:input name="insertWithNewIDRequest" message="impl:insertWithNewIDRequest" />
+      <wsdl:output name="insertWithNewIDResponse" message="impl:insertWithNewIDResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="LectureServiceSoapBinding" type="impl:LectureService">
@@ -123,6 +133,15 @@
         <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
       <wsdl:output name="findFreeIDResponse">
+        <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/LectureService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertWithNewID">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="insertWithNewIDRequest">
+        <wsdlsoap:body use="encoded" namespace="http://DefaultNamespace" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="insertWithNewIDResponse">
         <wsdlsoap:body use="encoded" namespace="http://nebula.innolab.net.ru:8180/axis/LectureService.jws" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
