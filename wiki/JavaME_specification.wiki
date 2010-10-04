@@ -10,53 +10,53 @@
 
 Чтобы не возникало никаких сомнений, выписываю используемые имена во всех классах: 
 
-  _!ExamType:_
-ID 
-name 
+  _!ExamType:_<br>
+ID <br>
+name <br>
 
-  _Group:_ 
-ID 
-name 
-course 
+  _Group:_ <br>
+ID <br>
+name <br>
+course <br>
 
-  _Lecture:_ 
-ID 
-name 
-examTypeID 
-comment 
+  _Lecture:_ <br>
+ID <br>
+name <br>
+examTypeID <br>
+comment <br>
 
-  _Room:_ 
-ID 
-name 
+  _Room:_ <br>
+ID <br>
+name <br>
 
-  _Teacher:_ 
-ID 
-name 
-degree 
+  _Teacher:_ <br>
+ID <br>
+name <br>
+degree <br>
 
-  _Schedule:_ 
-ID 
-groupID 
-day 
-startTime 
-length 
-lectureID 
-roomID 
-teacherID 
-comment 
+  _Schedule:_ <br>
+ID <br>
+groupID <br>
+day <br>
+startTime <br>
+length <br>
+lectureID <br>
+roomID <br>
+teacherID <br>
+comment <br>
 
-  _!ScheduleChange:_ 
-ID 
-scheduleID 
-week 
-groupID 
-day 
-startTime 
-length 
-lectureID 
-roomID 
-teacherID 
-comment 
+  _!ScheduleChange:_ <br>
+ID <br>
+scheduleID <br>
+week <br>
+groupID <br>
+day <br>
+startTime <br>
+length <br>
+lectureID <br>
+roomID <br>
+teacherID <br>
+comment <br>
 
 *Пример передаваемой строки для класса Group:* <br>
 "ID=1 name='793б' course='4 курс, кафедра {{{<apostrophe>ABBYY<apostrophe>}}}'" 
