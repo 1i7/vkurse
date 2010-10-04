@@ -10,7 +10,7 @@
 
 Чтобы не возникало никаких сомнений, выписываю используемые имена во всех классах: 
 
-  _ExamType:_
+  _!ExamType:_
 ID 
 name 
 
@@ -45,7 +45,7 @@ roomID
 teacherID 
 comment 
 
-  _ScheduleChange:_ 
+  _!ScheduleChange:_ 
 ID 
 scheduleID 
 week 
