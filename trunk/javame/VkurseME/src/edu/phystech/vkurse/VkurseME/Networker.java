@@ -13,18 +13,58 @@ import org.ksoap.transport.*;
 public class Networker implements Runnable {
     VkurseME middlet;
     int action=Networker.AC_WAIT;
-    final static int AC_WAIT=0, AC_REQUEST_ALL_ACTIONS=1;
+    final static int AC_WAIT=0, AC_REQUEST_ALL_LECTURES=1;
 
     public Networker(VkurseME middlet)
     {
         this.middlet = middlet;
     }
+    public void all_lectures()
+    {
+        try
+        {
+            SoapObject rpc = new SoapObject
+		("http://DefaultNamespace", "");
+            /*
+             Первый параметр - пространоство имён(зависит от сервера)
+             Второй параметр - имя сервиса
+             Оба смотрим в WSDL-файле
+             */
+
+	    rpc.addProperty ("symbol", "1");
+
+	    String res[]=(String [])new HttpTransport
+		("http://nebula.innolab.net.ru:8180/axis/LectureService.jws",
+		 "getAll").call (rpc);
+            /*
+             Параметры: Url Адрес веб-сервера,
+                        Имя вызываемого метода
+             */
+
+            //return res;
+        }
+        catch (Exception e) {
+	    //e.printStackTrace ();
+
+            String errmsg = e.toString();
+            System.out.println("ERROR:"+errmsg);
+
+            //return errmsg;
+
+	    /*resultItem.setLabel ("Error:");
+	    resultItem.setText (e.toString ());*/
+	}
+
+    }
+
     public void run()
     {
         switch(action)
         {
-            case Networker.AC_REQUEST_ALL_ACTIONS:
-                TableFactory factory = new TestTableFactory();
+            case Networker.AC_REQUEST_ALL_LECTURES:
+                all_lectures();
+            /*
+             TableFactory factory = new TestTableFactory();
                 LecturesTable lecturestable = factory.getLecturesTable();
                 Vector lectures;
                 try {
@@ -33,6 +73,8 @@ public class Networker implements Runnable {
                     lectures = new Vector();
                 }
                 middlet.SetLectures(lectures);
+             * 
+             */
             break;
         }
     }
@@ -48,7 +90,7 @@ public class Networker implements Runnable {
     }
     public void request_all_lectures()
     {
-        process(Networker.AC_REQUEST_ALL_ACTIONS);
+        process(Networker.AC_REQUEST_ALL_LECTURES);
     }
 
     String Version()

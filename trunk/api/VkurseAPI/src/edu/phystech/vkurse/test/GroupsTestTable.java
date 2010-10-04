@@ -18,17 +18,17 @@ public class GroupsTestTable implements GroupsTable
 
     public GroupsTestTable()
     {
-        data.add(new Group(100, "Test data - group", "1"));
-        data.add(new Group(0, "791", "4"));
-        data.add(new Group(1, "792", "4"));
-        data.add(new Group(2, "793", "4"));
-        data.add(new Group(3, "794", "4"));
-        data.add(new Group(4, "798", "4"));
+        data.addElement(new Group(100, "Test data - group", "1"));
+        data.addElement(new Group(0, "791", "4"));
+        data.addElement(new Group(1, "792", "4"));
+        data.addElement(new Group(2, "793", "4"));
+        data.addElement(new Group(3, "794", "4"));
+        data.addElement(new Group(4, "798", "4"));
     }
 
     public boolean insert(Group item) throws TableException
     {
-        data.add(item);
+        data.addElement(item);
         return true;
     }
 
@@ -37,7 +37,7 @@ public class GroupsTestTable implements GroupsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Group)data.get(i)).getID() == item.getID()) data.set(i, item);
+            if (((Group)data.elementAt(i)).getID() == item.getID()) data.setElementAt(item,i);
         }
         return true;
     }
@@ -47,7 +47,7 @@ public class GroupsTestTable implements GroupsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Group)data.get(i)).getID() == ID) return (Group)data.get(i);
+            if (((Group)data.elementAt(i)).getID() == ID) return (Group)data.elementAt(i);
         }
         return null;
     }
@@ -58,11 +58,11 @@ public class GroupsTestTable implements GroupsTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Group)data.get(i)).getID() == ID) r = i;
+            if (((Group)data.elementAt(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
-            data.remove(r);
+            data.removeElementAt(r);
             return true;
         }
         else
@@ -77,7 +77,7 @@ public class GroupsTestTable implements GroupsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            r.add(data.get(i));
+            r.addElement(data.elementAt(i));
         }
         return r;
     }
@@ -88,7 +88,7 @@ public class GroupsTestTable implements GroupsTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = ((Group)data.get(i)).getID();
+            int ID = ((Group)data.elementAt(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

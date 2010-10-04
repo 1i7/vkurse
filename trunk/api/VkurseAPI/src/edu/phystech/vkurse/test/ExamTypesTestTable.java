@@ -18,15 +18,15 @@ public class ExamTypesTestTable implements ExamTypesTable
 
     public ExamTypesTestTable()
     {
-        data.add(new ExamType(100, "Test data - exam type"));
-        data.add(new ExamType(0, "Экзамен"));
-        data.add(new ExamType(1, "Зачет"));
-        data.add(new ExamType(2, "Дифференцированный зачет"));
+        data.addElement(new ExamType(100, "Test data - exam type"));
+        data.addElement(new ExamType(0, "Экзамен"));
+        data.addElement(new ExamType(1, "Зачет"));
+        data.addElement(new ExamType(2, "Дифференцированный зачет"));
     }
 
     public boolean insert(ExamType item) throws TableException
     {
-        data.add(item);
+        data.addElement(item);
         return true;
     }
 
@@ -35,7 +35,8 @@ public class ExamTypesTestTable implements ExamTypesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((ExamType)data.get(i)).getID() == item.getID()) data.set(i, item);
+            if (((ExamType)data.elementAt(i)).getID() == item.getID())
+                data.setElementAt(item, i);
         }
         return true;
     }
@@ -45,7 +46,7 @@ public class ExamTypesTestTable implements ExamTypesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((ExamType)data.get(i)).getID() == ID) return (ExamType)data.get(i);
+            if (((ExamType)data.elementAt(i)).getID() == ID) return (ExamType)data.elementAt(i);
         }
         return null;
     }
@@ -56,11 +57,11 @@ public class ExamTypesTestTable implements ExamTypesTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (((ExamType)data.get(i)).getID() == ID) r = i;
+            if (((ExamType)data.elementAt(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
-            data.remove(r);
+            data.removeElementAt(r);
             return true;
         }
         else
@@ -75,7 +76,7 @@ public class ExamTypesTestTable implements ExamTypesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            r.add(data.get(i));
+            r.addElement(data.elementAt(i));
         }
         return r;
     }
@@ -86,7 +87,7 @@ public class ExamTypesTestTable implements ExamTypesTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = ((ExamType)data.get(i)).getID();
+            int ID = ((ExamType)data.elementAt(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

@@ -19,25 +19,25 @@ public class RoomsTestTable implements RoomsTable
     public RoomsTestTable()
     {
         /*
-        data.add(new Room(0, "123 ГК"));
-        data.add(new Room(1, "Большая физическая"));
-        data.add(new Room(2, "115 КПМ"));
+        data.addElement(new Room(0, "123 ГК"));
+        data.addElement(new Room(1, "Большая физическая"));
+        data.addElement(new Room(2, "115 КПМ"));
          */
-        data.add(new Room(100, "Test data - room"));
-        data.add(new Room(0, "202 НК"));
-        data.add(new Room(1, "113 ГК"));
-        data.add(new Room(2, "430 ГК"));
-        data.add(new Room(3, "115 КПМ"));
-        data.add(new Room(4, "110 КПМ"));
-        data.add(new Room(5, "301 ЛК"));
-        data.add(new Room(6, "515 ГК"));
-        data.add(new Room(7, "417 ГК"));
-        data.add(new Room(8, "802 КПМ"));
+        data.addElement(new Room(100, "Test data - room"));
+        data.addElement(new Room(0, "202 НК"));
+        data.addElement(new Room(1, "113 ГК"));
+        data.addElement(new Room(2, "430 ГК"));
+        data.addElement(new Room(3, "115 КПМ"));
+        data.addElement(new Room(4, "110 КПМ"));
+        data.addElement(new Room(5, "301 ЛК"));
+        data.addElement(new Room(6, "515 ГК"));
+        data.addElement(new Room(7, "417 ГК"));
+        data.addElement(new Room(8, "802 КПМ"));
     }
 
     public boolean insert(Room item) throws TableException
     {
-        data.add(item);
+        data.addElement(item);
         return true;
     }
 
@@ -46,7 +46,7 @@ public class RoomsTestTable implements RoomsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Room)data.get(i)).getID() == item.getID()) data.set(i, item);
+            if (((Room)data.elementAt(i)).getID() == item.getID()) data.setElementAt(item,i);
         }
         return true;
     }
@@ -56,7 +56,7 @@ public class RoomsTestTable implements RoomsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Room)data.get(i)).getID() == ID) return (Room)data.get(i);
+            if (((Room)data.elementAt(i)).getID() == ID) return (Room)data.elementAt(i);
         }
         return null;
     }
@@ -67,11 +67,11 @@ public class RoomsTestTable implements RoomsTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (((Room)data.get(i)).getID() == ID) r = i;
+            if (((Room)data.elementAt(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
-            data.remove(r);
+            data.removeElementAt(r);
             return true;
         }
         else
@@ -86,7 +86,7 @@ public class RoomsTestTable implements RoomsTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            r.add(data.get(i));
+            r.addElement(data.elementAt(i));
         }
         return r;
     }
@@ -97,7 +97,7 @@ public class RoomsTestTable implements RoomsTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = ((Room)data.get(i)).getID();
+            int ID = ((Room)data.elementAt(i)).getID();
             if (ID > r) r = ID;
         }
         r++;

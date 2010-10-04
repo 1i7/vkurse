@@ -21,10 +21,11 @@ public class Schedule extends DbTableRecord
     protected String comment;
 
     public Schedule() {}
-    public Schedule(int id, byte day, int startTime, int length, int lectureID,
-            int roomID, int teacherID, String comment)
+    public Schedule(int id, int groupID, byte day, int startTime, int length,
+            int lectureID, int roomID, int teacherID, String comment)
     {
         this.id = id;
+        this.groupID = groupID;
         this.day = day;
         this.startTime = startTime;
         this.length = length;
@@ -96,5 +97,34 @@ public class Schedule extends DbTableRecord
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    //@Override public String toString()
+    public String toStringData()
+    {
+        String r = "ID=" + id + " ";
+        r += "groupID=" + groupID + " ";
+        r += "day=" + day + " ";
+        r += "startTime=" + startTime + " ";
+        r += "length=" + length + " ";
+        r += "lectureID=" + lectureID + " ";
+        r += "roomID=" + roomID + " ";
+        r += "teacherID=" + teacherID + " ";
+        r += "comment='" + replace(comment,"'", "<apostrophe>") + "' ";
+        r = r.trim();
+        return r;
+    }
+
+    void setData(String n, String d)
+    {
+        if (n.equals("ID")) this.id = Integer.parseInt(d);
+        if (n.equals("groupID")) this.groupID = Integer.parseInt(d);
+        if (n.equals("day")) this.day = (byte)Integer.parseInt(d);
+        if (n.equals("startTime")) this.startTime = Integer.parseInt(d);
+        if (n.equals("length")) this.length = Integer.parseInt(d);
+        if (n.equals("lectureID")) this.lectureID = Integer.parseInt(d);
+        if (n.equals("roomID")) this.roomID = Integer.parseInt(d);
+        if (n.equals("teacherID")) this.teacherID = Integer.parseInt(d);
+        if (n.equals("comment")) this.comment = d;
     }
 }

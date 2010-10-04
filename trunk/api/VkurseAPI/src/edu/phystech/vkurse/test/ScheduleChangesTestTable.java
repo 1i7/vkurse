@@ -17,13 +17,13 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
 
     public ScheduleChangesTestTable()
     {
-        data.add(new ScheduleChange(100, 100, 100, 100, (byte)2, 540, 85, 100, 100, 100, "comment of change"));
-        data.add(new ScheduleChange(0, 0, 1, 0, (byte)1, 540, 85, 0, 0, 0, "it is comment of change"));
+        data.addElement(new ScheduleChange(100, 100, 100, 100, (byte)2, 540, 85, 100, 100, 100, "comment of change"));
+        data.addElement(new ScheduleChange(0, 0, 1, 0, (byte)1, 540, 85, 0, 0, 0, "it is comment of change"));
     }
 
     public boolean insert(ScheduleChange item) throws TableException
     {
-        data.add(item);
+        data.addElement(item);
         return true;
     }
 
@@ -32,7 +32,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((ScheduleChange)data.get(i)).getID() == item.getID()) data.set(i, item);
+            if (((ScheduleChange)data.elementAt(i)).getID() == item.getID()) data.setElementAt(item,i);
         }
         return true;
     }
@@ -42,7 +42,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((ScheduleChange)data.get(i)).getID() == ID) return (ScheduleChange)data.get(i);
+            if (((ScheduleChange)data.elementAt(i)).getID() == ID) return (ScheduleChange)data.elementAt(i);
         }
         return null;
     }
@@ -53,11 +53,11 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (((ScheduleChange)data.get(i)).getID() == ID) r = i;
+            if (((ScheduleChange)data.elementAt(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
-            data.remove(r);
+            data.removeElementAt(r);
             return true;
         }
         else
@@ -72,7 +72,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            r.add(data.get(i));
+            r.addElement(data.elementAt(i));
         }
         return r;
     }
@@ -83,9 +83,9 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            ScheduleChange s = (ScheduleChange)data.get(i);
+            ScheduleChange s = (ScheduleChange)data.elementAt(i);
             if ((s.getGroupID()==groupID) && (s.getDay()==day) && (s.getWeek()==week))
-                r.add(s);
+                r.addElement(s);
         }
         return r;
     }
@@ -96,9 +96,9 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            ScheduleChange s = (ScheduleChange)data.get(i);
+            ScheduleChange s = (ScheduleChange)data.elementAt(i);
             if ((s.getScheduleID()==scheduleID))
-                r.add(s);
+                r.addElement(s);
         }
         return r;
     }
@@ -109,7 +109,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = ((ScheduleChange)data.get(i)).getID();
+            int ID = ((ScheduleChange)data.elementAt(i)).getID();
             if (ID > r) r = ID;
         }
         r++;
