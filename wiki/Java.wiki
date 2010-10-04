@@ -6,6 +6,8 @@
 
 == [http://code.google.com/p/vkurse/wiki/JavaME_TechReport Технический отчет] ==
 
+== [http://code.google.com/p/vkurse/wiki/JavaME_specification Спецификация by Дмитрий Исупов]==
+
 == Wiki-странички программиста ==
 
 [http://debate-world.ru/wiki/J2ME JavaME]
