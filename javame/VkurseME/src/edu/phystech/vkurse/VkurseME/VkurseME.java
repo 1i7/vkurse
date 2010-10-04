@@ -1,6 +1,6 @@
 package edu.phystech.vkurse.VkurseME;
 import edu.phystech.vkurse.model.*;      //  Модель
-//import edu.phystech.vkurse.test.TestTableFactory;       //  Тестовая реализация модели
+import edu.phystech.vkurse.test.*;       //  Тестовая реализация модели
 
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
@@ -23,10 +23,10 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
         settingsForm = new Form("Настройки");
 
 
-        //TableFactory factory = new TestTableFactory();
-        //GroupsTable gt =  factory.getGroupsTable();
+        TableFactory factory = new TestTableFactory();
+        GroupsTable gt =  factory.getGroupsTable();
         
-        /*
+        
         Vector vGroups = new Vector();
         
         try
@@ -38,17 +38,17 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
         {
             vGroups = new Vector();
         }
-        for (int i = 0; i< vGroups.size()+ 1; i++)
+        for (int i = 0; i< vGroups.size(); i++)
         {
            try
            {
-           Group g = gt.get(i);
-           sGroups[i] = g.getName();
+               Group g = (Group)vGroups.elementAt(i);
+               sGroups[i] = g.getName();
            }
            catch (Exception exc)
            {
            }
-        }*/
+        }
 
         settingsForm.addCommand(new Command("ShowLectures",Command.SCREEN,2));
         settingsForm.addCommand(new Command("Exit",Command.SCREEN,3));
@@ -98,7 +98,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
 
     }
 
-    /*
+
     void append_record(Schedule rec)
     {
         StringItem siLabel;
@@ -144,8 +144,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
         resForm.append(siLabel);
     //    resForm.append(siLabel2);
     }
-     *
-     */
+
 
     public void SetLectures(Vector lectures)
     {
@@ -227,7 +226,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
             resForm.append(siLabel5);
             resForm.setCommandListener(this);
 
-            /*
+
             TableFactory factory = new TestTableFactory();
             ScheduleTable scht =  factory.getScheduleTable();
             Vector vSchedule ;
@@ -253,8 +252,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
                 {
                 }
             }
-             *
-             */
+
             
             Display.getDisplay(this).setCurrent(resForm);
         }
