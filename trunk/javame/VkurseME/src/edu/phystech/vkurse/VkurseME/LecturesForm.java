@@ -40,7 +40,7 @@ public class LecturesForm extends Form implements CommandListener{
             try
             {
                 Lecture Sc = (Lecture)lectures.elementAt(j);
-                StringItem siLabel1 = new StringItem("",Sc.getName());
+                StringItem siLabel1 = new StringItem(Sc.getName(),"");
                 this.append(siLabel1);
             }
             catch (Exception exc)
