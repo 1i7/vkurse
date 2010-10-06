@@ -8,13 +8,12 @@ import javax.microedition.lcdui.Font;
 import java.util.*;
 
 public class VkurseME extends MIDlet implements CommandListener, ItemCommandListener{
-    private Form settingsForm, resForm, infoForm;
+    public Form settingsForm, resForm, infoForm;
     ChoiceGroup myChoiceGroup;
     ChoiceGroup choiceGroups;
     DateField calender;
     String st[]={"ФИВТ"};
     String sGroups[] ={"191", "192", "193","194"};
-
     Networker net;
 
 
@@ -52,6 +51,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
 
         settingsForm.addCommand(new Command("ShowLectures",Command.SCREEN,2));
         settingsForm.addCommand(new Command("Exit",Command.SCREEN,3));
+        settingsForm.setCommandListener(this);
         
         
 
@@ -61,9 +61,12 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
         myChoiceGroup = new ChoiceGroup("Факультет",ChoiceGroup.POPUP,st,null);
         choiceGroups = new ChoiceGroup("Группа",ChoiceGroup.POPUP,sGroups,null);
 
-        StringItem ApplyButton = new StringItem(null,"Применить", Item.BUTTON);
+        /*
+         StringItem ApplyButton = new StringItem(null,"Применить", Item.BUTTON);
         ApplyButton.setDefaultCommand(new Command("Применить", Command.ITEM, 1));
         ApplyButton.setItemCommandListener(this);
+         * 
+         */
 
         StringItem AllLectionsButton = new StringItem(null,"Доступные лекции", Item.BUTTON);
         AllLectionsButton.setDefaultCommand(new Command("Доступные лекции", Command.ITEM, 1));
@@ -75,7 +78,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
         settingsForm.append(calender);
         settingsForm.append(myChoiceGroup);
         settingsForm.append(choiceGroups);
-        settingsForm.append(ApplyButton);
+        //settingsForm.append(ApplyButton);
         settingsForm.append(AllLectionsButton);
     }
 
@@ -95,7 +98,15 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
     }
 
     public void commandAction(Command cmd, Displayable disp) {
-
+        if(cmd.getLabel() == "ShowLectures")
+        {
+            net.request_all_lectures();
+            Display.getDisplay(this).setCurrent(new WaitForm(this));
+        }
+        if(cmd.getLabel() == "Exit")
+        {
+            exit();
+        }
     }
 
 
@@ -148,6 +159,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
 
     public void SetLectures(Vector lectures)
     {
+        /*
         Form LecturesForm = new Form("Лекции");
         for (int j = 0; j< lectures.size()+ 1; j++)
         {
@@ -164,6 +176,8 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
 
         //LecturesForm.append(net.Version());
         Display.getDisplay(this).setCurrent(LecturesForm);
+         */
+        Display.getDisplay(this).setCurrent(new LecturesForm(this,lectures));
     }
 
     public void exit()
