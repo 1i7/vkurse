@@ -5,9 +5,6 @@
 
 package edu.phystech.vkurse.VkurseME;
 import javax.microedition.lcdui.*;
-import javax.microedition.lcdui.Font;
-import java.util.*;
-
 /**
  *
  * @author Lex
@@ -22,7 +19,7 @@ public class WaitForm extends Form implements CommandListener{
 
         this.middlet = middlet;
               
-        this.append("Подождите, пожалуйста, программа немножко думает ...");
+        this.append("Подождите, пожалуйста, загружаем ...");
         
         
         this.addCommand(new Command("Выход",Command.EXIT,0));

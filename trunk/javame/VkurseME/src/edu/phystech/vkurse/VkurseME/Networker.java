@@ -23,7 +23,6 @@ public class Networker implements Runnable {
     {
         try
         {
-
             SoapObject rpc = new SoapObject
 		("http://DefaultNamespace", "getAll");
             /*
