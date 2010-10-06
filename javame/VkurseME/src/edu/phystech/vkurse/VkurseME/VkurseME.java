@@ -166,6 +166,11 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
         Display.getDisplay(this).setCurrent(LecturesForm);
     }
 
+    public void exit()
+    {
+        destroyApp(false);
+        notifyDestroyed();
+    }
     public void commandAction(Command cmd, Item i)
     {
         if(cmd.getLabel().equals("Применить"))
@@ -238,7 +243,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
             {
                 vSchedule = new Vector();
             }
-            for (int j = 0; j< vSchedule.size()+ 1; j++)
+            for (int j = 0; j< vSchedule.size(); j++)
             {
                 try
                 {
@@ -252,8 +257,7 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
                 {
                 }
             }
-
-            
+       
             Display.getDisplay(this).setCurrent(resForm);
         }
 
@@ -263,14 +267,12 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
             //запускаем класс Networker
 
             net.request_all_lectures();
-
-        
+            Display.getDisplay(this).setCurrent(new WaitForm(this));
         }
 
         if (cmd.getLabel().equals("Выход"))
         {
-            destroyApp(false);
-            notifyDestroyed();
+            exit();
         }
 
         if (cmd.getLabel().equals("Настройки")){
