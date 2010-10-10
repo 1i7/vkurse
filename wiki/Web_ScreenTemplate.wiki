@@ -24,4 +24,4 @@ _Расписание на день_
 
 
 
-[http://code.google.com/p/vkurse/wiki/Android На главную]
+[http://code.google.com/p/vkurse/wiki/web На главную]
