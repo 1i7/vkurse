@@ -4,7 +4,7 @@
 
 _Примерно так будет выглядеть наш сайт:_
 
-  http://vkurse.googlecode.com/files/sketch.jpg
+http://vkurse.googlecode.com/files/sketch.jpg
 
 
 
