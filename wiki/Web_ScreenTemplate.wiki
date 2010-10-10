@@ -2,25 +2,9 @@
 
 = Эскиз дизайна =
 
-_Welcome-страница_
+_Примерно так будет выглядеть наш сайт:_
 
- http://vkurse.googlecode.com/files/web-welcome.png
-
-_Расписание на день_
-
- http://vkurse.googlecode.com/files/web-day.png
-
-_Страница с описанием предмета_
-
- http://vkurse.googlecode.com/files/web-lesson.png
-
-_Календарь_
-
- http://vkurse.googlecode.com/files/web-calendar.png
-
-_Расписание на день_
-
- http://vkurse.googlecode.com/files/web-week.png
+  http://vkurse.googlecode.com/files/sketch.jpg
 
 
 
