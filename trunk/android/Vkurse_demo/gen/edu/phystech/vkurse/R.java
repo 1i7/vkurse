@@ -12,6 +12,7 @@ public final class R {
     }
     public static final class color {
         public static final int background=0x7f050000;
+        public static final int black=0x7f050004;
         public static final int blue=0x7f050002;
         public static final int lightblue=0x7f050003;
         public static final int text=0x7f050001;
@@ -20,6 +21,7 @@ public final class R {
         public static final int background=0x7f020000;
         public static final int background2=0x7f020001;
         public static final int icon=0x7f020002;
+        public static final int vkurse9=0x7f020003;
     }
     public static final class id {
         public static final int TextView01=0x7f060002;

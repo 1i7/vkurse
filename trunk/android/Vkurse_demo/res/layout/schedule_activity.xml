@@ -12,12 +12,24 @@
 
     
 <TableLayout
+
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:stretchColumns="1"
 	>
 
 <TableRow>
+<TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    
+    />
+ <TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    
+    />
+
 <TextView android:id="@+id/dateDisplay"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -34,12 +46,22 @@
 </TableRow>
 <TableRow>
     
+<TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    
+    />
+<TextView 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    
+    />    
 <Button android:id="@+id/pickDate"
         android:text="Изменить дату"
         android:height = "60dip"
 		android:width = "100dip"
-		android:layout_gravity="left"
-		android:textColor="@color/blue"
+		android:layout_gravity="center"
+		android:textColor="@color/black"
         />
         
 <Button android:id="@+id/changeGroup"
@@ -47,7 +69,7 @@
         android:height = "60dip"
 		android:width = "100dip"
 		android:layout_gravity="right"
-		android:textColor="@color/blue" 
+		android:textColor="@color/black" 
 		/>
 
 </TableRow>
@@ -59,7 +81,7 @@
     android:layout_gravity="center"
     android:text="@string/timetable"
     android:textSize="25sp"
-    android:textColor="@color/blue"
+    android:textColor="@color/black"
     />
 
 
@@ -68,7 +90,7 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:textSize="18sp"
-	android:background="@color/lightblue"
+	android:background="@color/background"
 	android:choiceMode ="singleChoice"
 	/>
 </TableLayout>
