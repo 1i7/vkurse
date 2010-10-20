@@ -103,17 +103,40 @@ public class Class_Info  extends ListActivity {
 	            {
 	            	Schedule Sc = vSchedule.elementAt(k);
 	            	Lect = lct.get(Sc.getLectureID());
-	            	LectureName[k] = Lect.getName();
-	                LectureStart[k] = Sc.getStartTime();
-	                LectureLenght[k] = Sc.getLength();
+	            	if (Lect.getName() != null)
+	            	{
+	            		LectureName[k] = Lect.getName();
+	            		LectureStart[k] = Sc.getStartTime();
+	            		LectureLenght[k] = Sc.getLength();
+	            	}
+	            	else
+	                {
+	            		LectureName[k] = "emtpy";
+	            		LectureStart[k] = 00;
+	            		LectureLenght[k] = 00;
+	                }
 	                Teacher teach ;
 	                Teachers TeacherTable = new Teachers();
 	                teach = TeacherTable.get(Sc.getTeacherID());
-	                LectureTeacher[k] = teach.getName();
+	                if (teach.getName() != null)
+	                {
+	                	LectureTeacher[k] = teach.getName();
+	                }
+	                else
+	                {
+	                	LectureTeacher[k] = "emtpy";
+	                }
 	                Room room;
 	                Rooms roomTable = new Rooms();
 	                room = roomTable.get(Sc.getRoomID());
-	                LectureRoom[k] = room.getName();
+	                if(room.getName() != null)
+	                {
+	                	LectureRoom[k] = room.getName();
+	                }
+	                else
+	                {
+	                	LectureRoom[k] = "emtpy";
+	                }
 	               
 	            }
 	                
@@ -124,10 +147,16 @@ public class Class_Info  extends ListActivity {
 	            
 	            
 	        }
-	       
-	        String thisLecture[]={LectureName[num], LectureRoom[num], LectureTeacher[num]};
-	        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, thisLecture));
-	        
+	       if(LectureName.length != 0)
+	       {
+		        String thisLecture[]={LectureName[num], LectureRoom[num], LectureTeacher[num]};
+		        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, thisLecture));
+		        
+	       }else
+	       {
+	    	   String thisLecture[]={"empty"};
+	    	   setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, thisLecture));
+	       }
 	       // TextView text = (TextView)findViewById(R.id.TextView01);
 	        //text.setText(new StringBuilder() .append(Lecture[0].name));
     }

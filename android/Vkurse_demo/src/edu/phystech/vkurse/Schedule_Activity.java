@@ -56,7 +56,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         Year = cl.get(Calendar.YEAR);
         Month = cl.get(Calendar.MONTH);
         Day = cl.get(Calendar.DAY_OF_MONTH);
-        WeekDay = (byte)(cl.get(Calendar.DAY_OF_WEEK));
+        WeekDay = (byte)((cl.get(Calendar.DAY_OF_WEEK)+6)%7);
 
         
         DateDisplay = (TextView) findViewById(R.id.dateDisplay);
@@ -125,7 +125,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         int j = myInt.getIntExtra("from_spin",0);
     	ListView list = (ListView) findViewById(android.R.id.list);
     	i.putExtra("from_list",list.getCheckedItemPosition());
-    	i.putExtra("day", WeekDay);
+    	i.putExtra("day", (byte)(WeekDay));
     	i.putExtra("from_spin_again",j);
     	
     	startActivity(i);
@@ -171,7 +171,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         
        try
         {
-            vSchedule = scht.findByGroupDay(Ident[j], weekDay);
+            vSchedule = scht.findByGroupDay(Ident[j], (byte)(weekDay));
            
             Answer = new String[vSchedule.size()];
             LectureName = new String[vSchedule.size()];
@@ -186,23 +186,32 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         {
 	            try
 	            {
-	            	if(vSchedule.size()!=0)
+	            	
+	            	if (vSchedule.isEmpty())
 	            	{
-		            	Schedule Sc = vSchedule.elementAt(k);
-		            	Lect = lct.get(Sc.getLectureID());
-		            	LectureName[k] = Lect.getName();
-		                LectureStart[k] = Sc.getStartTime();
-		                LectureLenght[k] = Sc.getLength();
-		                Answer[k]= LectureStart[k] +" "+LectureName[k];
+	            		
+	                    Answer[k]= "empty";
 	            	}
 	            	else
-	                {
-	                    LectureStart[k] = 00;
-	                    LectureName[k] = " Empty";
-	                    	
-	                    Answer[k]= LectureStart[k] +LectureName[k];
-	                }
-	            
+	            	{
+	            		
+	                    Schedule Sc = vSchedule.elementAt(k);
+			            Lect = lct.get(Sc.getLectureID());
+			            if (Lect.getName() != null)
+			            {
+				            LectureName[k] = Lect.getName();
+				            LectureStart[k] = Sc.getStartTime();
+				            LectureLenght[k] = Sc.getLength();
+				            Answer[k]= LectureStart[k] +" "+LectureName[k];
+		            	}
+		            	else
+		                {
+		                    LectureStart[k] = 00;
+		                    LectureName[k] = " Empty";
+		                    	
+		                    Answer[k]= LectureStart[k] +LectureName[k];
+		                }
+	            	}
 	            }
         	 
                 
@@ -210,16 +219,27 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
         
             catch (Exception exc)
             {
+            	
             }
         }
             
             
         
-       if ( Answer[0]!= null )
+       if ( Answer.length!=0 )
        {
         	setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Answer));
         	getListView().setTextFilterEnabled(true);
         }
+       else
+       {
+    	   Answer = new String[4];
+    	   for(int n=0; n<4; n++)
+    	   {
+    		   Answer[n]="empty";
+    	   }
+    	   setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Answer));
+       		getListView().setTextFilterEnabled(true);
+       }
 	}
 	
 	// updates the date in the TextView
@@ -231,7 +251,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
                     .append(Month + 1).append("-")
                     .append(Year).append(", ")
                     .append(WeekDay));
-        getSchedule(WeekDay);
+        getSchedule((byte)(WeekDay));
     }
     
     private DatePickerDialog.OnDateSetListener DateSetListener =
@@ -244,7 +264,7 @@ public class Schedule_Activity extends ListActivity implements OnClickListener{
                     Day = dayOfMonth;
                     final Calendar cl = Calendar.getInstance();
                     cl.set(year, monthOfYear, dayOfMonth);
-                    WeekDay = (byte)cl.get(Calendar.DAY_OF_WEEK);
+                    WeekDay = (byte)((cl.get(Calendar.DAY_OF_WEEK)+6)%7);
                     updateDisplay();
                     
                 }
