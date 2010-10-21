@@ -4,31 +4,33 @@
  */
 
 package edu.phystech.vkurse.VkurseME;
-import javax.microedition.lcdui.*;
-import java.util.*;
-import edu.phystech.vkurse.model.*;
 
 /**
  *
  * @author Lex
  */
-public class LecturesForm extends Form implements CommandListener{
+
+import javax.microedition.lcdui.*;
+import java.util.*;
+import edu.phystech.vkurse.model.*;
+
+public class FormLectures extends Form implements CommandListener{
     VkurseME middlet;
-    Command cmd_back,cmd_reload,cmd_exit;
+    Command cmd_settings,cmd_reload,cmd_exit;
 
 
-    LecturesForm(VkurseME middlet,Vector lectures)
+    FormLectures(VkurseME middlet,Vector lectures)
     {
         super("Список лекций");
 
         this.middlet = middlet;
 
         cmd_reload = new Command("Обновить",Command.SCREEN,0);
-        cmd_back = new Command("Назад",Command.SCREEN,1);
+        cmd_settings = new Command("Настройки",Command.SCREEN,1);
         cmd_exit = new Command("Выход",Command.SCREEN,2);
 
 
-        this.addCommand(cmd_back);
+        this.addCommand(cmd_settings);
         this.addCommand(cmd_reload);
         this.addCommand(cmd_exit);
 
@@ -52,13 +54,13 @@ public class LecturesForm extends Form implements CommandListener{
     public void commandAction(Command cmd, Displayable disp) {
         if(cmd == cmd_reload)
         {
-            middlet.net.request_all_lectures();
-            Display.getDisplay(middlet).setCurrent(new WaitForm(middlet));
+            middlet.showLecturesForm(true);
         }
-        if(cmd == cmd_back)
+        if(cmd == cmd_settings)
         {
-            Display.getDisplay(middlet).setCurrent(middlet.settingsForm);
+            middlet.showSettingsForm(false);
         }
+
         if(cmd == cmd_exit)
         {
             middlet.exit();

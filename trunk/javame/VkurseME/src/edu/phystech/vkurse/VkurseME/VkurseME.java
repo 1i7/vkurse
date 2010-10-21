@@ -7,88 +7,43 @@ import javax.microedition.lcdui.*;
 import javax.microedition.lcdui.Font;
 import java.util.*;
 
-public class VkurseME extends MIDlet implements CommandListener, ItemCommandListener{
-    public Form settingsForm, resForm, infoForm;
-    ChoiceGroup myChoiceGroup;
-    ChoiceGroup choiceGroups;
-    DateField calender;
-    String st[]={"ФИВТ"};
-    String sGroups[] ={"191", "192", "193","194"};
+public class VkurseME extends MIDlet /*implements CommandListener, ItemCommandListener*/{
     Networker net;
+    final static int AC_WAIT=0, AC_SHOW_ALL_LECTURES=1,AC_SHOW_SETTINGS=2;
+    int action=AC_WAIT;
+
+    Vector all_lectures=null;
+    Vector groups=null;
+    Vector rooms=null;
+    Vector examtypes=null;
+    Vector teachers=null;
+
+    int tek_group=0;
+    int tek_day=0;
+
+    FormSettings form_settings=null;
+    FormLectures form_lectures=null;
+    FormSchedule form_schedule=null;
+
+    String weekdays[]={"Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"};
+
+    
 
 
-    private void prepare_settings_form()
-    {
-        settingsForm = new Form("Настройки");
-
-
-        TableFactory factory = new TestTableFactory();
-        GroupsTable gt =  factory.getGroupsTable();
-        
-        
-        Vector vGroups = new Vector();
-        
-        try
-        {
-             vGroups = gt.getAll();
-             sGroups = new String[vGroups.size()];
-        }
-        catch (Exception exc)
-        {
-            vGroups = new Vector();
-        }
-        for (int i = 0; i< vGroups.size(); i++)
-        {
-           try
-           {
-               Group g = (Group)vGroups.elementAt(i);
-               sGroups[i] = g.getName();
-           }
-           catch (Exception exc)
-           {
-           }
-        }
-
-        settingsForm.addCommand(new Command("ShowLectures",Command.SCREEN,2));
-        settingsForm.addCommand(new Command("Exit",Command.SCREEN,3));
-        settingsForm.setCommandListener(this);
-        
-        
-
-
-
-        calender = new DateField("Дата", DateField.DATE , TimeZone.getDefault());
-        myChoiceGroup = new ChoiceGroup("Факультет",ChoiceGroup.POPUP,st,null);
-        choiceGroups = new ChoiceGroup("Группа",ChoiceGroup.POPUP,sGroups,null);
-
-        /*
-         StringItem ApplyButton = new StringItem(null,"Применить", Item.BUTTON);
-        ApplyButton.setDefaultCommand(new Command("Применить", Command.ITEM, 1));
-        ApplyButton.setItemCommandListener(this);
-         * 
-         */
-
-        StringItem AllLectionsButton = new StringItem(null,"Доступные лекции", Item.BUTTON);
-        AllLectionsButton.setDefaultCommand(new Command("Доступные лекции", Command.ITEM, 1));
-        AllLectionsButton.setItemCommandListener(this);
-
-        Date NowDate = new Date();
-        calender.setDate(NowDate);
-
-        settingsForm.append(calender);
-        settingsForm.append(myChoiceGroup);
-        settingsForm.append(choiceGroups);
-        //settingsForm.append(ApplyButton);
-        settingsForm.append(AllLectionsButton);
-    }
 
     public VkurseME() {
-        net = new Networker(this);
-        prepare_settings_form();
+   
     }
 
+
     public void startApp() {
-        Display.getDisplay(this).setCurrent(settingsForm);
+        net = new Networker(this);
+
+        //Запускаем скачивание списка групп с сервера
+        action = AC_SHOW_SETTINGS;
+        net.request_all_groups();
+
+        Display.getDisplay(this).setCurrent(new FormWaitPreparingSettings(this));
     }
 
     public void pauseApp() {
@@ -97,87 +52,122 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
     public void destroyApp(boolean unconditional) {
     }
 
-    public void commandAction(Command cmd, Displayable disp) {
-        if(cmd.getLabel() == "ShowLectures")
-        {
-            net.request_all_lectures();
-            Display.getDisplay(this).setCurrent(new WaitForm(this));
-        }
-        if(cmd.getLabel() == "Exit")
-        {
-            exit();
-        }
-    }
 
 
-    void append_record(Schedule rec)
+    void showSettingsForm(boolean reload)
     {
-        StringItem siLabel;
-
-        int res = rec.getStartTime();
-        String sTime = ((res-(res % 60)) / 60)
-                + ":" +(res % 60);
-
-        int iRoomID = rec.getRoomID();
-        int iLectureID = rec.getLectureID();
-
-        TableFactory factory = new TestTableFactory();
-        RoomsTable rt =  factory.getRoomsTable();
-        Room vRoom ;
-        try
+        //нужно загрузить данные заного
+        if(form_settings == null || reload)
         {
-            vRoom = rt.get(iRoomID);
-        }
-        catch (Exception exc)
-        {
-            vRoom = new Room();
-        }
-        LecturesTable lt =  factory.getLecturesTable();
-        Lecture   vLecture ;
-        try
-        {
-            vLecture = lt.get(iLectureID);
-        }
-        catch (Exception exc)
-        {
-            vLecture = new Lecture();
-        }
+            //Запускаем скачивание списка групп с сервера
+            action = AC_SHOW_SETTINGS;
+            net.request_all_groups();
 
-        Font MyFont = Font.getFont(Font.FACE_MONOSPACE ,Font.STYLE_BOLD, Font.SIZE_LARGE);
-        siLabel = new StringItem(sTime + "   " + vRoom.getName() , "" + vLecture.getName());
-        siLabel.setFont(MyFont);
-        //siLabel.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
-        siLabel.setDefaultCommand(new Command("Подробнее", Command.ITEM, 1));
-     //   StringItem siLabel2 = new StringItem("",rec.teacher );
-     //   StringItem siLabel3 = new StringItem("\n", sTime + "   " + rec.room +"\n");
-        siLabel.setItemCommandListener(this);
-    //    resForm.append(siLabel3);
-        resForm.append(siLabel);
-    //    resForm.append(siLabel2);
+            Display.getDisplay(this).setCurrent(new FormWaitPreparingSettings(this));
+        }else
+        {
+            Display.getDisplay(this).setCurrent(form_settings);
+        }
+    }
+    void showLecturesForm(boolean reload)
+    {
+        //нужно загрузить данные заного
+        if(form_lectures == null || reload)
+        {
+            action = AC_SHOW_ALL_LECTURES;
+            net.request_all_lectures();
+
+            Display.getDisplay(this).setCurrent(new FormWaitLectures(this));
+        }else
+        {
+            Display.getDisplay(this).setCurrent(form_lectures);
+        }
+    }
+    void showScheduleForm(boolean reload)
+    {
+        //нужно загрузить данные заного
+        if(form_schedule == null || reload)
+        {
+            net.request_schedule(((Group)groups.elementAt(tek_group)).getID(),tek_day);
+
+            Display.getDisplay(this).setCurrent(new FormWaitSchedule(this));
+        }else
+        {
+            Display.getDisplay(this).setCurrent(form_schedule);
+        }
     }
 
+
+    Room get_room_by_id(int id)
+    {
+        for(int i=0;i<rooms.size();i++)
+        {
+            Room tek = (Room)rooms.elementAt(i);
+            if(tek.getID() == id)
+                return tek;
+        }
+        return new Room();//Хак. Некрасиво(
+    }
+    Lecture get_lecture_by_id(int id)
+    {
+        for(int i=0;i<all_lectures.size();i++)
+        {
+            Lecture tek = (Lecture)all_lectures.elementAt(i);
+            if(tek.getID() == id)
+                return tek;
+        }
+        return new Lecture();//Хак. Некрасиво(
+    }
+    Teacher get_teacher_by_id(int id)
+    {
+        for(int i=0;i<teachers.size();i++)
+        {
+            Teacher tek = (Teacher)teachers.elementAt(i);
+            if(tek.getID() == id)
+                return tek;
+        }
+        return new Teacher();//Хак. Некрасиво(
+    }
 
     public void SetLectures(Vector lectures)
     {
-        /*
-        Form LecturesForm = new Form("Лекции");
-        for (int j = 0; j< lectures.size()+ 1; j++)
+        all_lectures = lectures;
+        if(action == AC_SHOW_ALL_LECTURES)
         {
-            try
-            {
-                Lecture Sc = (Lecture)lectures.elementAt(j);
-
-                LecturesForm.append(Sc.getName()+"\n");
-            }
-            catch (Exception exc)
-            {
-            }
+            action = AC_WAIT;
+            form_lectures = new FormLectures(this,lectures);
+            Display.getDisplay(this).setCurrent(form_lectures);
         }
+    }
 
-        //LecturesForm.append(net.Version());
-        Display.getDisplay(this).setCurrent(LecturesForm);
-         */
-        Display.getDisplay(this).setCurrent(new LecturesForm(this,lectures));
+    public void SetListGroups(Vector groups)
+    {
+        this.groups = groups;
+        if(action == AC_SHOW_SETTINGS)
+        {
+            action = AC_WAIT;
+            form_settings = new FormSettings(this,groups);
+            Display.getDisplay(this).setCurrent(form_settings);
+        }
+    }
+    public void SetSchedule(Vector schedule)
+    {
+        form_schedule = new FormSchedule(this,schedule);
+        Display.getDisplay(this).setCurrent(form_schedule);
+    }
+    public void SetRooms(Vector _rooms)
+    {
+        rooms = _rooms;
+    }
+
+    public void SetExamTypes(Vector _examtypes)
+    {
+        examtypes = _examtypes;
+    }
+
+    public void SetTeachers(Vector _teachers)
+    {
+        teachers = _teachers;
     }
 
     public void exit()
@@ -185,125 +175,5 @@ public class VkurseME extends MIDlet implements CommandListener, ItemCommandList
         destroyApp(false);
         notifyDestroyed();
     }
-    public void commandAction(Command cmd, Item i)
-    {
-        if(cmd.getLabel().equals("Применить"))
-        {
-            resForm = new Form("Рассписание");
-          
-            
-            String sDepartment = st[myChoiceGroup.getSelectedIndex()];
-            String sGroup = sGroups[choiceGroups.getSelectedIndex()];
 
-            String sNowData;
-            Date NowDate = new Date();
-            Calendar c = Calendar.getInstance();
-            c.setTime(NowDate);
-            sNowData = c.get(Calendar.DAY_OF_MONTH)
-                    + "." +c.get(Calendar.MONTH)
-                    + "." +c.get(Calendar.YEAR)
-                    + "    " + c.get(Calendar.HOUR_OF_DAY)
-                    + ":" +c.get(Calendar.MINUTE)
-                    + ":" + c.get(Calendar.SECOND) ;
-
-            String sSeeData;
-            Date dat = calender.getDate();
-            Calendar d = Calendar.getInstance();
-            d.setTime(dat);
-            sSeeData = d.get(Calendar.DAY_OF_MONTH)
-                    + "." +d.get(Calendar.MONTH)
-                    + "." +d.get(Calendar.YEAR);
-
-            StringItem siLabel1 = new StringItem("Факультет:", sDepartment);
-            StringItem siLabel2 = new StringItem("Группа:",sGroup);
-            StringItem siLabel3 = new StringItem("Текущая дата:",sNowData);
-            StringItem siLabel4 = new StringItem("Просматриваеммый день:",sSeeData );
-            StringItem siLabel5 = new StringItem("\n","" );
-
-
-
-
-            
-            siLabel1.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
-            siLabel1.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
-            siLabel1.setItemCommandListener(this);
-            siLabel2.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
-            siLabel2.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
-            siLabel2.setItemCommandListener(this);
-            siLabel3.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
-            siLabel3.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
-            siLabel3.setItemCommandListener(this);
-            siLabel4.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
-            siLabel4.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
-            siLabel4.setItemCommandListener(this);
-            
-
-            resForm.append(siLabel1);
-            resForm.append(siLabel2);
-            resForm.append(siLabel3);
-            resForm.append(siLabel4);
-            resForm.append(siLabel5);
-            resForm.setCommandListener(this);
-
-
-            TableFactory factory = new TestTableFactory();
-            ScheduleTable scht =  factory.getScheduleTable();
-            Vector vSchedule ;
-            try
-            {
-                vSchedule = scht.getAll();
-            }
-            catch (Exception exc)
-            {
-                vSchedule = new Vector();
-            }
-            for (int j = 0; j< vSchedule.size(); j++)
-            {
-                try
-                {
-                    Schedule Sc = scht.get(j);
-                    if ((Sc.getGroupID() == choiceGroups.getSelectedIndex())&&(d.get(Calendar.DAY_OF_WEEK)==((Sc.getDay()+1) % 7)))
-                    {
-                        append_record(Sc);
-                    }
-                }
-                catch (Exception exc)
-                {
-                }
-            }
-       
-            Display.getDisplay(this).setCurrent(resForm);
-        }
-
-
-        if (cmd.getLabel().equals("Доступные лекции"))
-        {
-            //запускаем класс Networker
-
-            net.request_all_lectures();
-            Display.getDisplay(this).setCurrent(new WaitForm(this));
-        }
-
-        if (cmd.getLabel().equals("Выход"))
-        {
-            exit();
-        }
-
-        if (cmd.getLabel().equals("Настройки")){
-            Display.getDisplay(this).setCurrent(settingsForm);
-        }
-        if (cmd.getLabel().equals("Подробнее"))
-        {
-           infoForm = new Form("Инфо о предмете");
-           StringItem siLabel2 = new StringItem("","Информация о предмете" );
-           siLabel2.setDefaultCommand(new Command("Назад", Command.BACK, 1));
-           siLabel2.setItemCommandListener(this);
-           infoForm.append(siLabel2);
-           Display.getDisplay(this).setCurrent(infoForm);
-        }
-
-        if (cmd.getLabel().equals("Назад")){
-           Display.getDisplay(this).setCurrent(resForm);
-        }
-    }
 }
