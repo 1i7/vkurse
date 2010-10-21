@@ -15,6 +15,42 @@ import java.util.Vector;
 
 public class ExamTypeService
 {
+    public String get(int ID)
+	{
+		String r = "null";
+		ExamType l = null;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			ExamTypesTable lt = factory.getExamTypesTable();
+			l = lt.get(ID);
+			if (l != null) r = l.toStringData();
+		} catch (Exception ex) { }
+		return r;
+	}
+	
+	
+    public String[] getAll()
+	{
+		String[] r = new String[0];
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			ExamTypesTable lt = factory.getExamTypesTable();
+			Vector data = lt.getAll();
+			r = new String[data.size()];
+			int i;
+			for (i=0; i<data.size(); ++i)
+			{
+				//r.add(data.get(i).toStringData());
+				r[i] = ((ExamType)data.get(i)).toStringData();
+			}
+		} catch (Exception ex) { }
+        return r;
+	}
+
+
+/*
     public boolean insert(String examType)
 	{
 		ExamType obj = new ExamType();
@@ -45,21 +81,6 @@ public class ExamTypeService
 	}
 	
 	
-    public String get(int ID)
-	{
-		String r = "null";
-		ExamType l = null;
-		try
-		{
-			TableFactory factory = new PgSqlTableFactory();
-			ExamTypesTable lt = factory.getExamTypesTable();
-			l = lt.get(ID);
-			if (l != null) r = l.toStringData();
-		} catch (Exception ex) { }
-		return r;
-	}
-	
-	
     public boolean remove(int ID)
 	{
 		boolean r = false;
@@ -72,26 +93,6 @@ public class ExamTypeService
 		return r;
 	}
 	
-	
-    public String[] getAll()
-	{
-		String[] r = new String[0];
-		try
-		{
-			TableFactory factory = new PgSqlTableFactory();
-			ExamTypesTable lt = factory.getExamTypesTable();
-			Vector data = lt.getAll();
-			r = new String[data.size()];
-			int i;
-			for (i=0; i<data.size(); ++i)
-			{
-				//r.add(data.get(i).toStringData());
-				r[i] = ((ExamType)data.get(i)).toStringData();
-			}
-		} catch (Exception ex) { }
-        return r;
-	}
-
 	
 	public int findFreeID()
 	{
@@ -119,5 +120,5 @@ public class ExamTypeService
 		} catch (Exception ex) { }
 		return r;
 	}
-	
+*/	
 }
