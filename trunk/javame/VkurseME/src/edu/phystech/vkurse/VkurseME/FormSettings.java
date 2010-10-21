@@ -42,13 +42,15 @@ public class FormSettings extends Form implements CommandListener, ItemCommandLi
             }
         }
 
+        cmd_reload = new Command("Обновить", Command.SCREEN, 1);
         cmd_lectures = new Command("ShowLectures", Command.SCREEN, 2);
         cmd_exit = new Command("Exit", Command.SCREEN, 3);
-        cmd_reload = new Command("Обновить", Command.SCREEN, 3);
+        
 
+        this.addCommand(cmd_reload);
         this.addCommand(cmd_lectures);
         this.addCommand(cmd_exit);
-        this.addCommand(cmd_reload);
+        
         this.setCommandListener(this);
 
 
@@ -209,10 +211,7 @@ public void commandAction(Command cmd, Item i)
 
         if (cmd.getLabel().equals("Доступные лекции"))
         {
-            //запускаем класс Networker
-
-            middlet.net.request_all_lectures();
-            Display.getDisplay(middlet).setCurrent(new FormWaitLectures(middlet));
+            middlet.showLecturesForm(false);
         }
 
         if (cmd.getLabel().equals("Выход"))

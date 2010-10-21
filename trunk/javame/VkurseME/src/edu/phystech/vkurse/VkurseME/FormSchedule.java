@@ -31,12 +31,17 @@ public class FormSchedule extends Form implements CommandListener, ItemCommandLi
         StringItem siLabel2 = new StringItem("Просматриваеммый день:",middlet.weekdays[middlet.tek_day-1]);
         
 
-        siLabel1.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
+        
+
+        /*
+         siLabel1.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
         siLabel1.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
         siLabel1.setItemCommandListener(this);
         siLabel2.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
         siLabel2.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
         siLabel2.setItemCommandListener(this);
+         * 
+         */
 
         this.append(siLabel1);
         this.append(siLabel2);
@@ -132,30 +137,12 @@ public class FormSchedule extends Form implements CommandListener, ItemCommandLi
     }
 
     public void commandAction(Command cmd, Item i) {
-
         if (cmd.getLabel().equals("Подробнее")) {
-            //В приоритете мы храним номер выбранной команды
+            //В приоритете мы храним номер выбранной записи рассписания
             int task = cmd.getPriority();
 
             Display.getDisplay(middlet).setCurrent(new FormSubject(middlet,(Schedule)schedule.elementAt(task)));
-            
-            //this.append(Integer.toString(n));
 
-
-
-
-
-
-            /*
-            infoForm = new Form("Инфо о предмете");
-            StringItem siLabel2 = new StringItem("","Информация о предмете" );
-            siLabel2.setDefaultCommand(new Command("Назад", Command.BACK, 1));
-            siLabel2.setItemCommandListener(this);
-            infoForm.append(siLabel2);
-            Display.getDisplay(this).setCurrent(infoForm);
-             *
-             */
         }
-
     }
 }
