@@ -15,36 +15,6 @@ import java.util.Vector;
 
 public class ScheduleService
 {
-    public boolean insert(String schedule)
-	{
-		Schedule obj = new Schedule();
-		obj.readData(schedule);
-		boolean r = false;
-		try
-		{
-			TableFactory factory = new PgSqlTableFactory();
-			ScheduleTable lt = factory.getScheduleTable();
-			r = lt.insert(obj);
-		} catch (Exception ex) { }
-		return r;
-	}
-	
-	
-    public boolean update(String schedule)
-	{
-		Schedule obj = new Schedule();
-		obj.readData(schedule);
-		boolean r = false;
-		try
-		{
-			TableFactory factory = new PgSqlTableFactory();
-			ScheduleTable lt = factory.getScheduleTable();
-			r = lt.update(obj);
-		} catch (Exception ex) { }
-		return r;
-	}
-	
-	
     public String get(int ID)
 	{
 		String r = "null";
@@ -55,19 +25,6 @@ public class ScheduleService
 			ScheduleTable lt = factory.getScheduleTable();
 			l = lt.get(ID);
 			if (l != null) r = l.toStringData();
-		} catch (Exception ex) { }
-		return r;
-	}
-	
-	
-    public boolean remove(int ID)
-	{
-		boolean r = false;
-		try
-		{
-			TableFactory factory = new PgSqlTableFactory();
-			ScheduleTable lt = factory.getScheduleTable();
-			r = lt.remove(ID);
 		} catch (Exception ex) { }
 		return r;
 	}
@@ -113,6 +70,50 @@ public class ScheduleService
 	}
 
 	
+/*
+    public boolean insert(String schedule)
+	{
+		Schedule obj = new Schedule();
+		obj.readData(schedule);
+		boolean r = false;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			ScheduleTable lt = factory.getScheduleTable();
+			r = lt.insert(obj);
+		} catch (Exception ex) { }
+		return r;
+	}
+	
+	
+    public boolean update(String schedule)
+	{
+		Schedule obj = new Schedule();
+		obj.readData(schedule);
+		boolean r = false;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			ScheduleTable lt = factory.getScheduleTable();
+			r = lt.update(obj);
+		} catch (Exception ex) { }
+		return r;
+	}
+	
+	
+    public boolean remove(int ID)
+	{
+		boolean r = false;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			ScheduleTable lt = factory.getScheduleTable();
+			r = lt.remove(ID);
+		} catch (Exception ex) { }
+		return r;
+	}
+	
+	
 	public int findFreeID()
 	{
 		int r = 0;
@@ -139,5 +140,5 @@ public class ScheduleService
 		} catch (Exception ex) { }
 		return r;
 	}
-	
+*/
 }

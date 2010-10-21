@@ -15,6 +15,42 @@ import java.util.Vector;
 
 public class LectureService
 {
+    public String get(int ID)
+	{
+		String r = "null";
+		Lecture l = null;
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			LecturesTable lt = factory.getLecturesTable();
+			l = lt.get(ID);
+			if (l != null) r = l.toStringData();
+		} catch (Exception ex) { }
+		return r;
+	}
+	
+	
+    public String[] getAll()
+	{
+		String[] r = new String[0];
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			LecturesTable lt = factory.getLecturesTable();
+			Vector data = lt.getAll();
+			r = new String[data.size()];
+			int i;
+			for (i=0; i<data.size(); ++i)
+			{
+				//r.add(data.get(i).toStringData());
+				r[i] = ((Lecture)data.get(i)).toStringData();
+			}
+		} catch (Exception ex) { }
+        return r;
+	}
+
+
+/*
     public boolean insert(String lecture)
 	{
 		Lecture lect = new Lecture();
@@ -45,21 +81,6 @@ public class LectureService
 	}
 	
 	
-    public String get(int ID)
-	{
-		String r = "null";
-		Lecture l = null;
-		try
-		{
-			TableFactory factory = new PgSqlTableFactory();
-			LecturesTable lt = factory.getLecturesTable();
-			l = lt.get(ID);
-			if (l != null) r = l.toStringData();
-		} catch (Exception ex) { }
-		return r;
-	}
-	
-	
     public boolean remove(int ID)
 	{
 		boolean r = false;
@@ -72,26 +93,6 @@ public class LectureService
 		return r;
 	}
 	
-	
-    public String[] getAll()
-	{
-		String[] r = new String[0];
-		try
-		{
-			TableFactory factory = new PgSqlTableFactory();
-			LecturesTable lt = factory.getLecturesTable();
-			Vector data = lt.getAll();
-			r = new String[data.size()];
-			int i;
-			for (i=0; i<data.size(); ++i)
-			{
-				//r.add(data.get(i).toStringData());
-				r[i] = ((Lecture)data.get(i)).toStringData();
-			}
-		} catch (Exception ex) { }
-        return r;
-	}
-
 	
 	public int findFreeID()
 	{
@@ -119,5 +120,5 @@ public class LectureService
 		} catch (Exception ex) { }
 		return r;
 	}
-
+*/
 }
