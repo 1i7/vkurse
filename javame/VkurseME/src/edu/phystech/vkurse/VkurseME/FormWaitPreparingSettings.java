@@ -5,23 +5,23 @@
 
 package edu.phystech.vkurse.VkurseME;
 import javax.microedition.lcdui.*;
+
 /**
  *
  * @author Lex
  */
-import javax.microedition.midlet.*;
 
-public class WaitForm extends Form implements CommandListener{
+public class FormWaitPreparingSettings extends Form implements CommandListener{
     VkurseME middlet;
-    WaitForm(VkurseME middlet)
+    FormWaitPreparingSettings(VkurseME middlet)
     {
         super("Подождите...");
 
         this.middlet = middlet;
-              
-        this.append("Подождите, пожалуйста, загружаем ...");
-        
-        
+
+        this.append("Пожалуйста, подождите...Сейчас вам будет предложено выбрать факультет и номер группы");
+
+
         this.addCommand(new Command("Выход",Command.EXIT,0));
         this.setCommandListener(this);
     }
