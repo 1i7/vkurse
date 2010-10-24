@@ -26,10 +26,10 @@ public class TeachersTestTable implements TeachersTable
         data.addElement(new Teacher(13, "Надеждин Б.Б.", ""));
     }
 
-    public boolean insert(Teacher item) throws TableException
+    public int insert(Teacher item) throws TableException
     {
         data.addElement(item);
-        return true;
+        return item.getID();
     }
 
     public boolean update(Teacher item) throws TableException
@@ -82,6 +82,7 @@ public class TeachersTestTable implements TeachersTable
         return r;
     }
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -105,4 +106,6 @@ public class TeachersTestTable implements TeachersTable
         }
         return r;
     }
+     * 
+     */
 }

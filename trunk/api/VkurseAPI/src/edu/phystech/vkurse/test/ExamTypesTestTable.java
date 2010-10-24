@@ -24,10 +24,10 @@ public class ExamTypesTestTable implements ExamTypesTable
         data.addElement(new ExamType(2, "Дифференцированный зачет"));
     }
 
-    public boolean insert(ExamType item) throws TableException
+    public int insert(ExamType item) throws TableException
     {
         data.addElement(item);
-        return true;
+        return item.getID();
     }
 
     public boolean update(ExamType item) throws TableException
@@ -81,6 +81,7 @@ public class ExamTypesTestTable implements ExamTypesTable
         return r;
     }
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -104,4 +105,6 @@ public class ExamTypesTestTable implements ExamTypesTable
         }
         return r;
     }
+     * 
+     */
 }

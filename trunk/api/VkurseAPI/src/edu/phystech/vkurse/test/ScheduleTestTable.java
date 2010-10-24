@@ -64,10 +64,10 @@ public class ScheduleTestTable implements ScheduleTable
         data.addElement(new Schedule(35, 4, (byte)6, 930, 260, 18, -1, -1, ""));
     }
 
-    public boolean insert(Schedule item) throws TableException
+    public int insert(Schedule item) throws TableException
     {
         data.addElement(item);
-        return true;
+        return item.getID();
     }
 
     public boolean update(Schedule item) throws TableException
@@ -133,6 +133,7 @@ public class ScheduleTestTable implements ScheduleTable
         return r;
     }
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -156,4 +157,6 @@ public class ScheduleTestTable implements ScheduleTable
         }
         return r;
     }
+     * 
+     */
 }

@@ -35,10 +35,10 @@ public class RoomsTestTable implements RoomsTable
         data.addElement(new Room(8, "802 КПМ"));
     }
 
-    public boolean insert(Room item) throws TableException
+    public int insert(Room item) throws TableException
     {
         data.addElement(item);
-        return true;
+        return item.getID();
     }
 
     public boolean update(Room item) throws TableException
@@ -91,6 +91,7 @@ public class RoomsTestTable implements RoomsTable
         return r;
     }
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -114,4 +115,6 @@ public class RoomsTestTable implements RoomsTable
         }
         return r;
     }
+     * 
+     */
 }

@@ -15,9 +15,9 @@ import java.util.Vector;
  */
 public class LecturesPgSqlTable implements LecturesTable
 {
-    public boolean insert(Lecture item) throws TableException
+    public int insert(Lecture item) throws TableException
     {
-        Boolean r=false;
+        int r=-1;
 
         if (item != null)
         {
@@ -35,10 +35,15 @@ public class LecturesPgSqlTable implements LecturesTable
 
                 Statement st = dbConn.createStatement();
 
-                r = (st.executeUpdate("insert into Lectures values(" +
+                st.executeUpdate("insert into Lectures values(" +
                         item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "', " +
                         item.getExamTypeID() + ", '" + item.getComment().replace("'", "<apostrophe>") + "'" +
-                        ");") > 0);
+                        ");");
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.first())
+                {
+                    r = rs.getInt(1);
+                }
 
                 st.close();
                 dbConn.close();
@@ -198,6 +203,7 @@ public class LecturesPgSqlTable implements LecturesTable
     }
     
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -247,4 +253,6 @@ public class LecturesPgSqlTable implements LecturesTable
         }
         return r;
     }
+     * 
+     */
 }

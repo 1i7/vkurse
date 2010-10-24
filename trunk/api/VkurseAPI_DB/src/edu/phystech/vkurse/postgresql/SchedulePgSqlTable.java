@@ -15,9 +15,9 @@ import java.util.Vector;
  */
 public class SchedulePgSqlTable implements ScheduleTable
 {
-    public boolean insert(Schedule item) throws TableException
+    public int insert(Schedule item) throws TableException
     {
-        Boolean r=false;
+        int r=-1;
 
         if (item != null)
         {
@@ -40,7 +40,7 @@ public class SchedulePgSqlTable implements ScheduleTable
                         item.getID() + ", '" + item.getName() + "'" +
                         ");");
                  */
-                r = (st.executeUpdate("insert into Schedule values(" +
+                st.executeUpdate("insert into Schedule values(" +
                         item.getID() + ", " +
                         item.getGroupID() + ", " +
                         item.getDay() + ", " +
@@ -50,7 +50,12 @@ public class SchedulePgSqlTable implements ScheduleTable
                         item.getRoomID() + ", " +
                         item.getTeacherID() + ", " +
                         "'" + item.getComment().replace("'", "<apostrophe>") + "'" +
-                        ");") > 0);
+                        ");");
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.first())
+                {
+                    r = rs.getInt(1);
+                }
 
                 st.close();
                 dbConn.close();
@@ -294,6 +299,8 @@ public class SchedulePgSqlTable implements ScheduleTable
         return r;
     }
 
+
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -343,4 +350,6 @@ public class SchedulePgSqlTable implements ScheduleTable
         }
         return r;
     }
+     * 
+     */
 }

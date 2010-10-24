@@ -15,9 +15,9 @@ import java.util.Vector;
  */
 public class ExamTypesPgSqlTable implements ExamTypesTable
 {
-    public boolean insert(ExamType item) throws TableException
+    public int insert(ExamType item) throws TableException
     {
-        Boolean r=false;
+        int r=-1;
 
         if (item != null)
         {
@@ -40,9 +40,14 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
                         item.getID() + ", '" + item.getName() + "'" +
                         ");");
                  */
-                r = (st.executeUpdate("insert into ExamTypes values(" +
+                st.executeUpdate("insert into ExamTypes values(" +
                         item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "'" +
-                        ");") > 0);
+                        ");");
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.first())
+                {
+                    r = rs.getInt(1);
+                }
 
                 st.close();
                 dbConn.close();
@@ -196,6 +201,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
         return r;
     }
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -245,4 +251,6 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
         }
         return r;
     }
+     * 
+     */
 }

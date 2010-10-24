@@ -15,9 +15,9 @@ import java.util.Vector;
  */
 public class GroupsPgSqlTable implements GroupsTable
 {
-    public boolean insert(Group item) throws TableException
+    public int insert(Group item) throws TableException
     {
-        Boolean r=false;
+        int r=-1;
 
         if (item != null)
         {
@@ -40,9 +40,14 @@ public class GroupsPgSqlTable implements GroupsTable
                         item.getID() + ", '" + item.getName() + "'" +
                         ");");
                  */
-                r = (st.executeUpdate("insert into Groups values(" +
+                st.executeUpdate("insert into Groups values(" +
                         item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "', '" + item.getCourse().replace("'", "<apostrophe>") + "'" +
-                        ");") > 0);
+                        ");");
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.first())
+                {
+                    r = rs.getInt(1);
+                }
 
                 st.close();
                 dbConn.close();
@@ -198,6 +203,7 @@ public class GroupsPgSqlTable implements GroupsTable
     }
 
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -247,4 +253,6 @@ public class GroupsPgSqlTable implements GroupsTable
         }
         return r;
     }
+     * 
+     */
 }

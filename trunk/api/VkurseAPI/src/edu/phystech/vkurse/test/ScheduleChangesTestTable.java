@@ -21,10 +21,10 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         data.addElement(new ScheduleChange(0, 0, 1, 0, (byte)1, 540, 85, 0, 0, 0, "it is comment of change"));
     }
 
-    public boolean insert(ScheduleChange item) throws TableException
+    public int insert(ScheduleChange item) throws TableException
     {
         data.addElement(item);
-        return true;
+        return item.getID();
     }
 
     public boolean update(ScheduleChange item) throws TableException
@@ -103,6 +103,7 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         return r;
     }
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -126,4 +127,6 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
         }
         return r;
     }
+     * 
+     */
 }
