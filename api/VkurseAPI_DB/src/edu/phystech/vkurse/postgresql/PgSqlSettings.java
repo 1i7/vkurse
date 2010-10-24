@@ -28,7 +28,6 @@ public class PgSqlSettings
      * версию с неправильными константами - если что, напомните - исправлю.
      */
 
-    
     //  PostgreSQL
     private static String jdbcDriverClass = "org.postgresql.Driver";
     private static String url =
@@ -38,7 +37,7 @@ public class PgSqlSettings
     private static String dbName = "inno2010_vkurse";
     private static String username = "innocourse-dtb";
     private static String password = "innocourse-dtb";
-    
+
     /*
     //  MySQL
     private static String jdbcDriverClass = "com.mysql.jdbc.Driver";

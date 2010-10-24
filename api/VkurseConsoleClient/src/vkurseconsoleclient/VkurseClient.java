@@ -94,10 +94,13 @@ public class VkurseClient
         {
             //java.util.List<Lecture> l
             //System.out.println(lecturesTable.getAll().getClass().getName());
-            System.out.println(tableFactory.getSourceName());
+            //System.out.println(tableFactory.getSourceName());
+            //ExamType et = new ExamType(0, "aaa");
+            //System.out.println(et.toStringData());
+            //System.out.println();
             ExamType et = new ExamType(0, "aaa");
-            System.out.println(et.toStringData());
-            System.out.println();
+            int r = examTypesTable.insert(et);
+            System.out.println(r);
         } catch (Exception ex)
         {
             System.out.println(ex.toString());
@@ -127,8 +130,8 @@ public class VkurseClient
         System.out.println("14: Remove schedule changes entry");
         System.out.println("15: Create new schedule changes entry");
         System.out.println("");
-        System.out.println("16: Show free IDs");
-        System.out.println("");
+        //System.out.println("16: Show free IDs");
+        //System.out.println("");
         System.out.println("0:  Exit");
 
         int r = ConsoleReadInt(-1);
@@ -146,7 +149,8 @@ public class VkurseClient
         System.out.println("3:  Edit");
         System.out.println("4:  Remove");
         System.out.println("5:  Create new");
-        System.out.println("6:  Get free ID");
+        //System.out.println("6:  Get free ID");
+        //System.out.println("7:  Create with new ID");
         System.out.println("");
         System.out.println("0:  Back");
 
@@ -180,7 +184,7 @@ public class VkurseClient
             if (14 == mnu) RemoveScheduleChangeEntry();
             if (15 == mnu) CreateScheduleChangeEntry();
 
-            if (16 == mnu) ShowFreeIDs();
+            //if (16 == mnu) ShowFreeIDs();
 
             if (20 == mnu) Test();
         }
@@ -284,7 +288,7 @@ public class VkurseClient
                     System.out.print("Name: ");
                     String name = ConsoleReadString("Name");
                     ExamType d = new ExamType(id, name);
-                    if (examTypesTable.insert(d))
+                    if (examTypesTable.insert(d)>=0)
                         System.out.println("Exam type was added");
                     else
                         System.out.println("Exam type was NOT added");
@@ -292,6 +296,7 @@ public class VkurseClient
                 System.out.println("");
             }
 
+            /*
             if (6 == mnu)
             {
                 try
@@ -300,6 +305,24 @@ public class VkurseClient
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
+
+            if (7 == mnu)
+            {
+                try
+                {
+                    System.out.println("Enter exam type data: ");
+                    System.out.print("Name: ");
+                    String name = ConsoleReadString("Name");
+                    ExamType d = new ExamType(0, name);
+                    if (examTypesTable.insertWithNewID(d))
+                        System.out.println("Exam type was added");
+                    else
+                        System.out.println("Exam type was NOT added");
+                } catch (Exception Ex) {}
+                System.out.println("");
+            }
+             * 
+             */
         }
     }
 
@@ -406,7 +429,7 @@ public class VkurseClient
                     System.out.print("Course: ");
                     String course = ConsoleReadString("Course");
                     Group d = new Group(id, name, course);
-                    if (groupsTable.insert(d))
+                    if (groupsTable.insert(d)>=0)
                         System.out.println("Group was added");
                     else
                         System.out.println("Group was NOT added");
@@ -414,6 +437,7 @@ public class VkurseClient
                 System.out.println("");
             }
 
+            /*
             if (6 == mnu)
             {
                 try
@@ -422,6 +446,8 @@ public class VkurseClient
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
+             * 
+             */
         }
     }
 
@@ -567,7 +593,7 @@ public class VkurseClient
                     System.out.print("Comment:    ");
                     String comment = ConsoleReadString("Comment");
                     Lecture d = new Lecture(id, name, examTypeID, comment);
-                    if (lecturesTable.insert(d))
+                    if (lecturesTable.insert(d)>=0)
                         System.out.println("Lecture was added");
                     else
                         System.out.println("Lecture was NOT added");
@@ -575,6 +601,7 @@ public class VkurseClient
                 System.out.println("");
             }
 
+            /*
             if (6 == mnu)
             {
                 try
@@ -583,6 +610,8 @@ public class VkurseClient
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
+             * 
+             */
         }
     }
 
@@ -684,7 +713,7 @@ public class VkurseClient
                     System.out.print("Name: ");
                     String name = ConsoleReadString("Name");
                     Room d = new Room(id, name);
-                    if (roomsTable.insert(d))
+                    if (roomsTable.insert(d)>=0)
                         System.out.println("Room was added");
                     else
                         System.out.println("Room was NOT added");
@@ -692,6 +721,7 @@ public class VkurseClient
                 System.out.println("");
             }
 
+            /*
             if (6 == mnu)
             {
                 try
@@ -700,6 +730,8 @@ public class VkurseClient
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
+             * 
+             */
         }
     }
 
@@ -806,7 +838,7 @@ public class VkurseClient
                     System.out.print("Degree: ");
                     String degree = ConsoleReadString("Degree");
                     Teacher d = new Teacher(id, name, degree);
-                    if (teachersTable.insert(d))
+                    if (teachersTable.insert(d)>=0)
                         System.out.println("Teacher was added");
                     else
                         System.out.println("Teacher was NOT added");
@@ -814,6 +846,7 @@ public class VkurseClient
                 System.out.println("");
             }
 
+            /*
             if (6 == mnu)
             {
                 try
@@ -822,6 +855,8 @@ public class VkurseClient
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
+             * 
+             */
         }
     }
 
@@ -1109,7 +1144,7 @@ public class VkurseClient
             String comment = ConsoleReadString("");
 
             Schedule d = new Schedule(id, groupID, day, startTime, length, lectureID, roomID, teacherID, comment);
-            if (scheduleTable.insert(d))
+            if (scheduleTable.insert(d)>=0)
                 System.out.println("Schedule entry was added");
             else
                 System.out.println("Schedule entry was NOT added");
@@ -1498,7 +1533,7 @@ public class VkurseClient
                 String comment = ConsoleReadString("");
 
                 ScheduleChange d = new ScheduleChange(id, scheduleID, week, groupID, day, startTime, length, lectureID, roomID, teacherID, comment);
-                if (scheduleChangesTable.insert(d))
+                if (scheduleChangesTable.insert(d)>=0)
                     System.out.println("Schedule change entry was added");
                 else
                     System.out.println("Schedule change entry was NOT added");
@@ -1515,6 +1550,7 @@ public class VkurseClient
     }
 
 
+    /*
     private void ShowFreeIDs()
     {
         try
@@ -1528,4 +1564,6 @@ public class VkurseClient
         }
         System.out.println("");
     }
+     * 
+     */
 }

@@ -11,11 +11,11 @@ package edu.phystech.vkurse.model;
  */
 public interface LecturesTable
 {
-    public boolean insert(Lecture item) throws TableException;
+    public int insert(Lecture item) throws TableException;
     public boolean update(Lecture item) throws TableException;
     public Lecture get(int ID) throws TableException;
     public boolean remove(int ID) throws TableException;
     public java.util.Vector getAll() throws TableException;
-    public int findFreeID() throws TableException;
-    public boolean insertWithNewID(Lecture item) throws TableException;
+    //public int findFreeID() throws TableException;
+    //public boolean insertWithNewID(Lecture item) throws TableException;
 }

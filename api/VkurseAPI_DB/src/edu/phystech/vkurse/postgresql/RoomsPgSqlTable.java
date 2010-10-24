@@ -15,9 +15,9 @@ import java.util.Vector;
  */
 public class RoomsPgSqlTable implements RoomsTable
 {
-    public boolean insert(Room item) throws TableException
+    public int insert(Room item) throws TableException
     {
-        Boolean r=false;
+        int r=-1;
 
         if (item != null)
         {
@@ -40,9 +40,14 @@ public class RoomsPgSqlTable implements RoomsTable
                         item.getID() + ", '" + item.getName() + "'" +
                         ");");
                  */
-                r = (st.executeUpdate("insert into Rooms values(" +
+                st.executeUpdate("insert into Rooms values(" +
                         item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "'" +
-                        ");") > 0);
+                        ");");
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.first())
+                {
+                    r = rs.getInt(1);
+                }
 
                 st.close();
                 dbConn.close();
@@ -197,6 +202,7 @@ public class RoomsPgSqlTable implements RoomsTable
     }
 
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -246,4 +252,6 @@ public class RoomsPgSqlTable implements RoomsTable
         }
         return r;
     }
+     * 
+     */
 }

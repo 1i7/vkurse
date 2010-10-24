@@ -154,7 +154,7 @@ public class Main
 
 
 
-        Boolean r;
+        boolean r;
         //  Попробуем удалить несуществующую запись с ID=100
         r = lt.remove(100);
         if (r)
@@ -176,7 +176,7 @@ public class Main
         //  Можно изменить какую-либо информацию
         l2.setComment("Comment of new lecrute");
         //  Ну и в конце концов мы все-таки добавляем новую запись
-        r = lt.insert(l2);
+        r = lt.insert(l2)>=0;
         if (r)
         {
             System.out.println("Record with ID=100 was added");

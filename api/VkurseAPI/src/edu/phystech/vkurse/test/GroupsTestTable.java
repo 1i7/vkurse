@@ -26,10 +26,10 @@ public class GroupsTestTable implements GroupsTable
         data.addElement(new Group(4, "798", "4"));
     }
 
-    public boolean insert(Group item) throws TableException
+    public int insert(Group item) throws TableException
     {
         data.addElement(item);
-        return true;
+        return item.getID();
     }
 
     public boolean update(Group item) throws TableException
@@ -82,6 +82,7 @@ public class GroupsTestTable implements GroupsTable
         return r;
     }
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -105,4 +106,6 @@ public class GroupsTestTable implements GroupsTable
         }
         return r;
     }
+     * 
+     */
 }

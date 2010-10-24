@@ -15,9 +15,9 @@ import java.util.Vector;
  */
 public class TeachersPgSqlTable implements TeachersTable
 {
-    public boolean insert(Teacher item) throws TableException
+    public int insert(Teacher item) throws TableException
     {
-        Boolean r=false;
+        int r=-1;
 
         if (item != null)
         {
@@ -40,9 +40,14 @@ public class TeachersPgSqlTable implements TeachersTable
                         item.getID() + ", '" + item.getName() + "'" +
                         ");");
                  */
-                r = (st.executeUpdate("insert into Teachers values(" +
+                st.executeUpdate("insert into Teachers values(" +
                         item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "', '" + item.getDegree().replace("'", "<apostrophe>") + "'" +
-                        ");") > 0);
+                        ");");
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.first())
+                {
+                    r = rs.getInt(1);
+                }
 
                 st.close();
                 dbConn.close();
@@ -198,6 +203,7 @@ public class TeachersPgSqlTable implements TeachersTable
     }
 
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -247,4 +253,6 @@ public class TeachersPgSqlTable implements TeachersTable
         }
         return r;
     }
+     * 
+     */
 }

@@ -11,11 +11,11 @@ package edu.phystech.vkurse.model;
  */
 public interface RoomsTable
 {
-    public boolean insert(Room item) throws TableException;
+    public int insert(Room item) throws TableException;
     public boolean update(Room item) throws TableException;
     public Room get(int ID) throws TableException;
     public boolean remove(int ID) throws TableException;
     public java.util.Vector getAll() throws TableException;
-    public int findFreeID() throws TableException;
-    public boolean insertWithNewID(Room item) throws TableException;
+    //public int findFreeID() throws TableException;
+    //public boolean insertWithNewID(Room item) throws TableException;
 }

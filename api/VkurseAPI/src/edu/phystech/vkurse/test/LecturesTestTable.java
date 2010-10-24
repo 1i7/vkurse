@@ -25,22 +25,22 @@ public class LecturesTestTable implements LecturesTable
         data.addElement(new Lecture(3, "Programming", 1, ""));
         */
         data.addElement(new Lecture(100, "Test data - lecture", 100, "comment"));
-        data.addElement(new Lecture(0, "Innovative practics", 0, "Comment"));
-        data.addElement(new Lecture(11, "Convex analysis (seminar)", 0, " "));
-        data.addElement(new Lecture(12, "Theoretical physics (lecture)", 0, "  "));
-        data.addElement(new Lecture(13, "Theoretical physics (seminar)", 0, "  "));
+        data.addElement(new Lecture(0, "Инновационный практикум", 0, ""));
+        data.addElement(new Lecture(11, "Выпуклый анализ (семинар)", 0, ""));
+        data.addElement(new Lecture(12, "Theoretical physics (лекция)", 0, ""));
+        data.addElement(new Lecture(13, "Theoretical physics (семинар)", 0, ""));
         data.addElement(new Lecture(14, "Jurisprudence", 2, " "));
-        data.addElement(new Lecture(10, "Convex analysis (lecture", 0, "  "));
-        data.addElement(new Lecture(15, "Computational math (lecture)", 0, " "));
-        data.addElement(new Lecture(16, "Computational math (seminar)", 0, "  "));
-        data.addElement(new Lecture(17, "Foreign language", 1, " "));
-        data.addElement(new Lecture(18, "Military training", 0, " "));
+        data.addElement(new Lecture(10, "Convex analysis (лекция)", 0, ""));
+        data.addElement(new Lecture(15, "Computational math (лекция)", 0, ""));
+        data.addElement(new Lecture(16, "Computational math (семинар)", 0, ""));
+        data.addElement(new Lecture(17, "Foreign language", 1, ""));
+        data.addElement(new Lecture(18, "Military training", 0, ""));
     }
 
-    public boolean insert(Lecture item) throws TableException
+    public int insert(Lecture item) throws TableException
     {
         data.addElement(item);
-        return true;
+        return item.getID();
     }
 
     public boolean update(Lecture item) throws TableException
@@ -93,6 +93,7 @@ public class LecturesTestTable implements LecturesTable
         return r;
     }
 
+    /*
     public int findFreeID() throws TableException
     {
         int r = 0;
@@ -116,4 +117,6 @@ public class LecturesTestTable implements LecturesTable
         }
         return r;
     }
+     * 
+     */
 }
