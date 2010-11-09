@@ -11,53 +11,53 @@ import java.util.*;
  *
  * @author Дима
  */
-public class ExamTypesTestTable implements ExamTypesTable
+public class LectureTypesTestTable implements LectureTypesTable
 {
-    //ArrayList<ExamType> data = new ArrayList<ExamType>();
+    //ArrayList<LectureType> data = new ArrayList<LectureType>();
     java.util.Vector data = new java.util.Vector();
 
-    public ExamTypesTestTable()
+    public LectureTypesTestTable()
     {
-        data.addElement(new ExamType(100, "Test data - exam type"));
-        data.addElement(new ExamType(0, "Экзамен"));
-        data.addElement(new ExamType(1, "Зачет"));
-        data.addElement(new ExamType(2, "Дифференцированный зачет"));
+        data.addElement(new LectureType(100, "Test data - lecture type"));
+        data.addElement(new LectureType(0, "Лекция"));
+        data.addElement(new LectureType(1, "Семинар"));
+        data.addElement(new LectureType(2, "Лабораторная работа"));
     }
 
-    public int insert(ExamType item) throws TableException
+    public int insert(LectureType item) throws TableException
     {
         data.addElement(item);
         return item.getID();
     }
 
-    public boolean update(ExamType item) throws TableException
+    public boolean update(LectureType item) throws TableException
     {
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((ExamType)data.elementAt(i)).getID() == item.getID())
+            if (((LectureType)data.elementAt(i)).getID() == item.getID())
                 data.setElementAt(item, i);
         }
         return true;
     }
-    
-    public ExamType get(int ID) throws TableException
+
+    public LectureType get(int ID) throws TableException
     {
         int i;
         for (i=0; i<data.size(); ++i)
         {
-            if (((ExamType)data.elementAt(i)).getID() == ID) return (ExamType)data.elementAt(i);
+            if (((LectureType)data.elementAt(i)).getID() == ID) return (LectureType)data.elementAt(i);
         }
         return null;
     }
-    
+
     public boolean remove(int ID) throws TableException
     {
         int i;
         int r = -1;
         for (i=0; i<data.size(); ++i)
         {
-            if (((ExamType)data.elementAt(i)).getID() == ID) r = i;
+            if (((LectureType)data.elementAt(i)).getID() == ID) r = i;
         }
         if (r>=0)
         {
@@ -69,7 +69,7 @@ public class ExamTypesTestTable implements ExamTypesTable
             return false;
         }
     }
-    
+
     public java.util.Vector getAll() throws TableException
     {
         Vector r = new Vector();
@@ -112,14 +112,14 @@ public class ExamTypesTestTable implements ExamTypesTable
         int i;
         for (i = 0; i < data.size(); i++)
         {
-            int ID = ((ExamType)data.elementAt(i)).getID();
+            int ID = ((LectureType)data.elementAt(i)).getID();
             if (ID > r) r = ID;
         }
         r++;
         return r;
     }
-    
-    public boolean insertWithNewID(ExamType item) throws TableException
+
+    public boolean insertWithNewID(LectureType item) throws TableException
     {
         boolean r = false;
         if (item != null)
@@ -129,6 +129,6 @@ public class ExamTypesTestTable implements ExamTypesTable
         }
         return r;
     }
-     * 
+     *
      */
 }

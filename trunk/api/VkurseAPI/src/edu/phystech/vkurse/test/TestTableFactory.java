@@ -14,7 +14,7 @@ public class TestTableFactory implements TableFactory
 {
     public String getSourceName()
     {
-        return "Test data. Ver: 20.09.2010 v2";
+        return "Test data. Ver: 09.11.2010";
     }
 
     public ExamTypesTable getExamTypesTable()
@@ -30,6 +30,11 @@ public class TestTableFactory implements TableFactory
     public LecturesTable getLecturesTable()
     {
         return new LecturesTestTable();
+    }
+
+    public LectureTypesTable getLectureTypesTable()
+    {
+        return new LectureTypesTestTable();
     }
 
     public RoomsTable getRoomsTable()

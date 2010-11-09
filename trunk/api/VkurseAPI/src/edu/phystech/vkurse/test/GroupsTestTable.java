@@ -82,6 +82,30 @@ public class GroupsTestTable implements GroupsTable
         return r;
     }
 
+    public java.util.Vector get(int[] ids) throws TableException
+    {
+        Vector r = new Vector();
+        int i;
+        for (i=0; i<data.size(); ++i)
+        {
+            DbTableRecord tr = (DbTableRecord)data.elementAt(i);
+            int id = tr.getID();
+            boolean add = false;
+            for (int j = 0; j < ids.length; j++)
+            {
+                if (ids[j] == id)
+                {
+                    add = true;
+                }
+            }
+            if (add)
+            {
+                r.addElement(tr);
+            }
+        }
+        return r;
+    }
+
     /*
     public int findFreeID() throws TableException
     {

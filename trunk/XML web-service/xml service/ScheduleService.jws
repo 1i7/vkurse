@@ -49,7 +49,27 @@ public class ScheduleService
         return r;
 	}
 
-	
+
+    public String[] get(int[] ids)
+	{
+		String[] r = new String[0];
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			ScheduleTable lt = factory.getScheduleTable();
+			Vector data = lt.getAll(ids);
+			r = new String[data.size()];
+			int i;
+			for (i=0; i<data.size(); ++i)
+			{
+				//r.add(data.get(i).toStringData());
+				r[i] = ((Schedule)data.get(i)).toStringData();
+			}
+		} catch (Exception ex) { }
+        return r;
+	}
+
+
     public String[] findByGroupDay(int groupID, int day)
 	{
 		String[] r = new String[0];

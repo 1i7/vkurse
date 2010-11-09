@@ -35,14 +35,22 @@ public class LecturesPgSqlTable implements LecturesTable
 
                 Statement st = dbConn.createStatement();
 
-                st.executeUpdate("insert into Lectures values(" +
-                        item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "', " +
+                st.executeUpdate("insert into Lectures(name, examtypeid, comment) values(" +
+                        "'" + item.getName().replace("'", "<apostrophe>") + "', " +
                         item.getExamTypeID() + ", '" + item.getComment().replace("'", "<apostrophe>") + "'" +
                         ");");
+                /*
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.first())
                 {
                     r = rs.getInt(1);
+                }
+                 */
+                {
+                    Statement stgfid = dbConn.createStatement();
+                    ResultSet rsgfid = stgfid.executeQuery("SELECT last_value FROM lectures_id_seq");
+                    rsgfid.next();
+                    r = rsgfid.getInt(1);
                 }
 
                 st.close();
@@ -202,6 +210,51 @@ public class LecturesPgSqlTable implements LecturesTable
         return r;
     }
     
+
+    public java.util.Vector get(int[] ids) throws TableException
+    {
+        java.util.Vector r = new java.util.Vector();
+
+        try
+        {
+            Class.forName(PgSqlSettings.getJdbcDriverClass()).newInstance();
+        } catch (java.lang.Exception exc)
+        {
+            throw new TableException("Cannot load JDBC driver. It is porbably not installed correctly. Connection string is:  " + PgSqlSettings.getJdbcDriverClass() + "        " + exc.toString());
+        }
+
+        if (ids.length > 0)
+        {
+            try
+            {
+                String cond = " where ";
+                for (int i = 0; i < ids.length; i++)
+                {
+                    if (i > 0) cond += " or ";
+                    cond += "(id="+ids[i]+")";
+                }
+                Connection dbConn = DriverManager.getConnection(PgSqlSettings.getUrl(), PgSqlSettings.getUsername(), PgSqlSettings.getPassword());
+                Statement st = dbConn.createStatement();
+                ResultSet rs = st.executeQuery("select * from Lectures" + cond);
+
+                while (rs.next())
+                {
+
+                    r.add(new Lecture(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"),
+                              rs.getInt("examTypeID"), rs.getString("comment").replace("<apostrophe>", "'")));
+                }
+                rs.close();
+                st.close();
+                dbConn.close();
+            } catch (java.lang.Exception exc)
+            {
+                throw new TableException("An error occured while working with server: " + exc.toString());
+            }
+        }
+
+        return r;
+    }
+
 
     /*
     public int findFreeID() throws TableException

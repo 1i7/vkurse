@@ -40,13 +40,21 @@ public class TeachersPgSqlTable implements TeachersTable
                         item.getID() + ", '" + item.getName() + "'" +
                         ");");
                  */
-                st.executeUpdate("insert into Teachers values(" +
-                        item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "', '" + item.getDegree().replace("'", "<apostrophe>") + "'" +
+                st.executeUpdate("insert into Teachers(name, degree) values(" +
+                        "'" + item.getName().replace("'", "<apostrophe>") + "', '" + item.getDegree().replace("'", "<apostrophe>") + "'" +
                         ");");
+                /*
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.first())
                 {
                     r = rs.getInt(1);
+                }
+                 */
+                {
+                    Statement stgfid = dbConn.createStatement();
+                    ResultSet rsgfid = stgfid.executeQuery("SELECT last_value FROM teachers_id_seq");
+                    rsgfid.next();
+                    r = rsgfid.getInt(1);
                 }
 
                 st.close();
@@ -197,6 +205,49 @@ public class TeachersPgSqlTable implements TeachersTable
         } catch (java.lang.Exception exc)
         {
             throw new TableException("An error occured while working with server: " + exc.toString());
+        }
+
+        return r;
+    }
+
+
+    public java.util.Vector get(int[] ids) throws TableException
+    {
+        java.util.Vector r = new java.util.Vector();
+
+        try
+        {
+            Class.forName(PgSqlSettings.getJdbcDriverClass()).newInstance();
+        } catch (java.lang.Exception exc)
+        {
+            throw new TableException("Cannot load JDBC driver. It is porbably not installed correctly. Connection string is:  " + PgSqlSettings.getJdbcDriverClass() + "        " + exc.toString());
+        }
+
+        if (ids.length > 0)
+        {
+            try
+            {
+                String cond = " where ";
+                for (int i = 0; i < ids.length; i++)
+                {
+                    if (i > 0) cond += " or ";
+                    cond += "(id="+ids[i]+")";
+                }
+                Connection dbConn = DriverManager.getConnection(PgSqlSettings.getUrl(), PgSqlSettings.getUsername(), PgSqlSettings.getPassword());
+                Statement st = dbConn.createStatement();
+                ResultSet rs = st.executeQuery("select * from Teachers" + cond);
+
+                while (rs.next())
+                {
+                    r.add(new Teacher(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"), rs.getString("degree").replace("<apostrophe>", "'")));
+                }
+                rs.close();
+                st.close();
+                dbConn.close();
+            } catch (java.lang.Exception exc)
+            {
+                throw new TableException("An error occured while working with server: " + exc.toString());
+            }
         }
 
         return r;

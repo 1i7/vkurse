@@ -50,6 +50,26 @@ public class GroupService
 	}
 
 
+    public String[] get(int[] ids)
+	{
+		String[] r = new String[0];
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			GroupsTable lt = factory.getGroupsTable();
+			Vector data = lt.get(ids);
+			r = new String[data.size()];
+			int i;
+			for (i=0; i<data.size(); ++i)
+			{
+				//r.add(data.get(i).toStringData());
+				r[i] = ((Group)data.get(i)).toStringData();
+			}
+		} catch (Exception ex) { }
+        return r;
+	}
+
+
 /*
     public boolean insert(String group)
 	{
