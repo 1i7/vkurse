@@ -16,6 +16,7 @@ public interface ScheduleTable
     public Schedule get(int ID) throws TableException;
     public boolean remove(int ID) throws TableException;
     public java.util.Vector getAll() throws TableException;
+    public java.util.Vector get(int[] ids) throws TableException;
     //public int findFreeID() throws TableException;
     //public boolean insertWithNewID(Schedule item) throws TableException;
 

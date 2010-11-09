@@ -40,13 +40,21 @@ public class RoomsPgSqlTable implements RoomsTable
                         item.getID() + ", '" + item.getName() + "'" +
                         ");");
                  */
-                st.executeUpdate("insert into Rooms values(" +
-                        item.getID() + ", '" + item.getName().replace("'", "<apostrophe>") + "'" +
+                st.executeUpdate("insert into Rooms(name) values(" +
+                        "'" + item.getName().replace("'", "<apostrophe>") + "'" +
                         ");");
+                /*
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.first())
                 {
                     r = rs.getInt(1);
+                }
+                 */
+                {
+                    Statement stgfid = dbConn.createStatement();
+                    ResultSet rsgfid = stgfid.executeQuery("SELECT last_value FROM rooms_id_seq");
+                    rsgfid.next();
+                    r = rsgfid.getInt(1);
                 }
 
                 st.close();
@@ -196,6 +204,49 @@ public class RoomsPgSqlTable implements RoomsTable
         } catch (java.lang.Exception exc)
         {
             throw new TableException("An error occured while working with server: " + exc.toString());
+        }
+
+        return r;
+    }
+
+
+    public java.util.Vector get(int[] ids) throws TableException
+    {
+        java.util.Vector r = new java.util.Vector();
+
+        try
+        {
+            Class.forName(PgSqlSettings.getJdbcDriverClass()).newInstance();
+        } catch (java.lang.Exception exc)
+        {
+            throw new TableException("Cannot load JDBC driver. It is porbably not installed correctly. Connection string is:  " + PgSqlSettings.getJdbcDriverClass() + "        " + exc.toString());
+        }
+
+        if (ids.length > 0)
+        {
+            try
+            {
+                String cond = " where ";
+                for (int i = 0; i < ids.length; i++)
+                {
+                    if (i > 0) cond += " or ";
+                    cond += "(id="+ids[i]+")";
+                }
+                Connection dbConn = DriverManager.getConnection(PgSqlSettings.getUrl(), PgSqlSettings.getUsername(), PgSqlSettings.getPassword());
+                Statement st = dbConn.createStatement();
+                ResultSet rs = st.executeQuery("select * from Rooms" + cond);
+
+                while (rs.next())
+                {
+                    r.add(new Room(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'")));
+                }
+                rs.close();
+                st.close();
+                dbConn.close();
+            } catch (java.lang.Exception exc)
+            {
+                throw new TableException("An error occured while working with server: " + exc.toString());
+            }
         }
 
         return r;

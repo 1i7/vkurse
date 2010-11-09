@@ -14,6 +14,7 @@ public interface TableFactory
     public ExamTypesTable getExamTypesTable();
     public GroupsTable getGroupsTable();
     public LecturesTable getLecturesTable();
+    public LectureTypesTable getLectureTypesTable();
     public RoomsTable getRoomsTable();
     public ScheduleTable getScheduleTable();
     public ScheduleChangesTable getScheduleChangesTable();

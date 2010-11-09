@@ -13,9 +13,9 @@ import java.util.Vector;
  *
  * @author Дима
  */
-public class ExamTypesPgSqlTable implements ExamTypesTable
+public class LectureTypesPgSqlTable implements LectureTypesTable
 {
-    public int insert(ExamType item) throws TableException
+    public int insert(LectureType item) throws TableException
     {
         int r=-1;
 
@@ -36,23 +36,17 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
                 Statement st = dbConn.createStatement();
 
                 /*
-                System.out.println("insert into ExamTypes values(" +
+                System.out.println("insert into LectureTypes values(" +
                         item.getID() + ", '" + item.getName() + "'" +
                         ");");
                  */
-                st.executeUpdate("insert into ExamTypes(name) values(" +
+                String q = "insert into LectureTypes(name) values(" +
                         "'" + item.getName().replace("'", "<apostrophe>") + "'" +
-                        ");");
-                /*
-                ResultSet rs = st.getGeneratedKeys();
-                if (rs.first())
-                {
-                    r = rs.getInt(1);
-                }
-                 */
+                        ");";
+                st.executeUpdate(q);
                 {
                     Statement stgfid = dbConn.createStatement();
-                    ResultSet rsgfid = stgfid.executeQuery("SELECT last_value FROM examtypes_id_seq");
+                    ResultSet rsgfid = stgfid.executeQuery("SELECT last_value FROM lecturetypes_id_seq");
                     rsgfid.next();
                     r = rsgfid.getInt(1);
                 }
@@ -68,7 +62,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
     }
 
 
-    public boolean update(ExamType item) throws TableException
+    public boolean update(LectureType item) throws TableException
     {
         Boolean r=false;
 
@@ -88,7 +82,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
 
                 Statement st = dbConn.createStatement();
 
-                String cmd = "update ExamTypes set " +
+                String cmd = "update LectureTypes set " +
                         "name = '" + item.getName().replace("'", "<apostrophe>") + "' " +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
@@ -104,9 +98,9 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
     }
 
 
-    public ExamType get(int ID) throws TableException
+    public LectureType get(int ID) throws TableException
     {
-        ExamType r = null;
+        LectureType r = null;
 
         try
         {
@@ -123,13 +117,13 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                "select * from ExamTypes where (id="+ID+")"
-                //"select * from ExamTypes"
+                "select * from LectureTypes where (id="+ID+")"
+                //"select * from LectureTypes"
                 );
 
             if (rs.next())
             {
-                r = new ExamType(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"));
+                r = new LectureType(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'"));
             }
             rs.close();
             st.close();
@@ -161,7 +155,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
 
             Statement st = dbConn.createStatement();
 
-            r = (st.executeUpdate("delete from ExamTypes where id="+ID+";") > 0);
+            r = (st.executeUpdate("delete from LectureTypes where id="+ID+";") > 0);
 
             st.close();
             dbConn.close();
@@ -192,11 +186,11 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
 
             Statement st = dbConn.createStatement();
 
-            ResultSet rs = st.executeQuery("select * from ExamTypes");
+            ResultSet rs = st.executeQuery("select * from LectureTypes");
 
             while (rs.next())
             {
-                r.add(new ExamType(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'")));
+                r.add(new LectureType(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'")));
             }
             rs.close();
             st.close();
@@ -234,11 +228,11 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
                 }
                 Connection dbConn = DriverManager.getConnection(PgSqlSettings.getUrl(), PgSqlSettings.getUsername(), PgSqlSettings.getPassword());
                 Statement st = dbConn.createStatement();
-                ResultSet rs = st.executeQuery("select * from ExamTypes" + cond);
+                ResultSet rs = st.executeQuery("select * from LectureTypes" + cond);
 
                 while (rs.next())
                 {
-                    r.add(new ExamType(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'")));
+                    r.add(new LectureType(rs.getInt("ID"), rs.getString("name").replace("<apostrophe>", "'")));
                 }
                 rs.close();
                 st.close();
@@ -257,7 +251,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
     public int findFreeID() throws TableException
     {
         int r = 0;
-        
+
         try
         {
             Class.forName(PgSqlSettings.getJdbcDriverClass()).newInstance();
@@ -273,8 +267,8 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
             Statement st = dbConn.createStatement();
 
             ResultSet rs = st.executeQuery(
-                "select MAX(ID) as mx from ExamTypes"
-                //"select * from ExamTypes"
+                "select MAX(ID) as mx from LectureTypes"
+                //"select * from LectureTypes"
                 );
 
             if (rs.next())
@@ -293,7 +287,7 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
         return r;
     }
 
-    public boolean insertWithNewID(ExamType item) throws TableException
+    public boolean insertWithNewID(LectureType item) throws TableException
     {
         boolean r = false;
         if (item != null)
@@ -303,6 +297,6 @@ public class ExamTypesPgSqlTable implements ExamTypesTable
         }
         return r;
     }
-     * 
+     *
      */
 }

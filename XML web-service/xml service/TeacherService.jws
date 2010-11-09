@@ -50,6 +50,26 @@ public class TeacherService
 	}
 
 
+    public String[] get(int[] ids)
+	{
+		String[] r = new String[0];
+		try
+		{
+			TableFactory factory = new PgSqlTableFactory();
+			TeachersTable lt = factory.getTeachersTable();
+			Vector data = lt.getAll(ids);
+			r = new String[data.size()];
+			int i;
+			for (i=0; i<data.size(); ++i)
+			{
+				//r.add(data.get(i).toStringData());
+				r[i] = ((Teacher)data.get(i)).toStringData();
+			}
+		} catch (Exception ex) { }
+        return r;
+	}
+
+
 /*
     public boolean insert(String teacher)
 	{

@@ -16,6 +16,7 @@ public class VkurseClient
     private ExamTypesTable examTypesTable;
     private GroupsTable groupsTable;
     private LecturesTable lecturesTable;
+    private LectureTypesTable lectureTypesTable;
     private RoomsTable roomsTable;
     private ScheduleTable scheduleTable;
     private ScheduleChangesTable scheduleChangesTable;
@@ -32,6 +33,7 @@ public class VkurseClient
             examTypesTable = tableFactory.getExamTypesTable();
             groupsTable = tableFactory.getGroupsTable();
             lecturesTable = tableFactory.getLecturesTable();
+            lectureTypesTable = tableFactory.getLectureTypesTable();
             roomsTable = tableFactory.getRoomsTable();
             scheduleTable = tableFactory.getScheduleTable();
             scheduleTable = tableFactory.getScheduleTable();
@@ -117,6 +119,7 @@ public class VkurseClient
         System.out.println("3:  Manage list of lectures");
         System.out.println("4:  Manage list of rooms");
         System.out.println("5:  Manage list of teachers");
+        System.out.println("20:  Manage list of lecture types");
         System.out.println("      Schedule management:");
         System.out.println("6:  Show all schedule records");
         System.out.println("7:  Show group schedule for particular day");
@@ -171,6 +174,7 @@ public class VkurseClient
             if (3 == mnu) ManageLectures();
             if (4 == mnu) ManageRooms();
             if (5 == mnu) ManageTeachers();
+            if (20 == mnu) ManageLectureTypes();
 
             if (6 == mnu) ShowAllSchedule();
             if (7 == mnu) ShowGroupDaySchedule();
@@ -296,33 +300,175 @@ public class VkurseClient
                 System.out.println("");
             }
 
-            /*
             if (6 == mnu)
             {
                 try
                 {
-                    System.out.println("Free ID:  " + examTypesTable.findFreeID());
+                    int[] ids = {0, 2};
+                    Vector v = examTypesTable.get(ids);
+                    System.out.println("   List of exam types");
+                    System.out.println("ID    Name");
+                    System.out.println("--------------------------------------");
+                    int i;
+                    for (i=0; i<v.size(); i++)
+                    {
+                        ExamType d = (ExamType)v.get(i);
+                        System.out.println(StrToLen(""+d.getID(), 6) + d.getName());
+                    }
                 } catch (Exception Ex) {}
                 System.out.println("");
             }
+        }
+    }
 
-            if (7 == mnu)
+
+    private void ManageLectureTypes()
+    {
+        int mnu;
+        while ((mnu = DoManagementMenu("Lecture types")) != 0)
+        {
+            if (1 == mnu)
             {
                 try
                 {
-                    System.out.println("Enter exam type data: ");
-                    System.out.print("Name: ");
-                    String name = ConsoleReadString("Name");
-                    ExamType d = new ExamType(0, name);
-                    if (examTypesTable.insertWithNewID(d))
-                        System.out.println("Exam type was added");
-                    else
-                        System.out.println("Exam type was NOT added");
-                } catch (Exception Ex) {}
+                    Vector v = lectureTypesTable.getAll();
+                    System.out.println("   List of lecture types");
+                    System.out.println("ID    Name");
+                    System.out.println("--------------------------------------");
+                    int i;
+                    for (i=0; i<v.size(); i++)
+                    {
+                        LectureType d = (LectureType)v.get(i);
+                        System.out.println(StrToLen(""+d.getID(), 6) + d.getName());
+                    }
+                } catch (Exception Ex)
+                {
+                    System.out.println("Exception");
+                    System.out.println("" + Ex);
+                }
                 System.out.println("");
             }
-             * 
-             */
+
+            if (2 == mnu)
+            {
+                try
+                {
+                    System.out.print("Enter ID: ");
+                    int id = ConsoleReadInt(-1);
+                    LectureType d = lectureTypesTable.get(id);
+                    if (d!=null)
+                    {
+                        System.out.println("    Lecture type:");
+                        System.out.println("ID:   " + d.getID());
+                        System.out.println("Name: " + d.getName());
+                    }
+                    else
+                    {
+                        System.out.println("ID " + id + " was not found");
+                    }
+                } catch (Exception Ex)
+                {
+                    System.out.println("Exception");
+                    System.out.println("" + Ex);
+                }
+                System.out.println("");
+            }
+
+            if (3 == mnu)
+            {
+                try
+                {
+                    System.out.print("Enter ID: ");
+                    int id = ConsoleReadInt(-1);
+                    LectureType d = lectureTypesTable.get(id);
+                    if (d!=null)
+                    {
+                        System.out.println("    Lecture type:");
+                        System.out.println("ID:   " + d.getID());
+                        System.out.print("Name["+d.getName()+"]: ");
+                        d.setName(ConsoleReadString(d.getName()));
+                        lectureTypesTable.update(d);
+                    }
+                    else
+                    {
+                        System.out.println("ID " + id + " was not found");
+                    }
+                } catch (Exception Ex)
+                {
+                    System.out.println("Exception");
+                    System.out.println("" + Ex);
+                }
+                System.out.println("");
+            }
+
+            if (4 == mnu)
+            {
+                try
+                {
+                    System.out.print("Enter ID: ");
+                    int id = ConsoleReadInt(-1);
+                    LectureType d = lectureTypesTable.get(id);
+                    if (d!=null)
+                    {
+                        lectureTypesTable.remove(id);
+                        System.out.println("Lecture type with ID " + id + " was removed");
+                    }
+                    else
+                    {
+                        System.out.println("ID " + id + " was not found");
+                    }
+                } catch (Exception Ex)
+                {
+                    System.out.println("Exception");
+                    System.out.println("" + Ex);
+                }
+                System.out.println("");
+            }
+
+            if (5 == mnu)
+            {
+                try
+                {
+                    System.out.println("Enter lecture type data: ");
+                    System.out.print("ID:   ");
+                    int id = ConsoleReadInt(0);
+                    System.out.print("Name: ");
+                    String name = ConsoleReadString("Name");
+                    LectureType d = new LectureType(id, name);
+                    if (lectureTypesTable.insert(d)>=0)
+                        System.out.println("Lecture type was added");
+                    else
+                        System.out.println("Lecture type was NOT added");
+                } catch (Exception Ex)
+                {
+                    System.out.println("Exception");
+                    System.out.println("" + Ex);
+                }
+                System.out.println("");
+            }
+
+            if (6 == mnu)
+            {
+                try
+                {
+                    int[] ids = {0, 2};
+                    Vector v = lectureTypesTable.get(ids);
+                    System.out.println("   List of lecture types");
+                    System.out.println("ID    Name");
+                    System.out.println("--------------------------------------");
+                    int i;
+                    for (i=0; i<v.size(); i++)
+                    {
+                        LectureType d = (LectureType)v.get(i);
+                        System.out.println(StrToLen(""+d.getID(), 6) + d.getName());
+                    }
+                } catch (Exception Ex)
+                {
+                    System.out.println("Exception");
+                    System.out.println("" + Ex);
+                }
+                System.out.println("");
+            }
         }
     }
 
@@ -1140,10 +1286,23 @@ public class VkurseClient
             } catch (Exception Ex) {}
             System.out.print("TeacherID: ");
             int teacherID = ConsoleReadInt(0);
+            try
+            {
+                Vector v = lectureTypesTable.getAll();
+                System.out.println("   Lecture types");
+                int i;
+                for (i=0; i<v.size(); i++)
+                {
+                    LectureType td = (LectureType)v.get(i);
+                    System.out.println(""+td.getID() + ":  " + td.getName());
+                }
+            } catch (Exception Ex) {}
+            System.out.print("LectureTypeID: ");
+            int lectureTypeID = ConsoleReadInt(0);
             System.out.print("Comment:   ");
             String comment = ConsoleReadString("");
 
-            Schedule d = new Schedule(id, groupID, day, startTime, length, lectureID, roomID, teacherID, comment);
+            Schedule d = new Schedule(id, groupID, day, startTime, length, lectureID, roomID, teacherID, lectureTypeID, comment);
             if (scheduleTable.insert(d)>=0)
                 System.out.println("Schedule entry was added");
             else
@@ -1529,10 +1688,29 @@ public class VkurseClient
                 } catch (Exception Ex) {}
                 System.out.print("TeacherID["+sc.getTeacherID()+"]: ");
                 int teacherID = ConsoleReadInt(sc.getTeacherID());
+                try
+                {
+                    Vector v = lectureTypesTable.getAll();
+                    System.out.println("   Lecture types");
+                    int i;
+                    for (i=0; i<v.size(); i++)
+                    {
+                        LectureType td = (LectureType)v.get(i);
+                        System.out.println(""+td.getID() + ":  " + td.getName());
+                    }
+                } catch (Exception Ex) {}
+                System.out.print("LectureTypeID: ");
+                int lectureTypeID = ConsoleReadInt(0);
+                System.out.print("Canceled (y/n): ");
+                boolean canceled = false;
+                {
+                    String ts = ConsoleReadString("");
+                    canceled = ts.equals("y") || ts.equals("Y");
+                }
                 System.out.print("Comment: ");
                 String comment = ConsoleReadString("");
 
-                ScheduleChange d = new ScheduleChange(id, scheduleID, week, groupID, day, startTime, length, lectureID, roomID, teacherID, comment);
+                ScheduleChange d = new ScheduleChange(id, scheduleID, week, groupID, day, startTime, length, lectureID, roomID, teacherID, lectureTypeID, canceled, comment);
                 if (scheduleChangesTable.insert(d)>=0)
                     System.out.println("Schedule change entry was added");
                 else

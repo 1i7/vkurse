@@ -17,8 +17,8 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
 
     public ScheduleChangesTestTable()
     {
-        data.addElement(new ScheduleChange(100, 100, 100, 100, (byte)2, 540, 85, 100, 100, 100, "comment of change"));
-        data.addElement(new ScheduleChange(0, 0, 1, 0, (byte)1, 540, 85, 0, 0, 0, "it is comment of change"));
+        data.addElement(new ScheduleChange(100, 100, 100, 100, (byte)2, 540, 85, 100, 100, 100, 0, false, "comment of change"));
+        data.addElement(new ScheduleChange(0, 0, 1, 0, (byte)1, 540, 85, 0, 0, 0, 1, true, "it is comment of change"));
     }
 
     public int insert(ScheduleChange item) throws TableException
@@ -99,6 +99,30 @@ public class ScheduleChangesTestTable implements ScheduleChangesTable
             ScheduleChange s = (ScheduleChange)data.elementAt(i);
             if ((s.getScheduleID()==scheduleID))
                 r.addElement(s);
+        }
+        return r;
+    }
+
+    public java.util.Vector get(int[] ids) throws TableException
+    {
+        Vector r = new Vector();
+        int i;
+        for (i=0; i<data.size(); ++i)
+        {
+            DbTableRecord tr = (DbTableRecord)data.elementAt(i);
+            int id = tr.getID();
+            boolean add = false;
+            for (int j = 0; j < ids.length; j++)
+            {
+                if (ids[j] == id)
+                {
+                    add = true;
+                }
+            }
+            if (add)
+            {
+                r.addElement(tr);
+            }
         }
         return r;
     }

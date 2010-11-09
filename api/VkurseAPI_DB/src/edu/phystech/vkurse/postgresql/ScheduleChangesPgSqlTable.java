@@ -40,8 +40,13 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         item.getID() + ", '" + item.getName() + "'" +
                         ");");
                  */
-                st.executeUpdate("insert into ScheduleChanges values(" +
-                        item.getID() + ", " +
+                int cancelCode = 0;
+                if (item.getCanceled()) cancelCode = 1;
+                st.executeUpdate("insert into ScheduleChanges(" +
+                        "scheduleid, week, groupid, day, starttime, length, " +
+                        "lectureid, roomid, teacherid, lecturetypeid, cancel, comment" +
+                        ") values(" +
+                        //item.getID() + ", " +
                         item.getScheduleID() + ", " +
                         item.getWeek() + ", " +
                         item.getGroupID() + ", " +
@@ -51,12 +56,22 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         item.getLectureID() + ", " +
                         item.getRoomID() + ", " +
                         item.getTeacherID() + ", " +
+                        item.getLectureTypeID() + ", " +
+                        cancelCode + ", " +
                         "'" + item.getComment().replace("'", "<apostrophe>") + "'" +
                         ");");
+                /*
                 ResultSet rs = st.getGeneratedKeys();
                 if (rs.first())
                 {
                     r = rs.getInt(1);
+                }
+                 */
+                {
+                    Statement stgfid = dbConn.createStatement();
+                    ResultSet rsgfid = stgfid.executeQuery("SELECT last_value FROM schedulechanges_id_seq");
+                    rsgfid.next();
+                    r = rsgfid.getInt(1);
                 }
 
                 st.close();
@@ -90,6 +105,8 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
 
                 Statement st = dbConn.createStatement();
 
+                int cancelCode = 0;
+                if (item.getCanceled()) cancelCode = 1;
                 String cmd = "update ScheduleChanges set " +
                         "scheduleID = " + item.getScheduleID() + ", " +
                         "week = " + item.getWeek() + ", " +
@@ -100,6 +117,9 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         "lectureID = " + item.getLectureID() + ", " +
                         "roomID = " + item.getRoomID() + ", " +
                         "teacherID = " + item.getTeacherID() + ", " +
+                        "teacherID = " + item.getTeacherID() + ", " +
+                        "lectureTypeID = " + item.getLectureTypeID() + ", " +
+                        "cancel = " + cancelCode + ", " +
                         "comment = '" + item.getComment().replace("'", "<apostrophe>") + "'" +
                         " where ID="+item.getID()+";";
                 r = (st.executeUpdate(cmd) > 0);
@@ -152,6 +172,8 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
+                        rs.getInt("lectureTypeID"),
+                        (rs.getInt("cancel")==1),
                         rs.getString("comment").replace("<apostrophe>", "'")
                         );
             }
@@ -242,6 +264,8 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
+                        rs.getInt("lectureTypeID"),
+                        (rs.getInt("cancel")==1),
                         rs.getString("comment").replace("<apostrophe>", "'")
                         );
 
@@ -297,6 +321,8 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
+                        rs.getInt("lectureTypeID"),
+                        (rs.getInt("cancel")==1),
                         rs.getString("comment").replace("<apostrophe>", "'")
                         );
 
@@ -351,6 +377,8 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
                         rs.getInt("lectureID"),
                         rs.getInt("roomID"),
                         rs.getInt("teacherID"),
+                        rs.getInt("lectureTypeID"),
+                        (rs.getInt("cancel")==1),
                         rs.getString("comment").replace("<apostrophe>", "'")
                         );
 
@@ -362,6 +390,65 @@ public class ScheduleChangesPgSqlTable implements ScheduleChangesTable
         } catch (java.lang.Exception exc)
         {
             throw new TableException("An error occured while working with server: " + exc.toString());
+        }
+
+        return r;
+    }
+
+
+    public java.util.Vector get(int[] ids) throws TableException
+    {
+        java.util.Vector r = new java.util.Vector();
+
+        try
+        {
+            Class.forName(PgSqlSettings.getJdbcDriverClass()).newInstance();
+        } catch (java.lang.Exception exc)
+        {
+            throw new TableException("Cannot load JDBC driver. It is porbably not installed correctly. Connection string is:  " + PgSqlSettings.getJdbcDriverClass() + "        " + exc.toString());
+        }
+
+        if (ids.length > 0)
+        {
+            try
+            {
+                String cond = " where ";
+                for (int i = 0; i < ids.length; i++)
+                {
+                    if (i > 0) cond += " or ";
+                    cond += "(id="+ids[i]+")";
+                }
+                Connection dbConn = DriverManager.getConnection(PgSqlSettings.getUrl(), PgSqlSettings.getUsername(), PgSqlSettings.getPassword());
+                Statement st = dbConn.createStatement();
+                ResultSet rs = st.executeQuery("select * from ScheduleChanges" + cond);
+
+                while (rs.next())
+                {
+                    ScheduleChange s = new ScheduleChange(
+                            rs.getInt("ID"),
+                            rs.getInt("scheduleID"),
+                            rs.getInt("week"),
+                            rs.getInt("groupID"),
+                            (byte)rs.getInt("day"),
+                            rs.getInt("startTime"),
+                            rs.getInt("length"),
+                            rs.getInt("lectureID"),
+                            rs.getInt("roomID"),
+                            rs.getInt("teacherID"),
+                            rs.getInt("lectureTypeID"),
+                            (rs.getInt("cancel")==1),
+                            rs.getString("comment").replace("<apostrophe>", "'")
+                            );
+
+                    r.add(s);
+                }
+                rs.close();
+                st.close();
+                dbConn.close();
+            } catch (java.lang.Exception exc)
+            {
+                throw new TableException("An error occured while working with server: " + exc.toString());
+            }
         }
 
         return r;

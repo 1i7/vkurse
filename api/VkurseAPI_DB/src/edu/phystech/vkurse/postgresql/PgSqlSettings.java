@@ -28,6 +28,7 @@ public class PgSqlSettings
      * версию с неправильными константами - если что, напомните - исправлю.
      */
 
+    
     //  PostgreSQL
     private static String jdbcDriverClass = "org.postgresql.Driver";
     private static String url =
@@ -37,9 +38,9 @@ public class PgSqlSettings
     private static String dbName = "inno2010_vkurse";
     private static String username = "innocourse-dtb";
     private static String password = "innocourse-dtb";
-
+    
     /*
-    //  MySQL
+    //  Local MySQL
     private static String jdbcDriverClass = "com.mysql.jdbc.Driver";
     private static String url = "jdbc:mysql://localhost:3306/inno2010_vkurse";
     private static String dbName = "inno2010_vkurse";
@@ -48,7 +49,18 @@ public class PgSqlSettings
     // пароль рута на моем локальном сервере MySQL, только там нет ничего
     // инетересного.  :-P
     */
-    
+    /*
+    //  Local PostgreSQL
+    private static String jdbcDriverClass = "org.postgresql.Driver";
+    private static String url =
+            //"jdbc:postgresql://localhost/inno2010_vkurse;default_schema=true;";
+            "jdbc:postgresql://localhost/inno2010_vkurse?searchpath=public";
+    //jdbc:postgresql://localhost:5432/mydatabase?searchpath=myschema
+    private static String dbName = "inno2010_vkurse";
+    private static String username = "postgres";
+    private static String password = "pgsqlpass";
+    */
+
     private PgSqlSettings(){}
 
     public static String getJdbcDriverClass()

@@ -20,10 +20,14 @@ public class ScheduleChange extends DbTableRecord
     protected int lectureID;
     protected int roomID;
     protected int teacherID;
+    protected int lectureTypeID;
+    protected boolean canceled;
     protected String comment;
 
     public ScheduleChange() {}
-    public ScheduleChange(int id, int scheduleID, int week, int groupID, byte day, int startTime, int length, int lectureID, int roomID, int teacherID, String comment)
+    public ScheduleChange(int id, int scheduleID, int week, int groupID, byte day,
+            int startTime, int length, int lectureID, int roomID, int teacherID,
+            int lectureTypeID, boolean canceled, String comment)
     {
         this.id = id;
         this.scheduleID = scheduleID;
@@ -35,6 +39,8 @@ public class ScheduleChange extends DbTableRecord
         this.lectureID = lectureID;
         this.roomID = roomID;
         this.teacherID = teacherID;
+        this.lectureTypeID = lectureTypeID;
+        this.canceled = canceled;
         this.comment = comment;
     }
 
@@ -118,6 +124,22 @@ public class ScheduleChange extends DbTableRecord
         this.comment = comment;
     }
 
+    public boolean getCanceled() {
+        return canceled;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
+
+    public int getLectureTypeID() {
+        return lectureTypeID;
+    }
+
+    public void setLectureTypeID(int lectureTypeID) {
+        this.lectureTypeID = lectureTypeID;
+    }
+
     //@Override public String toString()
     public String toStringData()
     {
@@ -131,6 +153,8 @@ public class ScheduleChange extends DbTableRecord
         r += "lectureID=" + lectureID + " ";
         r += "roomID=" + roomID + " ";
         r += "teacherID=" + teacherID + " ";
+        r += "lectureTypeID=" + lectureTypeID + " ";
+        r += "canceled=" + canceled + " ";
         r += "comment='" + replace(comment,"'", "<apostrophe>") + "' ";
         r = r.trim();
         return r;
@@ -148,6 +172,8 @@ public class ScheduleChange extends DbTableRecord
         if (n.equals("lectureID")) this.lectureID = Integer.parseInt(d);
         if (n.equals("roomID")) this.roomID = Integer.parseInt(d);
         if (n.equals("teacherID")) this.teacherID = Integer.parseInt(d);
+        if (n.equals("lectureTypeID")) this.lectureTypeID = Integer.parseInt(d);
+        if (n.equals("canceled")) this.canceled = Boolean.parseBoolean(d);
         if (n.equals("comment")) this.comment = d;
     }
 }

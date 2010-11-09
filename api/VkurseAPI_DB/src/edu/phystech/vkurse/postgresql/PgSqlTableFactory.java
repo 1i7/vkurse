@@ -35,6 +35,11 @@ public class PgSqlTableFactory implements TableFactory
         return new LecturesPgSqlTable();
     }
 
+    public LectureTypesTable getLectureTypesTable()
+    {
+        return new LectureTypesPgSqlTable();
+    }
+
     public RoomsTable getRoomsTable()
     {
         return new RoomsPgSqlTable();
