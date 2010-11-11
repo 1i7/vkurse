@@ -5,6 +5,7 @@
 
 package edu.phystech.vkurse.VkurseME;
 import javax.microedition.lcdui.*;
+import java.util.*;
 
 /**
  *
@@ -13,13 +14,29 @@ import javax.microedition.lcdui.*;
 
 public class FormWaitPreparingSettings extends Form implements CommandListener{
     VkurseME middlet;
+    StringItem si = new StringItem(null, "...", Item.HYPERLINK);
+    Timer timer = new Timer();
     FormWaitPreparingSettings(VkurseME middlet)
     {
         super("Подождите...");
 
         this.middlet = middlet;
 
-        this.append("Пожалуйста, подождите...Сейчас вам будет предложено выбрать факультет и номер группы");
+        this.append("Пожалуйста, подождите. Сейчас вам будет предложено выбрать факультет и номер группы");
+        this.append(si);
+
+        TimerTask tTask = new TimerTask() {
+                public void run() {
+                    if(si.getText().equals("."))
+                        si.setText("..");
+                    else if(si.getText().equals(".."))
+                        si.setText("...");
+                    else if(si.getText().equals("..."))
+                        si.setText(".");
+                }
+            };
+        timer.schedule( tTask, 1000, 1000 );
+
 
 
         this.addCommand(new Command("Выход",Command.EXIT,0));

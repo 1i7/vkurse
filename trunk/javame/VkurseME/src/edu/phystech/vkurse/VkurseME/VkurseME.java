@@ -71,6 +71,7 @@ public class VkurseME extends MIDlet /*implements CommandListener, ItemCommandLi
     }
     void showLecturesForm(boolean reload)
     {
+
         //нужно загрузить данные заного
         if(form_lectures == null || reload)
         {
