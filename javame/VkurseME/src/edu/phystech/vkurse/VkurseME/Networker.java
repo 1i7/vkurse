@@ -230,8 +230,8 @@ public class Networker implements Runnable {
             case Networker.AC_REQUEST_SHEDULE:
                 all_lectures();
                 get_rooms();
-                get_examtypes();
-                get_teachers();
+                //get_examtypes();
+                //get_teachers();
                 
                 get_schedule();
                 break;

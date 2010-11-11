@@ -109,7 +109,17 @@ public class FormSchedule extends Form implements CommandListener, ItemCommandLi
         }
 
         Font MyFont = Font.getFont(Font.FACE_MONOSPACE ,Font.STYLE_BOLD, Font.SIZE_LARGE);
-        siLabel = new StringItem(sTime + "   " + vRoom.getName() , "" + vLecture.getName());
+
+        String room_name = vRoom.getName();
+        if(room_name == null)
+            room_name = "";
+
+        String lecture_name = vLecture.getName();
+        if(lecture_name == null)
+            lecture_name = "";
+
+
+        siLabel = new StringItem(sTime + "   " + room_name , "" + lecture_name);
         siLabel.setFont(MyFont);
         //siLabel.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
         siLabel.setDefaultCommand(new Command("Подробнее", Command.ITEM, n));

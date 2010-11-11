@@ -54,10 +54,26 @@ public class FormSettings extends Form implements CommandListener, ItemCommandLi
         this.setCommandListener(this);
 
 
+        choiceGroups = new ChoiceGroup("Группа", ChoiceGroup.POPUP, sGroups, null);
+        this.append(choiceGroups);
+
+        
+        //Кнопки для дней недели
+        for(int i=0;i<middlet.weekdays.length;i++)
+        {
+            StringItem button = new StringItem(null, middlet.weekdays[i], Item.HYPERLINK);
+            button.setDefaultCommand(new Command(middlet.weekdays[i], Command.ITEM, 1));
+            button.setItemCommandListener(this);
+
+            this.append(button);
+            this.append("\n");
+        }
+
+
 
         calender = new DateField("Дата", DateField.DATE, TimeZone.getDefault());
-        myChoiceGroup = new ChoiceGroup("Факультет", ChoiceGroup.POPUP, department, null);
-        choiceGroups = new ChoiceGroup("Группа", ChoiceGroup.POPUP, sGroups, null);
+        //myChoiceGroup = new ChoiceGroup("Факультет", ChoiceGroup.POPUP, department, null);
+        
 
 
         StringItem ApplyButton = new StringItem(null, "Применить", Item.BUTTON);
@@ -72,12 +88,13 @@ public class FormSettings extends Form implements CommandListener, ItemCommandLi
         Date NowDate = new Date();
         calender.setDate(NowDate);
 
-        this.append(calender);
-        this.append(myChoiceGroup);
-        this.append(choiceGroups);
-        this.append(ApplyButton);
-        this.append(AllLectionsButton);
+        this.append("\nКонкретный день:");
 
+        this.append(calender);
+        //this.append(myChoiceGroup);
+        this.append(ApplyButton);
+        this.append("\n");
+        this.append(AllLectionsButton);
     }
 
 
@@ -97,7 +114,9 @@ public class FormSettings extends Form implements CommandListener, ItemCommandLi
         }
     }
 
-public void commandAction(Command cmd, Item i)
+
+
+public void commandAction(Command cmd, Item item)
     {
         if(cmd.getLabel().equals("Применить"))
         {
@@ -108,7 +127,7 @@ public void commandAction(Command cmd, Item i)
             Date dat = calender.getDate();
             Calendar d = Calendar.getInstance();
             d.setTime(dat);
-            int day = d.get(Calendar.DAY_OF_WEEK);
+            int day = d.get(Calendar.DAY_OF_WEEK)-1;
 
 
             middlet.tek_group = choiceGroups.getSelectedIndex();
@@ -117,95 +136,6 @@ public void commandAction(Command cmd, Item i)
 
             middlet.net.request_schedule(groupID, day);
             Display.getDisplay(middlet).setCurrent(new FormWaitSchedule(middlet));
-
-
-
-            /*resForm = new Form("Рассписание");
-
-
-            String sDepartment = st[myChoiceGroup.getSelectedIndex()];
-            String sGroup = sGroups[choiceGroups.getSelectedIndex()];
-
-            String sNowData;
-            Date NowDate = new Date();
-            Calendar c = Calendar.getInstance();
-            c.setTime(NowDate);
-            sNowData = c.get(Calendar.DAY_OF_MONTH)
-                    + "." +c.get(Calendar.MONTH)
-                    + "." +c.get(Calendar.YEAR)
-                    + "    " + c.get(Calendar.HOUR_OF_DAY)
-                    + ":" +c.get(Calendar.MINUTE)
-                    + ":" + c.get(Calendar.SECOND) ;
-
-            String sSeeData;
-            Date dat = calender.getDate();
-            Calendar d = Calendar.getInstance();
-            d.setTime(dat);
-            sSeeData = d.get(Calendar.DAY_OF_MONTH)
-                    + "." +d.get(Calendar.MONTH)
-                    + "." +d.get(Calendar.YEAR);
-
-            StringItem siLabel1 = new StringItem("Факультет:", sDepartment);
-            StringItem siLabel2 = new StringItem("Группа:",sGroup);
-            StringItem siLabel3 = new StringItem("Текущая дата:",sNowData);
-            StringItem siLabel4 = new StringItem("Просматриваеммый день:",sSeeData );
-            StringItem siLabel5 = new StringItem("\n","" );
-
-
-
-
-
-            siLabel1.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
-            siLabel1.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
-            siLabel1.setItemCommandListener(this);
-            siLabel2.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
-            siLabel2.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
-            siLabel2.setItemCommandListener(this);
-            siLabel3.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
-            siLabel3.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
-            siLabel3.setItemCommandListener(this);
-            siLabel4.setDefaultCommand(new Command("Выход", Command.EXIT, 2));
-            siLabel4.setDefaultCommand(new Command("Настройки", Command.ITEM, 1));
-            siLabel4.setItemCommandListener(this);
-
-
-            resForm.append(siLabel1);
-            resForm.append(siLabel2);
-            resForm.append(siLabel3);
-            resForm.append(siLabel4);
-            resForm.append(siLabel5);
-            resForm.setCommandListener(this);
-
-
-            TableFactory factory = new TestTableFactory();
-            ScheduleTable scht =  factory.getScheduleTable();
-            Vector vSchedule ;
-            try
-            {
-                vSchedule = scht.getAll();
-            }
-            catch (Exception exc)
-            {
-                vSchedule = new Vector();
-            }
-            for (int j = 0; j< vSchedule.size(); j++)
-            {
-                try
-                {
-                    Schedule Sc = scht.get(j);
-                    if ((Sc.getGroupID() == choiceGroups.getSelectedIndex())&&(d.get(Calendar.DAY_OF_WEEK)==((Sc.getDay()+1) % 7)))
-                    {
-                        append_record(Sc);
-                    }
-                }
-                catch (Exception exc)
-                {
-                }
-            }
-
-            Display.getDisplay(this).setCurrent(resForm
-             *
-             */
         }
 
 
@@ -218,27 +148,23 @@ public void commandAction(Command cmd, Item i)
         {
             middlet.exit();
         }
-
-        /*
-         if (cmd.getLabel().equals("Настройки")){
-            Display.getDisplay(middlet).setCurrent(settingsForm);
-        }
-         *
-
-        if (cmd.getLabel().equals("Подробнее"))
+        for(int i=0;i<middlet.weekdays.length;i++)
         {
-           infoForm = new Form("Инфо о предмете");
-           StringItem siLabel2 = new StringItem("","Информация о предмете" );
-           siLabel2.setDefaultCommand(new Command("Назад", Command.BACK, 1));
-           siLabel2.setItemCommandListener(this);
-           infoForm.append(siLabel2);
-           Display.getDisplay(this).setCurrent(infoForm);
-        }
+           if(cmd.getLabel().equals(middlet.weekdays[i]))
+           {
+                //Правильно получаем ID выбранной группы
+                int groupID = ((Group)groups.elementAt(choiceGroups.getSelectedIndex())).getID();
+                int day = i+1;
+                
+                middlet.tek_group = choiceGroups.getSelectedIndex();
+                middlet.tek_day = day;
 
-        if (cmd.getLabel().equals("Назад")){
-           Display.getDisplay(this).setCurrent(resForm);
+
+                middlet.net.request_schedule(groupID, day);
+                Display.getDisplay(middlet).setCurrent(new FormWaitSchedule(middlet));
+     
+           }
         }
-         *
-         */
+      
     }
 }
