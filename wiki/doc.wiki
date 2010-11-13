@@ -1,13 +1,11 @@
 #summary main page
 
-= Архитектура проекта =
-http://vkurse.googlecode.com/svn/doc/architecture/architec.png
-
-
-
 = технические группы: =
 [Java] - мобильная группа !JavaMe<br>
 [Android]- мобильная группа андроид<br>
 [DB] - группа баз данных<br>
 [web] - группа веб-интерфейса<br>
 [xml] - группа XML-сервиса<br>
+
+= архитектура проекта =
+[architecture]
