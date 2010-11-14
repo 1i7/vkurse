@@ -1,4 +1,4 @@
-#summary Description of the Use-cases.
+#summary Description of the Use-cases (archive version — old).
 
 = Описание вариантов использования.(archive version — old) =
 
