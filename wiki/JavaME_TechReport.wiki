@@ -1,4 +1,4 @@
-#summary Технический отчет(archive version — old).
+#summary Технический отчет (archive version — old).
 
 = Отчет на общее техническое задание (archive version — old) =
 
