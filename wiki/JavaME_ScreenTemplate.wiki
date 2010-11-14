@@ -1,4 +1,4 @@
-#summary Эскиз дизайна приложения.
+#summary Эскиз дизайна приложения (archive version — template).
 
 = Эскиз дизайна приложения (archive version — template)=
 
