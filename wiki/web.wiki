@@ -8,5 +8,4 @@
 
 = [http://code.google.com/p/vkurse/wiki/web_admin Интерфейс администратора] =
 
-
-
+= [http://code.google.com/p/vkurse/wiki/web_adminka НОВЫЙ Интерфейс администратора] =
