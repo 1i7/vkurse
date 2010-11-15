@@ -1,8 +1,8 @@
 #summary мобильная группа Java
 
-== [http://code.google.com/p/vkurse/wiki/JavaME_specification Спецификация by Дмитрий Исупов]==
-
 == [http://code.google.com/p/vkurse/wiki/JavaME_UseCaseNew Описание вариантов использования] ==
+
+== [http://code.google.com/p/vkurse/wiki/JavaME_specification Спецификация by Дмитрий Исупов]==
 
 == [http://code.google.com/p/vkurse/wiki/JavaME_UseCase Описание вариантов использования(archive version — old)] ==
 
