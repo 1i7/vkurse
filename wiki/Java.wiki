@@ -6,17 +6,17 @@
 
 ==Archive==
 
-*[http://code.google.com/p/vkurse/wiki/JavaME_UseCase Описание вариантов использования(archive version — old)] 
+  *[http://code.google.com/p/vkurse/wiki/JavaME_UseCase Описание вариантов использования(archive version — old)] 
 
-*[http://code.google.com/p/vkurse/wiki/JavaME_ScreenTemplate Эскиз дизайна приложения (archive version — template)]
+  *[http://code.google.com/p/vkurse/wiki/JavaME_ScreenTemplate Эскиз дизайна приложения (archive version — template)]
 
-*[http://code.google.com/p/vkurse/wiki/JavaME_TechReport Технический отчет (archive version — old)]
+  *[http://code.google.com/p/vkurse/wiki/JavaME_TechReport Технический отчет (archive version — old)]
 
 
 == Wiki-странички программиста ==
 
-*[http://debate-world.ru/wiki/J2ME JavaME]
+  *[http://debate-world.ru/wiki/J2ME JavaME]
 
-*[http://debate-world.ru/wiki/SOAP Работа с протоколом SOAP]
+  *[http://debate-world.ru/wiki/SOAP Работа с протоколом SOAP]
 
 == [http://code.google.com/p/vkurse/wiki/doc Главная страница проекта] ==
