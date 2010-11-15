@@ -16,3 +16,5 @@
 [http://debate-world.ru/wiki/J2ME JavaME]
 
 [http://debate-world.ru/wiki/SOAP Работа с протоколом SOAP]
+
+== [http://code.google.com/p/vkurse/wiki/doc Главная страница проекта] ==
