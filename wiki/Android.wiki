@@ -1,7 +1,9 @@
-#summary мобильная группа андроид
+#summary мобильная группа Android
 
-== [http://code.google.com/p/vkurse/wiki/Andriod_UseCase Описание вариантов использования]==
+== Archive ==
 
-== [http://code.google.com/p/vkurse/wiki/Andriod_ScreenTemplate Эскиз дизайна приложения] ==
+=== [http://code.google.com/p/vkurse/wiki/Andriod_UseCase Описание вариантов использования]===
 
-== [http://code.google.com/p/vkurse/wiki/Andriod_TechReport Технический отчет] ==
+=== [http://code.google.com/p/vkurse/wiki/Andriod_ScreenTemplate Эскиз дизайна приложения] ===
+
+=== [http://code.google.com/p/vkurse/wiki/Andriod_TechReport Технический отчет] ===
