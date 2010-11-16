@@ -1,5 +1,7 @@
 #summary мобильная группа Android
 
+== [http://code.google.com/p/vkurse/wiki/Andriod_UseCase2 Описание вариантов использования] ==
+
 == Archive ==
 
   * [http://code.google.com/p/vkurse/wiki/Andriod_UseCase Описание вариантов использования (archive version - old)]
