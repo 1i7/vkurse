@@ -9,3 +9,5 @@
   * [http://code.google.com/p/vkurse/wiki/Andriod_ScreenTemplate Эскиз дизайна приложения (archive version - template)]
 
   * [http://code.google.com/p/vkurse/wiki/Andriod_TechReport Технический отчет (archive version - old)]
+
+== [http://code.google.com/p/vkurse/wiki/doc Главная страница проекта] ==
