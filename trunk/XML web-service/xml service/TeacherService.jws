@@ -57,7 +57,7 @@ public class TeacherService
 		{
 			TableFactory factory = new PgSqlTableFactory();
 			TeachersTable lt = factory.getTeachersTable();
-			Vector data = lt.getAll(ids);
+			Vector data = lt.get(ids);
 			r = new String[data.size()];
 			int i;
 			for (i=0; i<data.size(); ++i)
