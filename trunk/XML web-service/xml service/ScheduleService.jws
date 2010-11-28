@@ -57,7 +57,7 @@ public class ScheduleService
 		{
 			TableFactory factory = new PgSqlTableFactory();
 			ScheduleTable lt = factory.getScheduleTable();
-			Vector data = lt.getAll(ids);
+			Vector data = lt.get(ids);
 			r = new String[data.size()];
 			int i;
 			for (i=0; i<data.size(); ++i)
