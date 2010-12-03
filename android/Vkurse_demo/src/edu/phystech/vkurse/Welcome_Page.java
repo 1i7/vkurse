@@ -1,22 +1,27 @@
 package edu.phystech.vkurse;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Vector;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Spinner;
 import android.widget.ArrayAdapter;
-import edu.phystech.vkurse.model.*;
-
-import java.util.*;
-
-import edu.phystech.vkurse.test.*;
+import android.widget.Spinner;
+import edu.phystech.vkurse.model.Group;
 
 public class Welcome_Page extends Activity implements OnClickListener{
 	
 	String sGroups[];
-	
+	public static final String PREFS_NAME = "MyPrefsFile";
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,7 @@ public class Welcome_Page extends Activity implements OnClickListener{
            }
         }
         
+        
         Spinner spin = (Spinner)findViewById(R.id.spin);
         ArrayAdapter adapter = new ArrayAdapter(
         		this,  android.R.layout.simple_spinner_item, sGroups);
@@ -58,13 +64,15 @@ public class Welcome_Page extends Activity implements OnClickListener{
         spin.setAdapter(adapter);
         
     }
+    
+  
     /** Called to start new activity. */
     public void onClick(View v)
     {
     	Intent i = new Intent(this, Schedule_Activity.class);
    	
     	Spinner spin = (Spinner)findViewById(R.id.spin);
-    	i.putExtra("from_spin",spin.getSelectedItemPosition());
+    	i.putExtra("from_spin",spin.getSelectedItemPosition());    	
     	
     	startActivity(i);
     }

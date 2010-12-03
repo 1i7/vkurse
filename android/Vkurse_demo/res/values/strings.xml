@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Vkurse_demo</string>
+	<string name="quit">Выйти</string>
+	<string name="group">Изменить группу</string>
+	<string name="date">Изменить дату</string>
+	
+	<string name="app_name">Vkurse</string>
 	<string name="app2_name">Schedule</string>
 	<string name="app3_name">Information</string>
     
@@ -10,11 +14,20 @@
     <string name="spin_two_promt">-Номер группы-</string>
     <string name="forward_button_text">Далее</string>
     <string name="timetable">Расписание</string>
+    <string name="info">Нет занятий</string>
        
     <color name="background">#801000</color>
     <color name="text">#101010</color>
     <color name="blue">#000080</color>
     <color name="lightblue">#506099</color>
     <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#555555</color>
+    
+    <string name="settings_label">Настройки...</string>
+    <string name="settings_title">Настройки приложения</string>
+    <string name="settings_shortcut">s</string>
+    <string name="group_title">Изменить группу</string>
+    <string name="date_title">Изменить дату</string>
     
 </resources>

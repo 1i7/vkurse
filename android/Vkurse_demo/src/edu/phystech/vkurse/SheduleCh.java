@@ -14,69 +14,58 @@ public class SheduleCh implements ScheduleChangesTable
 	private static String SOAP_ACTION = "";
 	
 	@Override
-	public int findFreeID() throws TableException 
+	public Vector<ScheduleChange> get(int[] arg0) throws TableException 
 	{
-		String METHOD_NAME = "findFreeID";
-		int res_int = 0;
+		String METHOD_NAME = "get";
+		Vector<ScheduleChange> lects = null;
+		Vector<String> res = null;
 		try 
 		{
+			Vector<Integer> zed = new Vector<Integer>();
+			for ( int i = 0; i < arg0.length; i++)
+			{
+				zed.add(arg0[i]);
+			}
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-                
+            request.addProperty("ids", zed);
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.setOutputSoapObject(request);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
             androidHttpTransport.call(SOAP_ACTION, envelope);
             Object result = envelope.getResponse();
             
-            //если пршила пустая строка
-            if (result == null )
+            //если пришел пустой массив 
+            if (result != null )
             {
-            	
+  
+            	//прочитали данные
+            	res = (Vector<String>)result;
+            	lects = new Vector<ScheduleChange>();
+                        
+            	//инициализация объектов ScheduleChange
+            	for ( int j = 0; j < res.size(); j++ )
+            	{
+            		ScheduleChange lect = new ScheduleChange();
+            		if ( res.elementAt(j) != null )
+            		{
+            			lect.readData( res.elementAt(j));
+            		}
+            		lects.add(lect);
+            	} 
             }
-                     
-            res_int = ((Integer)result).intValue();
-        } catch ( Exception e) 
+            
+        } catch (Exception e) 
         {
-           e.printStackTrace();
+        	throw new TableException("Ошибка при получений данных");
         }
-		return res_int;
-	}
-	
-	@Override
-	public boolean insertWithNewID(ScheduleChange item) throws TableException 
-	{
-		String METHOD_NAME = "insertWithNewID";
-		Object result = null;
-		try 
-		{
-            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-            request.addProperty("scheduleChange", item.toStringData());
-     
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-            envelope.setOutputSoapObject(request);
-            HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-            androidHttpTransport.call(SOAP_ACTION, envelope);
-            result = envelope.getResponse();
-           
-        } catch ( Exception e) 
-        {
-           e.printStackTrace();
-        }
-        if (result == null) 
-		{
-			return false;
-		}
-		else
-		{
-			return ((Boolean) result).booleanValue();
-		}
+		return lects;
 	}
 	
 	@Override
 	public ScheduleChange get(int ID) throws TableException
 	{
 		String METHOD_NAME = "get";
-		ScheduleChange lect = new ScheduleChange();
+		ScheduleChange lect = null;
 		try 
 		{
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -89,13 +78,12 @@ public class SheduleCh implements ScheduleChangesTable
             Object result = envelope.getResponse();
             
             //если пршила пустая строка
-            if (result == null )
+            if (result != null )
             {
-            	
+            	lect = new ScheduleChange();
+            	lect.readData(result.toString());
             }
-            
-            lect.readData(result.toString());
-           
+ 
         } catch ( Exception e) 
         {
            e.printStackTrace();
@@ -107,8 +95,8 @@ public class SheduleCh implements ScheduleChangesTable
 	public Vector<ScheduleChange> getAll() throws TableException 
 	{
 		String METHOD_NAME = "getAll";
-		Vector<ScheduleChange> lects = new Vector<ScheduleChange>();
-		Vector<String> res;
+		Vector<ScheduleChange> lects = null;
+		Vector<String> res = null;
 		try 
 		{
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);     
@@ -119,68 +107,65 @@ public class SheduleCh implements ScheduleChangesTable
             Object result = envelope.getResponse();
             
             //если пришел пустой массив 
-            if (result == null )
+            if (result != null )
             {
-            	TableException table = new TableException("An empty string");
-            	table.printStackTrace();
-            }
-            
-            //прочитали данные
-            res = (Vector<String>)result;
+  
+            	//прочитали данные
+            	res = (Vector<String>)result;
+            	lects = new Vector<ScheduleChange>();
                         
-            //инициализация объектов ScheduleChange
-            for ( int j = 0; j < res.size(); j++ )
-            {
-            	ScheduleChange lect = new ScheduleChange();
-            	if ( res.elementAt(j) != null )
+            	//инициализация объектов ScheduleChange
+            	for ( int j = 0; j < res.size(); j++ )
             	{
-            		lect.readData( res.elementAt(j));
-            	}
-            	lects.add(lect);
-            } 
+            		ScheduleChange lect = new ScheduleChange();
+            		if ( res.elementAt(j) != null )
+            		{
+            			lect.readData( res.elementAt(j));
+            		}
+            		lects.add(lect);
+            	} 
+            }
             
         } catch (Exception e) 
         {
-           e.printStackTrace();
+        	throw new TableException("Ошибка при получений данных");
         }
 		return lects;
 	}
 	
 	@Override
-	public boolean insert(ScheduleChange item) throws TableException 
+	public int insert(ScheduleChange item) throws TableException 
 	{
 		String METHOD_NAME = "insert";
-		Object result = null;
+		int res = -1;
 		try 
 		{
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
             request.addProperty("scheduleChange", item.toStringData());
-     
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.setOutputSoapObject(request);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
             androidHttpTransport.call(SOAP_ACTION, envelope);
-            result = envelope.getResponse();
-           
+            Object result = envelope.getResponse();
+            
+            if (result != null) 
+    		{
+    			res = (Integer)result;
+    		}
+            
         } catch ( Exception e) 
         {
-           e.printStackTrace();
+        	throw new TableException("Ошибка при получений данных");
         }
-        if (result == null) 
-		{
-			return false;
-		}
-		else
-		{
-			return ((Boolean) result).booleanValue();
-		}
+       
+		return res;
 	}
 	
 	@Override
 	public boolean remove(int ID) throws TableException
 	{
 		String METHOD_NAME = "remove";
-		Object result = null;
+		boolean res = false;
 		try 
 		{
 			SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -190,27 +175,26 @@ public class SheduleCh implements ScheduleChangesTable
             envelope.setOutputSoapObject(request);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
             androidHttpTransport.call(SOAP_ACTION, envelope);
-            result = envelope.getResponse();
-          
+            Object result = envelope.getResponse();
+            
+            if (result != null) 
+    		{
+    			res = (Boolean)result;
+    		}
+            
         } catch ( Exception e) 
         {
-           e.printStackTrace();
+        	throw new TableException("Ошибка при получений данных");
         }
-		if (result == null) 
-		{
-			return false;
-		}
-		else
-		{
-			return ((Boolean) result).booleanValue();
-		}
+	
+		return res;
 	}
 	
 	@Override
 	public boolean update(ScheduleChange item) throws TableException 
 	{
 		String METHOD_NAME = "update";
-		Object result = null;
+		boolean res = false;
 		try 
 		{
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -220,20 +204,19 @@ public class SheduleCh implements ScheduleChangesTable
             envelope.setOutputSoapObject(request);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
             androidHttpTransport.call(SOAP_ACTION, envelope);
-            result = envelope.getResponse();
-           
+            Object result = envelope.getResponse();
+            
+            if (result != null) 
+    		{
+    			res = (Boolean)result;
+    		}
+            
         } catch ( Exception e) 
         {
            e.printStackTrace();
         }
-        if (result == null) 
-		{
-			return false;
-		}
-		else
-		{
-			return ((Boolean) result).booleanValue();
-		}
+   
+      	return res;
 	}
 	
 	@Override
@@ -327,8 +310,6 @@ public class SheduleCh implements ScheduleChangesTable
         }
 		return lects;
 	}
-	
-	
 	
 	
 }

@@ -3,17 +3,32 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:paddingTop="60dip" 
-    android:paddingLeft="20dip" 
-    android:paddingRight="20dip" 
-    android:background="@drawable/background2">
+    android:paddingTop="10dip" 
+	android:background="@color/white"
+    >
     
-    
+<TableLayout
+
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:stretchColumns="1"
+	>
+
+<TableRow>    
 <TextView  
 	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content"
-	android:id="@+id/TextView01"
+	android:id="@+id/text1"
+	android:textColor="@color/black"
 	/>
+<TextView
+	android:gravity="right"
+	android:textColor="@color/black"  
+	android:layout_width="wrap_content" 
+	android:layout_height="wrap_content"
+	android:id="@+id/text2"
+	/>
+</TableRow>
 
 <ListView 
 	android:id="@android:id/list"
@@ -21,7 +36,7 @@
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:textSize="18sp"
-	android:background="@color/background"
+	android:background="@color/grey"
 	android:choiceMode ="singleChoice"
 	/>
 <TextView  
@@ -29,4 +44,7 @@
 	android:layout_height="wrap_content"
 
 	/>
+
+	</TableLayout>
+	
 </LinearLayout>
