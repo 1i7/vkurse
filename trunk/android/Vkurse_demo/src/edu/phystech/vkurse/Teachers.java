@@ -16,69 +16,57 @@ public class Teachers implements TeachersTable
 	private static String SOAP_ACTION = "";
 	
 	@Override
-	public int findFreeID() throws TableException 
+	public Vector<Teacher> get(int[] arg0) throws TableException
 	{
-		String METHOD_NAME = "findFreeID";
-		int res_int = 0;
+		String METHOD_NAME = "get";
+		Vector<Teacher> lects = null;
+		Vector<String> res = null;
 		try 
 		{
-            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-                
+			Vector<Integer> zed = new Vector<Integer>();
+			for ( int i = 0; i < arg0.length; i++)
+			{
+				zed.add(arg0[i]);
+			}
+            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);  
+            request.addProperty("ids", zed);
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.setOutputSoapObject(request);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
             androidHttpTransport.call(SOAP_ACTION, envelope);
             Object result = envelope.getResponse();
             
-            //если пршила пустая строка
-            if (result == null )
+            //если пришел пустой массив 
+            if (result != null )
             {
             	
+            	//прочитали данные
+            	res = (Vector<String>)result;
+            	lects = new Vector<Teacher>();
+                        
+            	//инициализация объектов Teacher
+            	for ( int j = 0; j < res.size(); j++ )
+            	{
+            		Teacher lect = new Teacher();
+            		if ( res.elementAt(j) != null )
+            		{
+            			lect.readData( res.elementAt(j));
+            		}
+            		lects.add(lect);
+            	} 
             }
-                     
-            res_int = ((Integer)result).intValue();
-        } catch ( Exception e) 
+        } catch (Exception e) 
         {
-           e.printStackTrace();
+        	throw new TableException("Ошибка при получений данных");
         }
-		return res_int;
+		return lects;
 	}
-	
-	@Override
-	public boolean insertWithNewID(Teacher item) throws TableException 
-	{
-		String METHOD_NAME = "insertWithNewID";
-		Object result = null;
-		try 
-		{
-            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-            request.addProperty("teacher", item.toStringData());
-     
-            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-            envelope.setOutputSoapObject(request);
-            HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-            androidHttpTransport.call(SOAP_ACTION, envelope);
-            result = envelope.getResponse();
-           
-        } catch ( Exception e) 
-        {
-           e.printStackTrace();
-        }
-        if (result == null) 
-		{
-			return false;
-		}
-		else
-		{
-			return ((Boolean) result).booleanValue();
-		}
-	}
-	
+		
 	@Override
 	public Teacher get(int ID) throws TableException 
 	{
 		String METHOD_NAME = "get";
-		Teacher lect = new Teacher();
+		Teacher lect = null;
 		try 
 		{
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -91,16 +79,15 @@ public class Teachers implements TeachersTable
             Object result = envelope.getResponse();
             
             //если пршила пустая строка
-            if (result == null )
+            if (result != null )
             {
-            	
+            	lect = new Teacher();
+            	lect.readData(result.toString());
             }
-            
-            lect.readData(result.toString());
-           
+    
         } catch ( Exception e) 
         {
-           e.printStackTrace();
+        	throw new TableException("Ошибка при получений данных");
         }
 		return lect;
 	}
@@ -109,8 +96,8 @@ public class Teachers implements TeachersTable
 	public Vector<Teacher> getAll() throws TableException
 	{
 		String METHOD_NAME = "getAll";
-		Vector<Teacher> lects = new Vector<Teacher>();
-		Vector<String> res;
+		Vector<Teacher> lects = null;
+		Vector<String> res = null;
 		try 
 		{
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);     
@@ -121,38 +108,36 @@ public class Teachers implements TeachersTable
             Object result = envelope.getResponse();
             
             //если пришел пустой массив 
-            if (result == null )
+            if (result != null )
             {
-            	TableException table = new TableException("An empty string");
-            	table.printStackTrace();
-            }
-            
-            //прочитали данные
-            res = (Vector<String>)result;
+            	
+            	//прочитали данные
+            	res = (Vector<String>)result;
+            	lects = new Vector<Teacher>();
                         
-            //инициализация объектов Teacher
-            for ( int j = 0; j < res.size(); j++ )
-            {
-            	Teacher lect = new Teacher();
-            	if ( res.elementAt(j) != null )
+            	//инициализация объектов Teacher
+            	for ( int j = 0; j < res.size(); j++ )
             	{
-            		lect.readData( res.elementAt(j));
-            	}
-            	lects.add(lect);
-            } 
-            
+            		Teacher lect = new Teacher();
+            		if ( res.elementAt(j) != null )
+            		{
+            			lect.readData( res.elementAt(j));
+            		}
+            		lects.add(lect);
+            	} 
+            }
         } catch (Exception e) 
         {
-           e.printStackTrace();
+        	throw new TableException("Ошибка при получений данных");
         }
 		return lects;
 	}
 	
 	@Override
-	public boolean insert(Teacher item) throws TableException 
+	public int insert(Teacher item) throws TableException 
 	{
 		String METHOD_NAME = "insert";
-		Object result = null;
+		int res = -1;
 		try 
 		{
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -162,27 +147,26 @@ public class Teachers implements TeachersTable
             envelope.setOutputSoapObject(request);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
             androidHttpTransport.call(SOAP_ACTION, envelope);
-            result = envelope.getResponse();
-           
+            Object result = envelope.getResponse();
+            
+            if (result != null) 
+    		{
+    			res = (Integer)result;
+    		}
+            
         } catch ( Exception e) 
         {
-           e.printStackTrace();
+        	throw new TableException("Ошибка при получений данных");
         }
-        if (result == null) 
-		{
-			return false;
-		}
-		else
-		{
-			return ((Boolean) result).booleanValue();
-		}
+       
+		return res;
 	}
 	
 	@Override
 	public boolean remove(int ID) throws TableException 
 	{
 		String METHOD_NAME = "remove";
-		Object result = null;
+		boolean res = false;
 		try 
 		{
 			SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -192,27 +176,26 @@ public class Teachers implements TeachersTable
             envelope.setOutputSoapObject(request);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
             androidHttpTransport.call(SOAP_ACTION, envelope);
-            result = envelope.getResponse();
-          
+            Object result = envelope.getResponse();
+            
+            if (result != null) 
+    		{
+    			res = (Boolean)result;
+    		}
+            
         } catch ( Exception e) 
         {
-           e.printStackTrace();
+        	throw new TableException("Ошибка при получений данных");
         }
-		if (result == null) 
-		{
-			return false;
-		}
-		else
-		{
-			return ((Boolean) result).booleanValue();
-		}
+	
+		return res;
 	}
 	
 	@Override
 	public boolean update(Teacher item) throws TableException 
 	{
 		String METHOD_NAME = "update";
-		Object result = null;
+		boolean res = false;
 		try 
 		{
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -222,20 +205,19 @@ public class Teachers implements TeachersTable
             envelope.setOutputSoapObject(request);
             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
             androidHttpTransport.call(SOAP_ACTION, envelope);
-            result = envelope.getResponse();
-           
+            Object result = envelope.getResponse();
+            
+            if (result != null) 
+    		{
+    			res = (Boolean)result;
+    		}
+            
         } catch ( Exception e) 
         {
            e.printStackTrace();
         }
-        if (result == null) 
-		{
-			return false;
-		}
-		else
-		{
-			return ((Boolean) result).booleanValue();
-		}
+   
+      	return res;
 	}
 	
 }
