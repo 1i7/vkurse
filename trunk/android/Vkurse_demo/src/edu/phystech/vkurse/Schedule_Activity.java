@@ -189,7 +189,7 @@ public class Schedule_Activity extends ListActivity{
         else{
        try
         {
-            vSchedule = scht.findByGroupDay(Ident[j], (byte)(5));
+            vSchedule = scht.findByGroupDay(Ident[j], (byte)(weekDay));
             LectureRoom = new String[vSchedule.size()];
             Order = new ScheduleItem[vSchedule.size()];
             Answer = new String[vSchedule.size()];
