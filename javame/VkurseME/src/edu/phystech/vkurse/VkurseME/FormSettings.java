@@ -43,8 +43,8 @@ public class FormSettings extends Form implements CommandListener, ItemCommandLi
         }
 
         cmd_reload = new Command("Обновить", Command.SCREEN, 1);
-        cmd_lectures = new Command("ShowLectures", Command.SCREEN, 2);
-        cmd_exit = new Command("Exit", Command.SCREEN, 3);
+        cmd_lectures = new Command("Показать лекции", Command.SCREEN, 2);
+        cmd_exit = new Command("Выход", Command.SCREEN, 3);
         
 
         this.addCommand(cmd_reload);
