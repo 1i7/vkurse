@@ -130,6 +130,17 @@ public class VkurseME extends MIDlet /*implements CommandListener, ItemCommandLi
         return new Teacher();//Хак. Некрасиво(
     }
 
+    ExamType get_examtype_by_id(int id)
+    {
+        for(int i=0;i<examtypes.size();i++)
+        {
+            ExamType tek = (ExamType)examtypes.elementAt(i);
+            if(tek.getID() == id)
+                return tek;
+        }
+        return new ExamType();//Хак. Некрасиво(
+    }
+
     public void SetLectures(Vector lectures)
     {
         all_lectures = lectures;

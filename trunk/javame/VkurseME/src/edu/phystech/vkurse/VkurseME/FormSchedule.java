@@ -22,13 +22,13 @@ public class FormSchedule extends Form implements CommandListener, ItemCommandLi
 
     FormSchedule(VkurseME middlet,Vector schedule)
     {
-        super("Рассписание");
+        super("Расписание");
 
         this.schedule = schedule;
         this.middlet = middlet;
 
         StringItem siLabel1 = new StringItem("Группа:",((Group)middlet.groups.elementAt(middlet.tek_group)).getName());
-        StringItem siLabel2 = new StringItem("Просматриваеммый день:",middlet.weekdays[middlet.tek_day-1]);
+        StringItem siLabel2 = new StringItem("Просматриваемый день:",middlet.weekdays[middlet.tek_day-1]);
         
 
         
@@ -47,17 +47,25 @@ public class FormSchedule extends Form implements CommandListener, ItemCommandLi
         this.append(siLabel2);
         this.append(new StringItem("  ",""));
         
-
         //append_record(Sc);
-        for (int j = 0; j< schedule.size(); j++)
+        //Проверка на пустоту расписания
+        if (schedule.isEmpty())
         {
-            try
+            String Empty = "В этот день занятий нет";
+            this.append(Empty);
+        }
+        else
+        {
+            for (int j = 0; j< schedule.size(); j++)
             {
-                Schedule Sc = (Schedule)schedule.elementAt(j);
-                append_record(Sc,j);
-            }
-            catch (Exception exc)
-            {
+                try
+                {
+                    Schedule Sc = (Schedule)schedule.elementAt(j);
+                    append_record(Sc,j);
+                }
+                catch (Exception exc)
+                {
+                }
             }
         }
 
@@ -80,8 +88,34 @@ public class FormSchedule extends Form implements CommandListener, ItemCommandLi
         StringItem siLabel;
 
         int res = rec.getStartTime();
-        String sTime = ((res-(res % 60)) / 60)
+         // Форматирование времени
+        String sTime;
+        if (((res-(res % 60)) / 60) < 10)
+        {
+            if ((res % 60)<10)
+            {
+            sTime = "0" + ((res-(res % 60)) / 60)
+                + ":0" +(res % 60);
+            }
+            else
+            {
+            sTime = "0" + ((res-(res % 60)) / 60)
                 + ":" +(res % 60);
+            }
+        }
+        else
+        {
+            if ((res % 60)<10)
+            {
+            sTime = ((res-(res % 60)) / 60)
+                + ":0" +(res % 60);
+            }
+            else
+            {
+            sTime = ((res-(res % 60)) / 60)
+                + ":" + (res % 60);
+            }
+        }
 
         int iRoomID = rec.getRoomID();
         int iLectureID = rec.getLectureID();

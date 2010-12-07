@@ -38,13 +38,23 @@ public class FormSubject extends Form implements CommandListener{
         if(lecture_name == null)
             lecture_name = "";
         StringItem siLabel3 = new StringItem("Предмет:", lecture_name);
+
+        /*(String examtype_name = middlet.get_examtype_by_id(task.getExamTypeID()).getName();
+        if(examtype_name == null)
+            examtype_name = "";
+        StringItem siLabel4 = new StringItem("Форма отчетности::", examtype_name);*/
+
+        /*String teacher_name = middlet.get_teacher_by_id(task.getTeacherID()).getName();
+        if(teacher_name == null)
+            teacher_name = "";
+        StringItem siLabel4 = new StringItem("Преподаватель:", teacher_name);*/
         
 
-        /*
-        String teacher_name = middlet.get_teacher_by_id(task.getTeacherID()).getName();
-        StringItem siLabel4 = new StringItem("Препод:",teacher_name);
-         * 
-         */
+        
+       /* String teacher_name = middlet.get_teacher_by_id(task.getTeacherID()).getName();
+        StringItem siLabel4 = new StringItem("Препод:",teacher_name);*/
+        
+         
 
         String room_name = middlet.get_room_by_id(task.getRoomID()).getName();
         if(room_name == null)
@@ -61,7 +71,7 @@ public class FormSubject extends Form implements CommandListener{
         this.append(siLabel1);
         this.append(siLabel2);
         this.append(siLabel3);
-        //this.append(siLabel4);
+       // this.append(siLabel4);
         this.append(siLabel5);
         this.append(siLabel6);
     }

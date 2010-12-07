@@ -16,6 +16,7 @@ public class Schedule extends DbTableRecord
     protected int startTime;
     protected int length;
     protected int lectureID;
+    protected int examTypeID;
     protected int roomID;
     protected int teacherID;
     protected int lectureTypeID;
@@ -23,7 +24,7 @@ public class Schedule extends DbTableRecord
 
     public Schedule() {}
     public Schedule(int id, int groupID, byte day, int startTime, int length,
-            int lectureID, int roomID, int teacherID, int lectureTypeID,
+            int lectureID,int examTypeID, int roomID, int teacherID, int lectureTypeID,
             String comment)
     {
         this.id = id;
@@ -32,6 +33,7 @@ public class Schedule extends DbTableRecord
         this.startTime = startTime;
         this.length = length;
         this.lectureID = lectureID;
+        this.examTypeID = examTypeID;
         this.roomID = roomID;
         this.teacherID = teacherID;
         this.lectureTypeID = lectureTypeID;
@@ -68,6 +70,10 @@ public class Schedule extends DbTableRecord
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public int getExamTypeID() {
+        return examTypeID;
     }
 
     public int getLectureID() {
@@ -119,6 +125,7 @@ public class Schedule extends DbTableRecord
         r += "startTime=" + startTime + " ";
         r += "length=" + length + " ";
         r += "lectureID=" + lectureID + " ";
+        r += "examTypeID=" + examTypeID + " ";
         r += "roomID=" + roomID + " ";
         r += "teacherID=" + teacherID + " ";
         r += "lectureTypeID=" + lectureTypeID + " ";
@@ -137,6 +144,7 @@ public class Schedule extends DbTableRecord
         if (n.equals("lectureID")) this.lectureID = Integer.parseInt(d);
         if (n.equals("roomID")) this.roomID = Integer.parseInt(d);
         if (n.equals("teacherID")) this.teacherID = Integer.parseInt(d);
+        if (n.equals("examTypeID")) this.examTypeID = Integer.parseInt(d);
         if (n.equals("lectureTypeID")) this.lectureTypeID = Integer.parseInt(d);
         if (n.equals("comment")) this.comment = d;
     }
