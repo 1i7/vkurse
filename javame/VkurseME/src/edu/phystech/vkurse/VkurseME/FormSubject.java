@@ -59,7 +59,7 @@ public class FormSubject extends Form implements CommandListener{
         String room_name = middlet.get_room_by_id(task.getRoomID()).getName();
         if(room_name == null)
             room_name = "";
-        StringItem siLabel5 = new StringItem("Комната:",room_name);
+        StringItem siLabel5 = new StringItem("Аудитория:",room_name);
 
         String comment =  task.getComment();
         if(comment == null)
