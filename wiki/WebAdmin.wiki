@@ -20,3 +20,6 @@
 При нажатии на кнопку _«внести временное изменение»_ загружается следующий экран:
 
   http://vkurse.googlecode.com/files/1.4.jpg
+
+
+[http://code.google.com/p/vkurse/wiki/web На главную]
