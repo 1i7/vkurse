@@ -1,19 +1,17 @@
 package edu.phystech.vkurse;
 
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.app.ListActivity;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-
 
 
 import edu.phystech.vkurse.model.*;
@@ -27,14 +25,15 @@ public class Class_Info  extends ListActivity {
 	
 	String sGroups[];
 	int Ident[];
-	
+	private ArrayList<String[]> m_orders = null;
+	private ScheduleItemAdapter m_adapter;
 	Handler handler = new Handler();
 	TableFactory factory = new TestTableFactory();
     ScheduleTable scht =  factory.getScheduleTable();
     GroupsTable gt =  factory.getGroupsTable();
-    Vector vSchedule ;
-    Vector vGroups;
-    
+    Vector<Schedule> vSchedule ;
+    Vector<Group> vGroups;
+    Vector<ExamType> Exam ;
    
     
     String LectureName[];
@@ -86,42 +85,50 @@ public class Class_Info  extends ListActivity {
 	           }
 	        }
 	        
-	        String days[]={"Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота" };
+	        String days[]={"Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ", "РџРѕРЅРµРґРµР»СЊРЅРёРє", "Р’С‚РѕСЂРЅРёРє", "РЎСЂРµРґР°", "Р§РµС‚РІРµСЂРі", "РџСЏС‚РЅРёС†Р°", "РЎСѓР±Р±РѕС‚Р°"  };
 	       	TextView text1 = (TextView)findViewById(R.id.text1);
 	        text1.setText(new StringBuilder() .append(days[day]));
 	        TextView text2 = (TextView)findViewById(R.id.text2);
-	        text2.setText(new StringBuilder() .append(sGroups[j]+" группа"));
+	        text2.setText(new StringBuilder() .append(sGroups[j]+" РіСЂСѓРїРїР°"));
 	}
 	   
 	void getScheduleAnync() {
 	    final Thread thread = new Thread() {
 	        @Override
 	        public void run() {
-	            // получить расписание по сети (займет долгое время)
+	           
 	            final String[] schedule = getInformation();
 	            handler.post(new Runnable() {
 	                @Override
 	                public void run() {
-	                    // убрать прогресс-бар из заголовка
+	                    
 	                    getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_OFF);
 	                    getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_INDETERMINATE_ON);
 
-	                    // показать информацию о расписании в интерфейсе
+	                    
 	                    displayInfoInGUI(schedule);
 	                }
 	            });
 	        }
 	    };
 
-	    // показать прогресс-бар в заголовке:
+	    
 	    getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_ON);
 	    getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_INDETERMINATE_ON);
 
-	    // запустить поток
+	    
 	    thread.start();
 	}
+	private void getData(String[] Answer)
+	{
+        m_orders.add(Answer);
+    }
 	void displayInfoInGUI(String[] schedule){
-		setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, schedule));
+		m_orders = new ArrayList<String[]>();
+		getData(schedule);
+        this.m_adapter = new ScheduleItemAdapter(this, R.layout.list, m_orders);
+        setListAdapter(this.m_adapter);
+        
 	}
 	private String[] getInformation()
 	{ 
@@ -141,7 +148,7 @@ public class Class_Info  extends ListActivity {
 	        } 
 	        catch (Exception exc)
 	        {
-	            vGroups = new Vector();
+	            vGroups = new Vector<Group>();
 	        }
 	        for (int i = 0; i< vGroups.size()+ 1; i++)
 	        {
@@ -159,13 +166,16 @@ public class Class_Info  extends ListActivity {
 	        Schedules scht = new Schedules();
 	        Vector<Schedule> vSchedule;
 	        Lectures lct = new Lectures();
-	        ExamType Exam = new ExamType();
-	        Vector<ExamType> Ex;
-	        Lecture Lect;
+	        LectureTypes lt = new LectureTypes();
+	        Exam_type ex = new Exam_type();
 	        
+	        ExamType exm;
+	        Lecture Lect;
+	        LectureType lectType;
 	       try
 	        {
 	            vSchedule = scht.findByGroupDay(Ident[j], (byte)(day));
+	            //Exam = ex.getAll();
 	            LectureName = new String[vSchedule.size()];
 	            LectureStart = new int[vSchedule.size()];
 	            LectureLenght = new int[vSchedule.size()];
@@ -176,7 +186,7 @@ public class Class_Info  extends ListActivity {
 	        }
 	        catch (Exception exc)
 	        {
-	            vSchedule = new Vector();
+	            vSchedule = new Vector<Schedule>();
 	        }
 	        for (int k = 0; k< vSchedule.size()+ 1; k++)
 	        {
@@ -184,19 +194,24 @@ public class Class_Info  extends ListActivity {
 	            {
 	            	Schedule Sc = vSchedule.elementAt(k);
 	            	Lect = lct.get(Sc.getLectureID());
-	            	
+	            	lectType = lt.get(Sc.getLectureTypeID());
+	            	exm = ex.get(Lect.getExamTypeID());
 	            	if (Lect.getName() != null)
 	            	{
 	            		LectureName[k] = Lect.getName();
 	            		LectureStart[k] = Sc.getStartTime();
 	            		LectureLenght[k] = Sc.getLength();
-	            		//TypeOfLecture[k] = 
+	            		Form[k]= exm.getName(); 
+	            		//ExamType e = Exam.get(Sc.getLectureTypeID());
+	            		TypeOfLecture[k]=lectType.getName(); 
 	            	}
 	            	else
 	                {
-	            		LectureName[k] = "emtpy";
-	            		LectureStart[k] = 00;
-	            		LectureLenght[k] = 00;
+	            		LectureName[k] = "-";
+	            		LectureStart[k] = 0;
+	            		LectureLenght[k] = 0;
+	            		TypeOfLecture[k] = "-";
+	            		Form[k]="-";
 	                }
 	                Teacher teach ;
 	                Teachers TeacherTable = new Teachers();
@@ -207,7 +222,7 @@ public class Class_Info  extends ListActivity {
 	                }
 	                else
 	                {
-	                	LectureTeacher[k] = "emtpy";
+	                	LectureTeacher[k] = "-";
 	                }
 	                Room room;
 	                Rooms roomTable = new Rooms();
@@ -218,9 +233,10 @@ public class Class_Info  extends ListActivity {
 	                }
 	                else
 	                {
-	                	LectureRoom[k] = "emtpy";
+	                	LectureRoom[k] = "-";
 	                }
-	               
+	              
+	                
 	            }
 	                
 	              
@@ -235,22 +251,22 @@ public class Class_Info  extends ListActivity {
 	       {
 	    	   
 	            if (LectureStart[num]%60<10 && (LectureStart[num]+LectureLenght[num])%60<10){
-	            	String thisLecture[]={LectureStart[num]/60+":0"+LectureStart[num]%60+"-"+ (LectureStart[num]+LectureLenght[num])/60+":0"+(LectureStart[num]+LectureLenght[num])%60,LectureName[num], LectureRoom[num], LectureTeacher[num]};
+	            	String thisLecture[]={LectureStart[num]/60+":0"+LectureStart[num]%60+"-"+ (LectureStart[num]+LectureLenght[num])/60+":0"+(LectureStart[num]+LectureLenght[num])%60,LectureName[num], LectureRoom[num], LectureTeacher[num],TypeOfLecture[num],Form[num]};
 	            	return thisLecture;
 	            }
 	            else if(LectureStart[num]%60<10)
 	            {
-	            	String thisLecture[]={LectureStart[num]/60+":0"+LectureStart[num]%60+"-"+ (LectureStart[num]+LectureLenght[num])/60+":"+(LectureStart[num]+LectureLenght[num])%60,LectureName[num], LectureRoom[num], LectureTeacher[num]};
+	            	String thisLecture[]={LectureStart[num]/60+":0"+LectureStart[num]%60+"-"+ (LectureStart[num]+LectureLenght[num])/60+":"+(LectureStart[num]+LectureLenght[num])%60,LectureName[num], LectureRoom[num], LectureTeacher[num],TypeOfLecture[num],Form[num]};
 	            	return thisLecture;
 	            }
 	            else if ((LectureStart[num]+LectureLenght[num])%60<10)
 	            {
-	            	String thisLecture[]={LectureStart[num]/60+":"+LectureStart[num]%60+"-"+ (LectureStart[num]+LectureLenght[num])/60+":0"+(LectureStart[num]+LectureLenght[num])%60,LectureName[num], LectureRoom[num], LectureTeacher[num]};
+	            	String thisLecture[]={LectureStart[num]/60+":"+LectureStart[num]%60+"-"+ (LectureStart[num]+LectureLenght[num])/60+":0"+(LectureStart[num]+LectureLenght[num])%60,LectureName[num], LectureRoom[num], LectureTeacher[num],TypeOfLecture[num],Form[num]};
 	            	return thisLecture;
 	            }
 	            else
 	            {
-	            	String thisLecture[]={LectureStart[num]/60+":"+LectureStart[num]%60+"-"+ (LectureStart[num]+LectureLenght[num])/60+":"+(LectureStart[num]+LectureLenght[num])%60,LectureName[num], LectureRoom[num], LectureTeacher[num]};
+	            	String thisLecture[]={LectureStart[num]/60+":"+LectureStart[num]%60+"-"+ (LectureStart[num]+LectureLenght[num])/60+":"+(LectureStart[num]+LectureLenght[num])%60,LectureName[num], LectureRoom[num], LectureTeacher[num],TypeOfLecture[num],Form[num]};
 	            	return thisLecture;
 	            }
 		        
@@ -261,6 +277,50 @@ public class Class_Info  extends ListActivity {
 	    	   return thisLecture;
 	       }
 	       
-	  } 	
+	  } 
+	private class ScheduleItemAdapter extends ArrayAdapter<String[]> {
+
+        private ArrayList<String[]> items;
+
+        public ScheduleItemAdapter(Context context, int textViewResourceId, ArrayList<String[]> items) {
+                super(context, textViewResourceId, items);
+                this.items = items;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+                View v = convertView;
+                if (v == null) {
+                    LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    v = vi.inflate(R.layout.list, null);
+                }
+                String[] o = items.get(position);
+                if (o != null) {
+                    TextView t = (TextView) v.findViewById(R.id.time);
+                    TextView s = (TextView) v.findViewById(R.id.subj);
+                    TextView r = (TextView) v.findViewById(R.id.room);
+                    TextView l = (TextView) v.findViewById(R.id.lector);
+                    TextView tp = (TextView) v.findViewById(R.id.type);
+                    TextView ex = (TextView) v.findViewById(R.id.exam);
+                    if (t != null) {
+                          t.setText(o[0]);                            }
+                    if (s!= null) {
+                    	s.setText(o[1]);
+                    	}
+                    if(r != null){
+                          r.setText(o[2]);
+                    }
+                    if(l != null){
+                        l.setText(o[3]);
+                    }
+                    if(tp != null){
+                        tp.setText(o[4]);
+                    }
+                    if(ex != null){
+                        ex.setText(o[5]);
+                    }
+            }
+                return v;
+        }
+	}
     
 }

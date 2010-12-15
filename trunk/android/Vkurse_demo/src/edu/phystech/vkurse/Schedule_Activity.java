@@ -1,5 +1,9 @@
 package edu.phystech.vkurse;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Vector;
@@ -18,7 +22,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,9 +32,9 @@ import edu.phystech.vkurse.model.Group;
 import edu.phystech.vkurse.model.Lecture;
 import edu.phystech.vkurse.model.Room;
 import edu.phystech.vkurse.model.Schedule;
-import android.util.Log;
 
-public class Schedule_Activity extends ListActivity{
+
+public class Schedule_Activity extends ListActivity implements OnClickListener{
     
 	private TextView DateDisplay;
     private int Year;
@@ -45,89 +51,49 @@ public class Schedule_Activity extends ListActivity{
     int Ident[];
     Handler handler = new Handler();
     static final int DATE_DIALOG_ID = 0;
+    static final int DATE_DIALOG_ID1 = 1;
+    
+    int gr;
+    int dt=-1;
+    int year;
+    int mnth;
+    int day;
     
     
     private ArrayList<ScheduleItem> m_orders = null;
     private ScheduleItemAdapter m_adapter;
    
+    View groupButton;
+    View renewButton;
+    
     
     
     /** Called when the activity is first created. */ 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_PROGRESS);
-        setContentView(R.layout.schedule_activity);
-    
         
-        // get the current date
+     // getScheduleAnync(WeekDay);
         final Calendar cl = Calendar.getInstance();
-        Year = cl.get(Calendar.YEAR);
-        Month = cl.get(Calendar.MONTH);
-        Day = cl.get(Calendar.DAY_OF_MONTH);
-        WeekDay = (byte)((cl.get(Calendar.DAY_OF_WEEK)+6)%7);
-
-        
-        DateDisplay = (TextView) findViewById(R.id.dateDisplay);     
-        
-        
-        // display the current date (this method is below)
-        updateDisplay();
-        
-        getScheduleAnync(WeekDay);
-        
-        Groups factory = new Groups();
-        Vector<Group> vGroups ;
-       
-        try
-        {
-             vGroups = factory.getAll();
-             sGroups = new String[vGroups.size()];
-             Ident = new int[vGroups.size()];
-             
-             
-        } 
-        catch (Exception exc)
-        {
-            vGroups = new Vector<Group>();
-        }
-        for (int i = 0; i< vGroups.size()+ 1; i++)
-        {
-           try
-           {
-        	   Group g = vGroups.elementAt(i);
-	           sGroups[i] = g.getName();
-	           Ident[i] = g.getID();
-           }
-           catch (Exception exc)
-           {
-           }
-        }
-        if (sGroups.length==0){
-        	sGroups[0]="empty";
-        }
-        
-        
-        Intent myInt = getIntent();
-        int j = myInt.getIntExtra("from_spin",0);
-	
-       TextView GroupDisplay = (TextView) findViewById(R.id.groupDisplay);
-       GroupDisplay.setText(new StringBuilder().append(sGroups[j]).append(" группа"));
+	        Year = cl.get(Calendar.YEAR);
+	        Month = cl.get(Calendar.MONTH);
+	        Day = cl.get(Calendar.DAY_OF_MONTH);
+	        WeekDay = (byte)((cl.get(Calendar.DAY_OF_WEEK)+6)%7);
+	        
+	        dt = WeekDay;
+	        day = Day;
+	        mnth = Month;
+	        year = Year;
+ 	  
 	}
 	private void getData(ScheduleItem[] Answer)
 	{
-		try{
-			if(Answer.length!=0){
-				for (int i=0; i<Answer.length+1;i++)
-				{
-					m_orders.add(Answer[i]);
-				}
-			}
-            Log.i("ARRAY", ""+ m_orders.size());
-          } catch (Exception e) { 
-            Log.e("BACKGROUND_PROC", e.getMessage());
-          }
-          
-	}
+		if(Answer != null)
+		{
+    for (int i = 0; i < Answer.length; i++) {
+        m_orders.add(Answer[i]);}
+    }
+}
 	public void onListItemClick(ListView parent, View v, int position, long id)
 	{
 		Intent i = new Intent(this, Class_Info.class);
@@ -148,8 +114,33 @@ public class Schedule_Activity extends ListActivity{
 	
 		Intent myInt = getIntent();
         int j = myInt.getIntExtra("from_spin",0);
+        int date = myInt.getIntExtra("date",-1);
         
-        
+        if(date!=-1)
+        	weekDay=(byte)date;
+        gr = j;
+        String FILENAME = "work_file.txt";
+       // String string = "hello world!";
+
+        FileOutputStream fos;
+		try {
+			fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+			try {
+				fos.write(j);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        try {
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         Groups factory = new Groups();
         Vector<Group> vGroups ;
         
@@ -177,7 +168,12 @@ public class Schedule_Activity extends ListActivity{
            {
            }
         }
-        
+        if(sGroups==null)
+        {
+        	return null;
+        }
+        else
+        {
         Schedules scht = new Schedules();
         Vector<Schedule> vSchedule;
         Lectures lct = new Lectures();
@@ -208,7 +204,7 @@ public class Schedule_Activity extends ListActivity{
 	            		
 	                    Schedule Sc = vSchedule.elementAt(k);
 			            Lect = lct.get(Sc.getLectureID());
-			           // if (Lect.getName() != null)
+			           
 			            Room room;
 		                Rooms roomTable = new Rooms();
 		                room = roomTable.get(Sc.getRoomID());
@@ -217,25 +213,26 @@ public class Schedule_Activity extends ListActivity{
 				            LectureStart[k] = Sc.getStartTime();
 				            LectureLenght[k] = Sc.getLength();
 				            if (LectureStart[k]%60<10 && (LectureStart[k]+LectureLenght[k])%60<10){
-				            	Answer[k]= LectureStart[k]/60+":0"+LectureStart[k]%60+"-"+ (LectureStart[k]+LectureLenght[k])/60+":0"+(LectureStart[k]+LectureLenght[k])%60+" "+LectureName[k];
+				            	Answer[k]= LectureStart[k]/60+":0"+LectureStart[k]%60+"-"+ (LectureStart[k]+LectureLenght[k])/60+":0"+(LectureStart[k]+LectureLenght[k])%60;
 				            }
 				            else if(LectureStart[k]%60<10)
 				            {
-				            	Answer[k]= LectureStart[k]/60+":0"+LectureStart[k]%60+"-"+ (LectureStart[k]+LectureLenght[k])/60+":"+(LectureStart[k]+LectureLenght[k])%60+" "+LectureName[k];
+				            	Answer[k]= LectureStart[k]/60+":0"+LectureStart[k]%60+"-"+ (LectureStart[k]+LectureLenght[k])/60+":"+(LectureStart[k]+LectureLenght[k])%60;
 				            }
 				            else if ((LectureStart[k]+LectureLenght[k])%60<10)
 				            {
-				            	Answer[k]= LectureStart[k]/60+":"+LectureStart[k]%60+"-"+ (LectureStart[k]+LectureLenght[k])/60+":0"+(LectureStart[k]+LectureLenght[k])%60+" "+LectureName[k];
+				            	Answer[k]= LectureStart[k]/60+":"+LectureStart[k]%60+"-"+ (LectureStart[k]+LectureLenght[k])/60+":0"+(LectureStart[k]+LectureLenght[k])%60;
 				            }
 				            else
 				            {
-				            	Answer[k]= LectureStart[k]/60+":"+LectureStart[k]%60+"-"+ (LectureStart[k]+LectureLenght[k])/60+":"+(LectureStart[k]+LectureLenght[k])%60+" "+LectureName[k];
+				            	Answer[k]= LectureStart[k]/60+":"+LectureStart[k]%60+"-"+ (LectureStart[k]+LectureLenght[k])/60+":"+(LectureStart[k]+LectureLenght[k])%60;
 				            }
 				            if(LectureRoom[k]!=null){
 				            	ScheduleItem o = new ScheduleItem();
 				            	
 				                o.setListRight(LectureRoom[k]);
 				                o.setListLeft(Answer[k]);
+				                o.setListLeft1(LectureName[k]);
 				                Order[k]=o;}
 				                		           
 				            	            	
@@ -251,13 +248,15 @@ public class Schedule_Activity extends ListActivity{
         }}
             
         return Order;    
-        
+        }
        
 	}
 	
 	void displayScheduleInGUI(final ScheduleItem[] Answer){
 		
 		m_orders = new ArrayList<ScheduleItem>();
+		if(Answer != null)
+		{
 		getData(Answer);
         this.m_adapter = new ScheduleItemAdapter(this, R.layout.row, m_orders);
         setListAdapter(this.m_adapter);
@@ -265,6 +264,7 @@ public class Schedule_Activity extends ListActivity{
         
 	//setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Answer));
 	        	getListView().setTextFilterEnabled(true);
+		}
 	      
 	}
 	
@@ -272,32 +272,45 @@ public class Schedule_Activity extends ListActivity{
 	    final Thread thread = new Thread() {
 	        @Override
 	        public void run() {
-	            // получить расписание по сети (займет долгое время)
+	            
 	            final ScheduleItem[] schedule = getSchedule(weekDay);
 	            handler.post(new Runnable() {
 	                @Override
 	                public void run() {
-	                    // убрать прогресс-бар из заголовка
+	                    
 	                    getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_OFF);
 	                    getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_INDETERMINATE_ON);
 
-	                    // показать информацию о расписании в интерфейсе
+	                    
 	                    displayScheduleInGUI(schedule);
 	                }
 	            });
 	        }
 	    };
 
-	    // показать прогресс-бар в заголовке:
+	    
 	    getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_ON);
 	    getWindow().setFeatureInt(Window.FEATURE_PROGRESS, Window.PROGRESS_INDETERMINATE_ON);
 
-	    // запустить поток
+	    
 	    thread.start();
 	}
 	// updates the date in the TextView
     private void updateDisplay() {
-    	String days[]={"Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота" };
+    	Intent myInt = getIntent();
+    	int d = myInt.getIntExtra("day_",-1);
+        int m = myInt.getIntExtra("mnth",-1);
+        int y = myInt.getIntExtra("year",-1);
+        int dow = myInt.getIntExtra("date",-1);
+        if(d!=-1)
+        	Day = d;
+        if(m!=-1)
+        	Month = m;
+        if(y!=-1)
+        	Year = y;
+        if(dow!=-1)
+        	WeekDay = (byte)dow;
+    	String days[]={"Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ", "РџРѕРЅРµРґРµР»СЊРЅРёРє", "Р’С‚РѕСЂРЅРёРє", "РЎСЂРµРґР°", "Р§РµС‚РІРµСЂРі", "РџСЏС‚РЅРёС†Р°", "РЎСѓР±Р±РѕС‚Р°" };
         DateDisplay.setText(
             new StringBuilder()
                     // Month is 0 based so add 1
@@ -308,6 +321,30 @@ public class Schedule_Activity extends ListActivity{
         getScheduleAnync((byte)(WeekDay));
     }
     
+    private void updateDisplay_() {
+    	Intent myInt = getIntent();
+    	int d = myInt.getIntExtra("day_",-1);
+        int m = myInt.getIntExtra("mnth",-1);
+        int y = myInt.getIntExtra("year",-1);
+        int dow = myInt.getIntExtra("date",-1);
+        if(d!=-1)
+        	Day = d;
+        if(m!=-1)
+        	Month = m;
+        if(y!=-1)
+        	Year = y;
+        if(dow!=-1)
+        	WeekDay = (byte)dow;
+    	String days[]={"Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ", "РџРѕРЅРµРґРµР»СЊРЅРёРє", "Р’С‚РѕСЂРЅРёРє", "РЎСЂРµРґР°", "Р§РµС‚РІРµСЂРі", "РџСЏС‚РЅРёС†Р°", "РЎСѓР±Р±РѕС‚Р°" };
+        DateDisplay.setText(
+            new StringBuilder()
+                    // Month is 0 based so add 1
+                    .append(Day).append("-")
+                    .append(Month + 1).append("-")
+                    .append(Year).append(", ")
+                    .append(days[WeekDay]));
+        
+    }
     private DatePickerDialog.OnDateSetListener DateSetListener =
             new DatePickerDialog.OnDateSetListener() {
 
@@ -319,10 +356,35 @@ public class Schedule_Activity extends ListActivity{
                     final Calendar cl = Calendar.getInstance();
                     cl.set(year, monthOfYear, dayOfMonth);
                     WeekDay = (byte)((cl.get(Calendar.DAY_OF_WEEK)+6)%7);
+                    dt = WeekDay;
+                    day=Day;
+                    mnth= Month;
+                    year = Year;
                     updateDisplay();
+                    
                     
                 }
             };
+            private DatePickerDialog.OnDateSetListener DateSetListener1 =
+                new DatePickerDialog.OnDateSetListener() {
+
+                    public void onDateSet(DatePicker view, int year, 
+                                          int monthOfYear, int dayOfMonth) {
+                        Year = year;
+                        Month = monthOfYear;
+                        Day = dayOfMonth;
+                        final Calendar cl = Calendar.getInstance();
+                        cl.set(year, monthOfYear, dayOfMonth);
+                        WeekDay = (byte)((cl.get(Calendar.DAY_OF_WEEK)+6)%7);
+                        dt = WeekDay;
+                        day=Day;
+                        mnth= Month;
+                        year = Year;
+                        updateDisplay_();
+                        
+                        
+                    }
+                };
            
   	   
     @Override
@@ -332,6 +394,10 @@ public class Schedule_Activity extends ListActivity{
                    return new DatePickerDialog(this,
                                 DateSetListener,
                                 Year, Month, Day);
+              case DATE_DIALOG_ID1:
+                  return new DatePickerDialog(this,
+                               DateSetListener1,
+                               Year, Month, Day);
               	            	  
           }
 					  	 
@@ -378,9 +444,13 @@ public class Schedule_Activity extends ListActivity{
                 ScheduleItem o = items.get(position);
                 if (o != null) {
                     TextView lt = (TextView) v.findViewById(R.id.lefttext);
+                    TextView lt1 = (TextView) v.findViewById(R.id.lefttext1);
                     TextView rt = (TextView) v.findViewById(R.id.righttext);
                     if (lt != null) {
                           lt.setText(o.getListLeft());                            }
+                    if (lt1!= null) {
+                    	lt1.setText(o.getListLeft1());
+                    	}
                     if(rt != null){
                           rt.setText(o.getListRight());
                     }
@@ -388,4 +458,178 @@ public class Schedule_Activity extends ListActivity{
                 return v;
         }
 }
+    public void onClick(View v)
+    {
+    	if (v==groupButton)
+    	{
+    		Intent i = new Intent(this, Change_Group.class);
+			startActivity(i);
+    	}
+    	if(v==renewButton)
+		{
+			Intent j = new Intent(this, Schedule_Activity.class);
+			j.putExtra("from_spin",gr);
+			j.putExtra("date", dt);
+			j.putExtra("year", year);
+			j.putExtra("mnth", mnth);
+			j.putExtra("day_", day);
+			startActivity(j);
+		}
+    	
+    }
+   protected void onResume()
+    {
+	   Groups factory = new Groups();
+       Vector<Group> vGroups ;
+      
+       try
+       {
+            vGroups = factory.getAll();
+            sGroups = new String[vGroups.size()];
+            Ident = new int[vGroups.size()];
+            
+            
+       } 
+       catch (Exception exc)
+       {
+           vGroups = new Vector<Group>();
+       }
+       for (int i = 0; i< vGroups.size()+ 1; i++)
+       {
+          try
+          {
+       	   Group g = vGroups.elementAt(i);
+	           sGroups[i] = g.getName();
+	           Ident[i] = g.getID();
+          }
+          catch (Exception exc)
+          {
+          }
+       }
+       
+       
+       
+    	String FILENAME = "work_file.txt";
+        int data=-1;
+
+         FileInputStream fos;
+ 		try {
+ 			fos = openFileInput(FILENAME);
+ 			try {
+ 				data = fos.read();
+ 			} catch (IOException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 	        try {
+ 				fos.close();
+ 			} catch (IOException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 		} catch (FileNotFoundException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+ 		
+ 		if (sGroups==null)
+ 		{
+ 			setContentView(R.layout.schedule_activity);
+ 		    
+ 			TextView text = (TextView) findViewById(R.id.info);
+            text.setText(R.string.info1);
+ 	        groupButton = findViewById(R.id.gr);
+ 	        groupButton.setOnClickListener(this);
+ 	    
+ 	        View dateButton = findViewById(R.id.dt);
+ 	        dateButton.setOnClickListener(this);
+ 	        
+ 	        dateButton.setOnClickListener(new View.OnClickListener() {
+ 	            public void onClick(View v) {
+ 	                showDialog(DATE_DIALOG_ID1);
+ 	            }
+ 	        });
+ 	        
+ 	        renewButton = findViewById(R.id.but);
+ 	        renewButton.setOnClickListener(this);
+ 	        
+ 	        
+ 	        // get the current date
+ 	        final Calendar cl = Calendar.getInstance();
+ 	        Year = cl.get(Calendar.YEAR);
+ 	        Month = cl.get(Calendar.MONTH);
+ 	        Day = cl.get(Calendar.DAY_OF_MONTH);
+ 	        WeekDay = (byte)((cl.get(Calendar.DAY_OF_WEEK)+6)%7);
+ 	        
+ 	        dt = WeekDay;
+ 	        day = Day;
+ 	        mnth = Month;
+ 	        year = Year;
+
+ 	        
+ 	        DateDisplay = (TextView) findViewById(R.id.dateDisplay);     
+ 	        
+ 	        
+ 	        
+ 	       updateDisplay_();
+	        
+ 	       
+ 	      
+ 		}
+ 		else
+ 		{
+	 		if(data == -1)
+	 		{
+	 			Intent i = new Intent(this, Welcome_Page.class);
+			   
+		    	startActivity(i);
+	 		}
+	 			
+	 		else
+	 		{
+	 			setContentView(R.layout.schedule_activity);
+	 		    
+	 			TextView text = (TextView) findViewById(R.id.info);
+	            text.setText(R.string.info);
+	 	        groupButton = findViewById(R.id.gr);
+	 	        groupButton.setOnClickListener(this);
+	 	    
+	 	        View dateButton = findViewById(R.id.dt);
+	 	        dateButton.setOnClickListener(this);
+	 	        
+	 	        dateButton.setOnClickListener(new View.OnClickListener() {
+	 	            public void onClick(View v) {
+	 	                showDialog(DATE_DIALOG_ID);
+	 	            }
+	 	        });
+	 	        
+	 	        renewButton = findViewById(R.id.but);
+	 	        renewButton.setOnClickListener(this);
+	 	        
+	 	        
+	 	        // get the current date
+	 	       
+
+	 	        
+	 	        DateDisplay = (TextView) findViewById(R.id.dateDisplay);     
+	 	        
+	 	        
+	 	        
+	 	        // display the current date (this method is below)
+	 	        updateDisplay();
+	 	        
+	 	        getScheduleAnync(WeekDay);
+	 	        
+	 	       
+	 	        
+	 	        
+	 	        Intent myInt = getIntent();
+	 	        int j = myInt.getIntExtra("from_spin",0);
+	 		
+	 	       TextView GroupDisplay = (TextView) findViewById(R.id.groupDisplay);
+	 	       GroupDisplay.setText(new StringBuilder().append(sGroups[j]).append(" РіСЂСѓРїРїР°"));
+	 		}
+ 		}
+ 		super.onResume();
+    }
 }
