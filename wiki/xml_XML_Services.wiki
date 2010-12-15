@@ -35,3 +35,5 @@ http://nebula.innolab.net.ru:8186(axis) ИмяСервиса.jws
 
 WSDL описание:
 http://nebula.innolab.net.ru:8186(axis) ИмяСервиса.jws?wsdl
+
+[http://code.google.com/p/vkurse/wiki/xml На главную]
