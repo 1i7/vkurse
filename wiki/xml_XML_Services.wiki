@@ -3,13 +3,21 @@
 = Описание XML-сервисов =
 
 Существует 8 сервисов:
+
 1) ExamTypeService – типы отчетности (экзамен, зачёт …)
+
 2) GroupService – группы
+
 3) LectureService – предметы
+
 4) LectureTupeService – типы занятии (лекции, семинары, лабы …)
+
 5) RoomService – аудитория
+
 6) TeacherService – преподаватели
+
 7) SchduleService – расписание
+
 8) ScheduleChangeService – изменения в расписания
 
 Каждый из сервисов имеет стандартный набор методов:
