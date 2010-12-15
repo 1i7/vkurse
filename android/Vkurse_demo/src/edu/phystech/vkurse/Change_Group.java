@@ -1,6 +1,7 @@
 package edu.phystech.vkurse;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import edu.phystech.vkurse.model.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 import edu.phystech.vkurse.test.*;
@@ -49,22 +53,52 @@ public class Change_Group extends Activity implements OnClickListener{
            {
            }
         }
-        
+        if (sGroups==null)
+        {
+        	String[] space = {" Нет данных"};
+        	Spinner spin = (Spinner)findViewById(R.id.spin2);
+        	ArrayAdapter adapter = new ArrayAdapter(
+        		this,  android.R.layout.simple_spinner_item, space);
+        	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        	spin.setAdapter(adapter);
+        	//showDialog(DIALOG_CLOSE_APPLICATION_ID);
+        }
+        else
+        {
         Spinner spin = (Spinner)findViewById(R.id.spin2);
         ArrayAdapter adapter = new ArrayAdapter(
         		this,  android.R.layout.simple_spinner_item, sGroups);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
+        }
         
     }
     /** Called to start new activity. */
     public void onClick(View v)
     {
-    	Intent i = new Intent(this, Schedule_Activity.class);
-    	
-    	Spinner spin = (Spinner)findViewById(R.id.spin2);
-    	i.putExtra("from_spin",spin.getSelectedItemPosition());
-    	
-    	startActivity(i);
+    	   Spinner spin = (Spinner)findViewById(R.id.spin2);
+    	   String FILENAME = "work_file.txt";
+    	   int j=spin.getSelectedItemPosition();
+
+            FileOutputStream fos;
+    		try {
+    			fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+    			try {
+    				fos.write(j);
+    			} catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+    	        try {
+    				fos.close();
+    			} catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+    		} catch (FileNotFoundException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		finish();
     }
 }

@@ -3,6 +3,8 @@
 	<string name="quit">Выйти</string>
 	<string name="group">Изменить группу</string>
 	<string name="date">Изменить дату</string>
+	<string name="renew">Обновить</string>
+	<string name="rep">Повторить попытку</string>
 	
 	<string name="app_name">Vkurse</string>
 	<string name="app2_name">Schedule</string>
@@ -15,6 +17,17 @@
     <string name="forward_button_text">Далее</string>
     <string name="timetable">Расписание</string>
     <string name="info">Нет занятий</string>
+    <string name="info1">Ошибка загрузки расписания</string>
+    <string name="not_av">Нет данных</string>
+    
+    <string name="close"> Закройте приложение и проверьте подключение к интернету, либо обновите страницу.</string>
+    
+    <string name="time">Время</string>
+    <string name="subj">Предмет</string>
+    <string name="room">Аудитория</string>
+    <string name="lector">Преподаватель</string>
+    <string name="type">Тип занятия</string>
+    <string name="exam">Форма отчетности</string>
        
     <color name="background">#801000</color>
     <color name="text">#101010</color>
