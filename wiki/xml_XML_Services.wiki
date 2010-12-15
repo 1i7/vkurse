@@ -4,21 +4,21 @@
 
 Существует 8 сервисов:
 
-* ExamTypeService – типы отчетности (экзамен, зачёт …)
+ * ExamTypeService – типы отчетности (экзамен, зачёт …)
 
-* GroupService – группы
+ * GroupService – группы
 
-* LectureService – предметы
+ * LectureService – предметы
 
-* LectureTupeService – типы занятии (лекции, семинары, лабы …)
+ * LectureTupeService – типы занятии (лекции, семинары, лабы …)
 
-* RoomService – аудитория
+ * RoomService – аудитория
 
-* TeacherService – преподаватели
+ * TeacherService – преподаватели
 
-* SchduleService – расписание
+ * SchduleService – расписание
 
-* ScheduleChangeService – изменения в расписания
+ * ScheduleChangeService – изменения в расписания
 
 Каждый из сервисов имеет стандартный набор методов:
 
