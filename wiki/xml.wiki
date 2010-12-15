@@ -4,7 +4,7 @@
 
 == [http://code.google.com/p/vkurse/wiki/xml/opisanie Описание вариантов использования] ==
 
-
+== [http://code.google.com/p/vkurse/wiki/xml_XML_Services Описание XML-сервисов] ==
 
 
 = Details =
