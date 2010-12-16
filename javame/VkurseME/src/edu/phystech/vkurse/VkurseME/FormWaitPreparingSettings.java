@@ -15,14 +15,15 @@ import java.util.*;
 public class FormWaitPreparingSettings extends Form implements CommandListener{
     VkurseME middlet;
     StringItem si = new StringItem(null, "...", Item.HYPERLINK);
-    Timer timer = new Timer();
+    Timer timer;
     FormWaitPreparingSettings(VkurseME middlet)
     {
         super("Подождите...");
 
+        timer = new Timer();
         this.middlet = middlet;
 
-        this.append("Пожалуйста, подождите. Сейчас вам будет предложено выбрать факультет и номер группы");
+        this.append("Пожалуйста, подождите. Сейчас вам будет предложено выбрать номер группы");
         this.append(si);
 
         TimerTask tTask = new TimerTask() {

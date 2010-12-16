@@ -31,7 +31,7 @@ public class FormSubject extends Form implements CommandListener{
         this.setCommandListener(this);
 
 
-        StringItem siLabel1 = new StringItem("Группа:",((Group)middlet.groups.elementAt(middlet.tek_group)).getName());
+        StringItem siLabel1 = new StringItem("Группа:",middlet.settings.getGroupName());
         StringItem siLabel2 = new StringItem("День:",middlet.weekdays[middlet.tek_day-1]);
 
         String lecture_name = middlet.get_lecture_by_id(task.getLectureID()).getName();

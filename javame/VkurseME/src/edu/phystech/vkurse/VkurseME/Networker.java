@@ -4,6 +4,7 @@ package edu.phystech.vkurse.VkurseME;
  *
  * @author Lex
  */
+import javax.microedition.lcdui.*;
 import edu.phystech.vkurse.model.*;
 import java.util.*;
 import org.ksoap.*;
@@ -18,15 +19,17 @@ public class Networker implements Runnable {
     //Данные конкретных задач:
     //AC_REQUEST_SHEDULE
     Integer day, groupID;
+    Thread networkThread;
+    Timer timer;
+    int timeout=16000;//Через столько миллисекунд прекращаем ждать выполнения запроса
 
     public Networker(VkurseME middlet)
     {
         this.middlet = middlet;
+        timer = new Timer();
     }
-    public void all_lectures()
+    public void all_lectures()throws Exception
     {
-        try
-        {
             SoapObject rpc = new SoapObject
 		("http://DefaultNamespace", "getAll");
             /*
@@ -57,17 +60,9 @@ public class Networker implements Runnable {
              Параметры: Url Адрес веб-сервера,
                         Имя вызываемого метода
              */
-
-        }
-        catch (Exception e) {
-            String errmsg = e.toString();
-            System.out.println("ERROR:"+errmsg);
-	}
     }
-    public void get_all_groups()
+    public void get_all_groups()throws Exception
     {
-        try
-        {
             SoapObject rpc = new SoapObject
 		("http://DefaultNamespace", "getAll");
 
@@ -86,18 +81,11 @@ public class Networker implements Runnable {
             }
 
             middlet.SetListGroups(groups);
-        }
-        catch (Exception e) {
-            String errmsg = e.toString();
-            System.out.println("ERROR:"+errmsg);
-	}
     }
     
 
-    public void get_schedule()
+    public void get_schedule()throws Exception
     {
-        try
-        {
             SoapObject rpc = new SoapObject
 		("http://DefaultNamespace", "findByGroupDay");
 
@@ -122,17 +110,10 @@ public class Networker implements Runnable {
             }
 
             middlet.SetSchedule(schedule);
-        }
-        catch (Exception e) {
-            String errmsg = e.toString();
-            System.out.println("ERROR:"+errmsg);
-	}
     }
 
-    public void get_rooms()
+    public void get_rooms()throws Exception
     {
-        try
-        {
             SoapObject rpc = new SoapObject
 		("http://DefaultNamespace", "getAll");
 
@@ -151,19 +132,11 @@ public class Networker implements Runnable {
             }
 
             middlet.SetRooms(rooms);
-        }
-        catch (Exception e) {
-            String errmsg = e.toString();
-            System.out.println("ERROR:"+errmsg);
-	}
     }
-    public void get_examtypes()
+    public void get_examtypes()throws Exception
     {
-        try
-        {
             SoapObject rpc = new SoapObject
 		("http://DefaultNamespace", "getAll");
-
 
 	    Vector res = (Vector) new HttpTransport
 		("http://nebula.innolab.net.ru:8180/axis/ExamTypeService.jws",
@@ -179,16 +152,9 @@ public class Networker implements Runnable {
             }
 
             middlet.SetExamTypes(exams);
-        }
-        catch (Exception e) {
-            String errmsg = e.toString();
-            System.out.println("ERROR:"+errmsg);
-	}
     }
-    public void get_teachers()
+    public void get_teachers()throws Exception
     {
-        try
-        {
             SoapObject rpc = new SoapObject
 		("http://DefaultNamespace", "getAll");
 
@@ -207,58 +173,76 @@ public class Networker implements Runnable {
             }
 
             middlet.SetTeachers(teachers);
-        }
-        catch (Exception e) {
-            String errmsg = e.toString();
-            System.out.println("ERROR:"+errmsg);
-	}
     }
 
     public void run()
     {
-        switch(action)
-        {
-            case Networker.AC_REQUEST_ALL_LECTURES:
-                all_lectures();
-                break;
+        try{
+            switch(action)
+            {
+                case Networker.AC_REQUEST_ALL_LECTURES:
+                    all_lectures();
+                    break;
 
 
-            case Networker.AC_REQUEST_ALL_GROUPS:
-                get_all_groups();
-                break;
+                case Networker.AC_REQUEST_ALL_GROUPS:
+                    get_all_groups();
+                    break;
 
-            case Networker.AC_REQUEST_SHEDULE:
-                all_lectures();
-                get_rooms();
-                //get_examtypes();
-                //get_teachers();
-                
-                get_schedule();
-                break;
+                case Networker.AC_REQUEST_SHEDULE:
+                    all_lectures();
+                    get_rooms();
+                    //get_examtypes();
+                    //get_teachers();
 
-            /*
-             TableFactory factory = new TestTableFactory();
-                LecturesTable lecturestable = factory.getLecturesTable();
-                Vector lectures;
-                try {
-                    lectures = lecturestable.getAll();
-                } catch (Exception exc) {
-                    lectures = new Vector();
-                }
-                middlet.SetLectures(lectures);
-             * 
-             */
+                    get_schedule();
+                    break;
+
+                /*
+                 TableFactory factory = new TestTableFactory();
+                    LecturesTable lecturestable = factory.getLecturesTable();
+                    Vector lectures;
+                    try {
+                        lectures = lecturestable.getAll();
+                    } catch (Exception exc) {
+                        lectures = new Vector();
+                    }
+                    middlet.SetLectures(lectures);
+                 *
+                 */
+            }
         }
+        catch (Exception e) {
+            String errmsg = e.toString();
+            System.out.println("ERROR:"+errmsg);
+
+            Display.getDisplay(middlet).setCurrent(new FormConnectionError(middlet,action));
+	}      
+        timer.cancel();
     }
     /*
      *  Запускает отдельный поток с нужной задачей
      */
     public void process(int new_action)
     {
+        timer = new Timer();
         action = new_action;
 
-        Thread thread = new Thread(this);
-        thread.start();
+        //Timeout - если долго тупит - вырубаем
+        TimerTask tTask = new TimerTask() {
+                public void run() {
+                        timer.cancel();
+                    if(networkThread.isAlive())
+                    {
+                        networkThread.interrupt();//не сработает, но попробовать стоит)
+                        Display.getDisplay(middlet).setCurrent(new FormConnectionError(middlet,action));
+                    }
+                }
+            };
+        timer.schedule(tTask, timeout);
+        
+        networkThread = new Thread(this);
+        networkThread.start();
     }
     public void request_all_lectures()
     {

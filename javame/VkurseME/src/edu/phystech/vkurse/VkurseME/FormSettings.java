@@ -16,10 +16,9 @@ import edu.phystech.vkurse.model.*;
 
 public class FormSettings extends Form implements CommandListener, ItemCommandListener{
     VkurseME middlet;
-    Command cmd_lectures,cmd_reload,cmd_exit;
+    Command cmd_reload,cmd_exit;
     ChoiceGroup myChoiceGroup;
     ChoiceGroup choiceGroups;
-    DateField calender;
     String department[]={"ФИВТ"};
     String sGroups[];// ={"191", "192", "193","194"};
 
@@ -33,68 +32,47 @@ public class FormSettings extends Form implements CommandListener, ItemCommandLi
         this.middlet = middlet;
         this.groups = groups;
 
+
+        this.append("Выберите вашу группу:\n");
+
+        
+
         sGroups = new String[groups.size()];
+
+        /*
+         * В эту переменнуж нужно получить позицию выбранной группы
+         * в списке всех групп. По умолчанию - первый элемент списка
+         */
+        int selectedGroup = 0;
+        
         for (int i = 0; i < groups.size(); i++) {
             try {
                 Group g = (Group) groups.elementAt(i);
+                if(g.getID() == middlet.settings.getGroup())
+                    selectedGroup = i;
                 sGroups[i] = g.getName();
             } catch (Exception exc) {
             }
         }
 
-        cmd_reload = new Command("Обновить", Command.SCREEN, 1);
-        cmd_lectures = new Command("Показать лекции", Command.SCREEN, 2);
-        cmd_exit = new Command("Выход", Command.SCREEN, 3);
-        
+        //cmd_reload = new Command("Обновить", Command.SCREEN, 1);
+        cmd_exit = new Command("Выход", Command.ITEM, 3);
 
-        this.addCommand(cmd_reload);
-        this.addCommand(cmd_lectures);
         this.addCommand(cmd_exit);
-        
         this.setCommandListener(this);
 
 
         choiceGroups = new ChoiceGroup("Группа", ChoiceGroup.POPUP, sGroups, null);
+        
+        choiceGroups.setSelectedIndex(selectedGroup, true);
         this.append(choiceGroups);
 
-        
-        //Кнопки для дней недели
-        for(int i=0;i<middlet.weekdays.length;i++)
-        {
-            StringItem button = new StringItem(null, middlet.weekdays[i], Item.HYPERLINK);
-            button.setDefaultCommand(new Command(middlet.weekdays[i], Command.ITEM, 1));
-            button.setItemCommandListener(this);
 
-            this.append(button);
-            this.append("\n");
-        }
+        StringItem SaveButton = new StringItem(null, "Сохранить", Item.BUTTON);
+        SaveButton.setDefaultCommand(new Command("Сохранить", Command.SCREEN, 1));
+        SaveButton.setItemCommandListener(this);
 
-
-
-        calender = new DateField("Дата", DateField.DATE, TimeZone.getDefault());
-        //myChoiceGroup = new ChoiceGroup("Факультет", ChoiceGroup.POPUP, department, null);
-        
-
-
-        StringItem ApplyButton = new StringItem(null, "Применить", Item.BUTTON);
-        ApplyButton.setDefaultCommand(new Command("Применить", Command.ITEM, 1));
-        ApplyButton.setItemCommandListener(this);
-
-
-        StringItem AllLectionsButton = new StringItem(null, "Доступные лекции", Item.BUTTON);
-        AllLectionsButton.setDefaultCommand(new Command("Доступные лекции", Command.ITEM, 1));
-        AllLectionsButton.setItemCommandListener(this);
-
-        Date NowDate = new Date();
-        calender.setDate(NowDate);
-
-        this.append("\nКонкретный день:");
-
-        this.append(calender);
-        //this.append(myChoiceGroup);
-        this.append(ApplyButton);
-        this.append("\n");
-        this.append(AllLectionsButton);
+        this.append(SaveButton);
     }
 
 
@@ -103,10 +81,6 @@ public class FormSettings extends Form implements CommandListener, ItemCommandLi
         if(cmd == cmd_reload)
         {
             middlet.showSettingsForm(true);
-        }
-        if(cmd == cmd_lectures)
-        {
-            middlet.showLecturesForm(false);
         }
         if(cmd == cmd_exit)
         {
@@ -117,54 +91,24 @@ public class FormSettings extends Form implements CommandListener, ItemCommandLi
 
 
 public void commandAction(Command cmd, Item item)
-    {
-        if(cmd.getLabel().equals("Применить"))
+{
+        if (cmd.getLabel().equals("Сохранить"))
         {
             //Правильно получаем ID выбранной группы
             int groupID = ((Group)groups.elementAt(choiceGroups.getSelectedIndex())).getID();
+            String groupName = ((Group)groups.elementAt(choiceGroups.getSelectedIndex())).getName();
 
-            //Получаем день недели, который выбрал пользователь
-            Date dat = calender.getDate();
-            Calendar d = Calendar.getInstance();
-            d.setTime(dat);
-            int day = d.get(Calendar.DAY_OF_WEEK)-1;
+            middlet.settings.setGroup(groupID);
+            middlet.settings.setGroupName(groupName);
+            middlet.settings.Save();
 
-
-            middlet.tek_group = choiceGroups.getSelectedIndex();
-            middlet.tek_day = day;
-
-
-            middlet.net.request_schedule(groupID, day);
-            Display.getDisplay(middlet).setCurrent(new FormWaitSchedule(middlet));
+            middlet.groupName = middlet.settings.getGroupName();
+            middlet.tek_group = middlet.settings.getGroup();
+            middlet.showMainForm(true);
         }
-
-
-        if (cmd.getLabel().equals("Доступные лекции"))
-        {
-            middlet.showLecturesForm(false);
-        }
-
         if (cmd.getLabel().equals("Выход"))
         {
             middlet.exit();
         }
-        for(int i=0;i<middlet.weekdays.length;i++)
-        {
-           if(cmd.getLabel().equals(middlet.weekdays[i]))
-           {
-                //Правильно получаем ID выбранной группы
-                int groupID = ((Group)groups.elementAt(choiceGroups.getSelectedIndex())).getID();
-                int day = i+1;
-                
-                middlet.tek_group = choiceGroups.getSelectedIndex();
-                middlet.tek_day = day;
-
-
-                middlet.net.request_schedule(groupID, day);
-                Display.getDisplay(middlet).setCurrent(new FormWaitSchedule(middlet));
-     
-           }
-        }
-      
     }
 }
