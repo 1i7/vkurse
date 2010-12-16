@@ -27,7 +27,7 @@ public class FormSchedule extends Form implements CommandListener, ItemCommandLi
         this.schedule = schedule;
         this.middlet = middlet;
 
-        StringItem siLabel1 = new StringItem("Группа:",((Group)middlet.groups.elementAt(middlet.tek_group)).getName());
+        StringItem siLabel1 = new StringItem("Группа:", middlet.groupName);
         StringItem siLabel2 = new StringItem("Просматриваемый день:",middlet.weekdays[middlet.tek_day-1]);
         
 

@@ -11,6 +11,9 @@ public class VkurseME extends MIDlet /*implements CommandListener, ItemCommandLi
     Networker net;
     final static int AC_WAIT=0, AC_SHOW_ALL_LECTURES=1,AC_SHOW_SETTINGS=2;
     int action=AC_WAIT;
+    String groupName="";
+
+    Settings settings;
 
     Vector all_lectures=null;
     Vector groups=null;
@@ -24,6 +27,7 @@ public class VkurseME extends MIDlet /*implements CommandListener, ItemCommandLi
     FormSettings form_settings=null;
     FormLectures form_lectures=null;
     FormSchedule form_schedule=null;
+    FormMain form_main=null;
 
     String weekdays[]={"Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"};
 
@@ -37,13 +41,21 @@ public class VkurseME extends MIDlet /*implements CommandListener, ItemCommandLi
 
 
     public void startApp() {
+        settings = new Settings();
         net = new Networker(this);
 
-        //Запускаем скачивание списка групп с сервера
-        action = AC_SHOW_SETTINGS;
-        net.request_all_groups();
 
-        Display.getDisplay(this).setCurrent(new FormWaitPreparingSettings(this));
+        if(settings.getGroup() == settings.NOT_FOUND)
+        {
+            //Запускаем скачивание списка групп с сервера
+            showSettingsForm(true);
+            Display.getDisplay(this).setCurrent(new FormWaitPreparingSettings(this));
+        }else
+        {
+            groupName = settings.getGroupName();
+            tek_group = settings.getGroup();
+            showMainForm(true);
+        }        
     }
 
     public void pauseApp() {
@@ -89,12 +101,23 @@ public class VkurseME extends MIDlet /*implements CommandListener, ItemCommandLi
         //нужно загрузить данные заного
         if(form_schedule == null || reload)
         {
-            net.request_schedule(((Group)groups.elementAt(tek_group)).getID(),tek_day);
+            net.request_schedule(settings.getGroup(),tek_day);
 
             Display.getDisplay(this).setCurrent(new FormWaitSchedule(this));
         }else
         {
             Display.getDisplay(this).setCurrent(form_schedule);
+        }
+    }
+    void showMainForm(boolean reload)
+    {
+        if(form_main == null || reload)
+        {
+            form_main = new FormMain(this, settings);
+            Display.getDisplay(this).setCurrent(form_main);
+        }else
+        {
+            Display.getDisplay(this).setCurrent(form_main);
         }
     }
 
