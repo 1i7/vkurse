@@ -1,3 +1,2 @@
 = Архитектура проекта =
 http://vkurse.googlecode.com/svn/doc/architecture/architec.png
-http://code.google.com/p/vkurse/source/browse/doc/media/logo_candidates/vkurse4.jpg
