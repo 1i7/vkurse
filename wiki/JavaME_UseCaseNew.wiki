@@ -2,33 +2,47 @@
 
  = Описание вариантов использования. =
 
-Пользователь заходит в приложение, разрешает передачу данный по сети для всего сеанса.
+Пользователь выбирает приложение «VkurseME» из списка приложений, установленных на телефоне.
 
-http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_newscr1.jpg
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_5.jpg 
 
-После получения разрешения на передачу данных по сети, приложение отображает экран загрузки данных с сервера.
 
-http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_newscr2.jpg 
+После загрузки приложения пользователю предлагается выбрать номер группы, для которой будет отображаться расписание.
 
-По окончании загрузки приложение показывает экран с возможностью выбора группы(главный экран).
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_6.jpg 
 
-http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_newscr3.jpg
+Пользователь выбирает 793 группу. 
 
-Пользователь заходит в  меню «Функции», из списка «Обновить», «ShowLectures» и «Exit» пользователь выбирает «Обновить».
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_7.jpg 
 
-http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_newscr4.jpg
+Приложение отображает главный экран.
 
-После обновления информации пользователь видит главный экран, затем нажимает на дату.
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_8.jpg 
 
-http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_newscr3.jpg
+Пользователь выбирает пункт «Понедельник» в списке дней недели. Приложение отображает экран разрешения передачи данных по сети. Пользователь выбирает из предложенного списка пункт «Разрешить для сеанса»
 
-Пользователь задает дату кнопками на экране, нажимает в верхнем левом углу галочку (подтверждение введенной даты).
-
-http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_newscr5.jpg
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_9.jpg 
 
 Приложение отображает сообщеине о том, что производится загрузка расписания.
 
-http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_newscr6.jpg
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_0.jpg 
+
+Приложение отображает расписание на понедельник для 793 группы.
+
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_1.jpg
+ 
+Пользователь прокручивает экран вниз для просмотра расписания до конца дня.
+
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_2.jpg 
+
+Пользователь для пары «Фондовые рынки» в меню «Функции» выбирает пункт «Подробнее».
+
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_3.jpg 
+
+Приложение отображает подробную информацию о предмете.
+
+http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_4.jpg 
+
 
 
 [http://code.google.com/p/vkurse/wiki/Java На главную]
