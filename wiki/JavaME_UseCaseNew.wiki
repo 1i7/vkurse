@@ -2,47 +2,48 @@
 
  = Описание вариантов использования. =
 
-Пользователь выбирает приложение «VkurseME» из списка приложений, установленных на телефоне.
+Пользователь выбирает приложение «VkurseME» из списка приложений, установленных на телефоне.<br>
 
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_5.jpg 
 
-
+<br>
 После загрузки приложения пользователю предлагается выбрать номер группы, для которой будет отображаться расписание.
-
+<br>
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_6.jpg 
-
+<br>
 Пользователь выбирает 793 группу. 
-
+<br>
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_7.jpg 
-
+<br>
 Приложение отображает главный экран. Пользователь выбирает пункт «Понедельник» в списке дней недели.
-
+<br>
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_8.jpg 
-
- Приложение отображает экран разрешения передачи данных по сети. Пользователь выбирает из предложенного списка пункт «Разрешить для сеанса»
-
+<br>
+Приложение отображает экран разрешения передачи данных по сети. Пользователь выбирает из предложенного списка пункт «Разрешить для сеанса»
+<br>
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_9.jpg 
-
+<br>
 Приложение отображает сообщеине о том, что производится загрузка расписания.
-
+<br>
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_0.jpg 
-
+<br>
 Приложение отображает расписание на понедельник для 793 группы.
-
+<br>
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_1.jpg
- 
+<br>
 Пользователь прокручивает экран вниз для просмотра расписания до конца дня.
-
+<br>
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_2.jpg 
-
+<br>
 Пользователь для пары «Фондовые рынки» в меню «Функции» выбирает пункт «Подробнее».
-
+<br>
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_3.jpg 
-
+<br>
 Приложение отображает подробную информацию о предмете.
-
+<br>
 http://vkurse.googlecode.com/svn/doc/JavaME/JavaME_NewScreen_4.jpg 
+<br>
 
-
+-------
 
 [http://code.google.com/p/vkurse/wiki/Java На главную]
