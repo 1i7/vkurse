@@ -2,9 +2,9 @@
 
 = [http://code.google.com/p/vkurse/wiki/web_usecase Описание вариантов использования] =
 
-= [http://code.google.com/p/vkurse/wiki/web_user Интерфейс пользователя старая версия] =
+= [http://code.google.com/p/vkurse/wiki/web_user Интерфейс пользователя первая версия] =
 
-= [http://code.google.com/p/vkurse/wiki/web_admin Интерфейс администратора старая версия] =
+= [http://code.google.com/p/vkurse/wiki/web_admin Интерфейс администратора первая версия] =
 
 = [http://code.google.com/p/vkurse/wiki/web_adminka Интерфейс администратора от 14 ноября] =
 
