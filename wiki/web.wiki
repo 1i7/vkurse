@@ -1,21 +1,12 @@
 #summary группа веб-интерфейса
 
-= [http://code.google.com/p/vkurse/wiki/web_usecase Описание вариантов использования] =
 
 = [http://code.google.com/p/vkurse/wiki/Web_ScreenTemplate Эскиз дизайна] =
 
-= [http://code.google.com/p/vkurse/wiki/web_user Интерфейс пользователя] =
+= [http://code.google.com/p/vkurse/wiki/WebAdmin Интерфейс администратора] =
 
-= [http://code.google.com/p/vkurse/wiki/web_admin Интерфейс администратора] =
+= [http://code.google.com/p/vkurse/wiki/WebUser Интерфейс пользователя] =
 
-= [http://code.google.com/p/vkurse/wiki/web_adminka Интерфейс администратора от 14 ноября] =
-
-= [http://code.google.com/p/vkurse/wiki/WebAdminNew Интерфейс администратора от 26 ноября] =
-
-= [http://code.google.com/p/vkurse/wiki/WebAdmin Интерфейс администратора от 8 декабря] =
-
-= [http://code.google.com/p/vkurse/wiki/WebUser Интерфейс пользователя от 8 декабря] =
-
-
+= [http://code.google.com/p/vkurse/wiki/web_other Старые версии] =
 
 
