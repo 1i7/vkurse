@@ -9,3 +9,5 @@
 = [http://code.google.com/p/vkurse/wiki/web_adminka Интерфейс администратора от 14 ноября] =
 
 = [http://code.google.com/p/vkurse/wiki/WebAdminNew Интерфейс администратора от 26 ноября] =
+
+[http://code.google.com/p/vkurse/wiki/web На главную]
