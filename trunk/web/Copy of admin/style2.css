@@ -1,0 +1,80 @@
+body
+{
+	text-align:center;
+	
+	padding:0 0 0 0;
+	margin:0 0 0 0;
+}
+#container
+{
+	margin-left: auto; 
+	margin-right: auto; 
+	width:1024px;
+	
+	border: thin black solid;
+}
+#up
+{
+	width:1024px;
+	height:150px;
+	border: thin black solid;
+}
+#middle
+{
+	width:1024px;
+	height:100%;
+	border: thin black solid;
+	height:500px;
+}
+#down
+{
+	width:1024px;
+	height:100px;
+	border: thin black solid;
+	background-image:url("./sketch_web2.png");
+	background-repeat:no-repeat;
+}
+#left
+{
+	width:300px;
+	height:100%;
+	float:left;
+	border: thin black solid;
+}
+#picture
+{
+	width:65px;
+	height:100%;
+	float:left;
+	border: thin black solid;
+	background-image:url("./sketch_web4.png");
+	background-repeat:no-repeat;
+}
+#content
+{
+	width:520px;
+	float:left;
+	height:100%;
+	border: thin black dotted;
+}
+#right_pic
+{
+	width:130px;
+	height:100%;
+	float:right;
+	border: thin black solid;
+	background-image:url("./sketch_web_cr6.png");
+	background-repeat:no-repeat;
+}
+p
+{
+	font-style: italic;
+	font-size: 22px;
+	font-family: "Courier New", Courier, monospace;
+}
+h1
+{
+	font-size: 36px;
+	font-style: italic;
+	font-family: "Courier New", Courier, monospace; 
+}

@@ -1,0 +1,101 @@
+/* CSS Document */
+P{font-style: italic;font-size: 22px; font-family: "Courier New", Courier, monospace;}
+H1{font-size: 36px; font-style: italic; font-family: "Courier New", Courier, monospace; }
+H1.color{ color:#999999 ;font-size: 36px; font-style: italic; font-family: "Courier New", Courier, monospace; }
+input{  background-image: url(6.png); background-color: #CCFF33; background-position: inherit;}
+select{border: groove; background:url(6.png); vertical-align: bottom;}
+.стиль2 { 
+//color:#003366!important;
+	font-size: 36px;
+	font-family: "Times New Roman", Times, serif;
+}
+.стиль3 {
+//color:#003366!important;
+	font-size: large;
+	font-family: "Times New Roman", Times, serif;
+}
+.стиль7 {
+//color:#003366!important;
+font-family: "Times New Roman", Times, serif}
+.стиль8 {
+//color:#003366!important;
+font-style: italic}
+.стиль10 {
+//color:#003366!important;
+font-size: large}
+.стиль15 {
+	// color:#003366!important;
+	font-family: "Times New Roman", Times, serif;
+	font-size: x-large;
+	font-style: italic;
+}
+.стиль20 {
+//color:#003366!important;
+font-size: x-large; font-style: italic; font-family: Arial, Helvetica, sans-serif;
+ }
+.стиль22 {
+//color:#003366!important;
+font-size: x-large; font-style: italic; font-family: "Courier New", Courier, monospace;
+ }
+.стиль23 {
+//color:#003366!important;
+font-size: 36px; font-family: "Times New Roman", Times, serif; font-style: italic; 
+}
+div{font-style: italic;font-size: 22px; font-family: "Courier New", Courier, monospace;}
+tr.cn{background: #FF9966!important; border-bottom-color:#66FFCC!important; }
+tr.мнимая{background:#66FFCC!important; border-bottom-color:#FFFFFF!important; 
+border-right-color:#FFFFFF!important; border-style:hidden; border-bottom:hidden; border-top-color:#FFFFFF!important;}
+table.мнимая1{background: #66FFCC!important;  border-bottom-color:#FFFFFF!important;  border-top-color:#FFFFFF!important;}
+a{ 
+//color: #009900!important;
+text-decoration: none!important;}
+input.удаление{background-image: none!important;background-color: #FFFFFF!important; }
+body{
+text-align:center;
+padding:0 0 0 0;
+margin:0 0 0 0;
+}
+#cap{
+	 width: 100%;
+	 margin: 0;
+	 padding:0;
+	display: block;
+}
+
+   #header {
+    display: block;
+    width: 80%;
+    margin: auto;
+    }
+ 
+        #container { 
+          width: 80%; 
+          margin: auto; 
+                padding:0; 
+                display: table; 
+                border: 1px; 
+                } 
+ 
+  #row  {
+    display: table-row;
+    }
+ 
+	#left {
+		width:150px;
+		padding:1em;
+		background: #EEF;
+		display: table-cell;
+		}
+ 
+	#right {
+		width:150px;
+		padding:1em;
+		background:#FEE;
+    display: table-cell;
+		}
+ 
+	#middle {
+		padding: 1em;
+		
+    display:  table-header-group;
+		}

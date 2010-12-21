@@ -9,27 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>ammosservlet</display-name>
-    <servlet-name>ammosservlet</servlet-name>
-    <servlet-class>ammosservlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ammosservlet</servlet-name>
-    <url-pattern>/ammosservlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>hello</display-name>
-    <servlet-name>hello</servlet-name>
-    <servlet-class>hello</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>hello</servlet-name>
-    <url-pattern>/hello</url-pattern>
-  </servlet-mapping>
-  <servlet>
+<!--  <servlet>
     <description></description>
     <display-name>Vkurseapi_test</display-name>
     <servlet-name>Vkurseapi_test</servlet-name>
@@ -38,5 +18,27 @@
   <servlet-mapping>
     <servlet-name>Vkurseapi_test</servlet-name>
     <url-pattern>/Vkurseapi_test</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping> -->
+   <security-constraint>
+        <web-resource-collection>
+    		<web-resource-name> 
+    		    Protected Site 
+    		</web-resource-name>
+                <url-pattern> /admin/* </url-pattern>
+	</web-resource-collection>
+	<auth-constraint>
+	    <!-- Roles that have access -->
+	    <role-name>vkurseadmin </role-name>
+	</auth-constraint>
+    </security-constraint>
+  <!-- BASIC authentication -->
+ <login-config>
+    <auth-method> BASIC </auth-method>
+    <realm-name> Admin Entrance </realm-name>
+ </login-config>
+ <!-- Define security roles -->
+ <security-role>
+ <description> vkurseadmin </description>
+ <role-name> vkurseadmin </role-name>
+ </security-role>
 </web-app>

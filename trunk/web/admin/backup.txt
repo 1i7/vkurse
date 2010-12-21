@@ -1,0 +1,107 @@
+﻿<table border=10 align="center" width="50%" bgcolor="#999999" bordercolor="#999999">
+                <tr bgcolor="#FF8455" border=10>
+				<% 
+				int maxsize=0;
+				int temp = 1440;
+				for(int v=1; v<8 ; v++)
+				{
+					%>
+     	 				<td><a href="../day.jsp?group=<%= group %>&day=<%= v %>"><p><%= week[v] %></p></a></td>
+				 	<% 
+					if( lst[v].size()>maxsize)
+					{
+						maxsize = lst[v].size();
+					}
+					
+	
+				}
+				%>
+                </tr>
+                <tr bgcolor="#FF8455" border=10>
+                <%
+				for(int v=1;  v<8 ; v++)
+				{
+					if(lst[v].size() != 0 )
+					{
+		     			temp = ((Schedule)lst[v].get(0)).getStartTime();
+					}
+					%>
+		 			<td><div align="center"><a style="text-decoration:none; color:#C0C;" href="edit_schedule_add.jsp?action=2&group=<%= group %>&day=<%= v %>&beginning=0&maxlen=<%= temp %>">+</a></div></td>
+                    <%
+				}
+				%>
+                </tr>
+                <%
+				for(int k=1 ; k<maxsize ; k++)
+				{
+				%>
+					<tr bgcolor="#FF8455" border=10>
+                    <%
+						for(int i=1; i<8 ; i++)
+    					{
+							%>
+							<td>
+                            <%
+							if(k<lst[i].size())
+							{
+			    				int lid = ((Schedule)lst[i].get(k)).getLectureID();
+								l = lt.get(lid);
+								int hour = ((Schedule)lst[i].get(k)).getStartTime()/60;
+								int min =  ((Schedule)lst[i].get(k)).getStartTime()%60; 
+								int addhour = ((Schedule)lst[i].get(k)).getLength()/60;
+								int addmin =  ((Schedule)lst[i].get(k)).getLength()%60;
+								if(addmin+min > 59)
+								{
+				   					 addhour+=(addmin+min)/60;
+									addmin=(addmin+min)%60;
+								}
+								%>
+                                <table><tr bordercolor="#993399" border=15><td>
+                                <%
+							out.println(Integer.toString(hour)+":"+Integer.toString(min)+" - ");
+							out.println(Integer.toString(hour+addhour)+":"+Integer.toString(addmin)); 
+					%>
+			   			 <a href="../course.jsp?lectureid=<%= lid %>">
+				  	    <%
+					   	 if(l==null)
+						 {
+						    out.println("неизвестно");
+						 }
+						 else
+						 {
+						    out.println(l.getName());
+						 }
+					
+				
+					    %>
+					    <br/>
+				        </a> 
+                        </td>
+                        
+					<%
+					
+					int temp1 = ((Schedule)lst[i].get(k)).getStartTime() + ((Schedule)lst[i].get(k)).getLength();
+					int temp2 = 1440;
+					if( k != lst[i].size()-1 )
+					{
+			 		   temp2 = ((Schedule)lst[i].get(k+1)).getStartTime();
+					}
+					%>
+                    <td>
+					<a style="text-decoration:none;color:#C0C;" href="edit_schedule_add.jsp?action=2&group=<%= group %>&day=<%= i %>&beginning=<%= temp1 %>&maxlen=<%= temp2 %>">+</a>
+           			 <a style="text-decoration:none; color:#C0C;" href="edit_schedule.jsp?action=1&group=<%= group%>&id=<%= ((Schedule)lst[i].get(k)).getID() %>">_</a>			
+						</td></tr></table></td>
+       				 <%	
+           	 	
+						}
+		}
+		%>
+		 </tr>
+				
+				 <%
+				 	
+				}
+%>
+	
+	
+	</table>
