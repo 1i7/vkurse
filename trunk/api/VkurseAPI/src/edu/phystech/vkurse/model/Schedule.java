@@ -1,3 +1,5 @@
+//  Файл восстановлен (r284 вместо некорректного r347)
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
