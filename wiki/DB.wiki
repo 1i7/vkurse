@@ -1,6 +1,9 @@
 #summary группа баз данных
 
 = Схема базы данных =
+http://vkurse.googlecode.com/svn/doc/DB/DBscheme.png
+
+
 http://vkurse.googlecode.com/svn/trunk/DataBase/DbScheme.png
 
 
