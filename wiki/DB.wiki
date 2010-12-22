@@ -74,7 +74,7 @@ string	name
 
 
 
-= LectureTypes =           //  Список аудиторий
+= LectureTypes =           //  Список видов занятий
 int             ID
 string  name
 }}}
